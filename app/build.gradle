@@ -67,7 +67,8 @@ android {
 dependencies {
     // Logger
     implementation project(':logger')
-
+    // Dagger
+    depsDagger()
 
     //Default
     implementation fileTree(dir: 'libs', include: ['*.jar'])
