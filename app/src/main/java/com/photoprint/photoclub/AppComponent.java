@@ -1,6 +1,7 @@
 package com.photoprint.photoclub;
 
 import com.photoprint.network.NetworkModule;
+import com.photoprint.photoclub.ui.mvp.core.MvpProcessor;
 
 import javax.inject.Singleton;
 
@@ -14,4 +15,6 @@ import dagger.Component;
 public interface AppComponent {
 
     void inject(AppInitProvider appInitProvider);
+
+    MvpProcessor mvpProcessor();
 }

@@ -1,10 +1,10 @@
 package com.photoprint.photoclub.ui.mvp.view;
 
 /**
- *  MVP Представление.
+ * MVP Представление.
  * Маркерный интерфейс.
  *
  * @author Grigoriy Pryamov.
  */
-public class MvpView {
+public interface MvpView {
 }
