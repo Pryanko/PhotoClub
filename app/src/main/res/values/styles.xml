@@ -18,6 +18,7 @@
 
     <!--RunActivity-->
     <style name="RunActivityAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:background">@drawable/bg_splash</item>
         <item name="colorPrimary">@color/appWhite</item>
         <item name="colorPrimaryDark">@color/appYellow</item>
         <item name="colorAccent">@color/appGray</item>
