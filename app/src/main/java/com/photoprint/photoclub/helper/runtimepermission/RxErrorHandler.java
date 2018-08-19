@@ -2,7 +2,7 @@ package com.photoprint.photoclub.helper.runtimepermission;
 
 import com.photoprint.logger.Logger;
 import com.photoprint.logger.LoggerFactory;
-import com.photoprint.photoclub.ui.mvp.viewstate.BaseMvpViewState;
+import com.photoprint.network.ApiException;
 
 import java.net.ConnectException;
 import java.net.SocketTimeoutException;
@@ -38,8 +38,8 @@ public class RxErrorHandler implements Consumer<Throwable> {
             logger.trace("skipping SSLHandshakeException");
         } else if (original instanceof SocketTimeoutException) {
             logger.trace("skipping SocketTimeoutException");
-//        } else if (original instanceof ApiException) {
-//            logger.trace("skipping ApiException");
+        } else if (original instanceof ApiException) {
+            logger.trace("skipping ApiException");
         } else {
             throw new RuntimeException(throwable);
         }
