@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.photoprint.photoclub.ui.widget.CustomButton
+        android:id="@+id/nextButton"
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="48dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginStart="24dp"
+        android:background="@drawable/bg_next_run_btn"
+        android:elevation="4dp"
+        android:text="@string/run_next_btn"
+        android:textAllCaps="true"
+        android:textSize="14dp"
+        android:theme="@style/Widget.App.Button.Yellow"
+        tools:ignore="SpUsage" />
+
+</RelativeLayout>

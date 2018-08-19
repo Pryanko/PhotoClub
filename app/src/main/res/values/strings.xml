@@ -1,4 +1,6 @@
 <resources>
-    
+
+    <!--RunActivity-->
+    <string name="run_next_btn">Продолжить</string>
 
 </resources>

@@ -2,6 +2,8 @@ package com.photoprint.photoclub.ui.activity;
 
 import android.app.Activity;
 
+import com.photoprint.photoclub.R;
+
 import javax.inject.Inject;
 
 /**
@@ -12,7 +14,7 @@ import javax.inject.Inject;
 public class ActivityNavigator {
 
     @Inject
-    public ActivityNavigator() {
+    ActivityNavigator() {
     }
 
     public void navigateBack(Activity activity) {
@@ -21,10 +23,10 @@ public class ActivityNavigator {
     }
 
     private void animForward(Activity activity) {
-        //  activity.overridePendingTransition(R.anim.slide_from_right, R.anim.zero_animation);
+        activity.overridePendingTransition(R.anim.slide_from_right, R.anim.zero_animation);
     }
 
     private void animBack(Activity activity) {
-        //  activity.overridePendingTransition(R.anim.zero_animation, R.anim.slide_to_right);
+        activity.overridePendingTransition(R.anim.zero_animation, R.anim.slide_to_right);
     }
 }

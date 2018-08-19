@@ -3,4 +3,20 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+    <!--Material colors-->
+    <color name="materialColorPrimary">#3F51B5</color>
+    <color name="materialColorPrimaryDark">#303F9F</color>
+    <color name="materialColorAccent">#FF4081</color>
+
+    <!--Application colors-->
+    <color name="appWhite">#ffffff</color>
+    <color name="appYellow">#ffffbe75</color>
+    <color name="appGray">#a7a7a7</color>
+
+    <!--Theme colors-->
+    <color name="windowBackground">@android:color/white</color>
+    <color name="rippleDarkTheme">#33ffffff</color>
+    <color name="rippleLightTheme">#1f000000</color>
+
 </resources>

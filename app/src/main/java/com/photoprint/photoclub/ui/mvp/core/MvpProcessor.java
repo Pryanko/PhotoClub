@@ -6,12 +6,14 @@ import com.photoprint.photoclub.ui.mvp.presenter.MvpPresenter;
 import com.photoprint.photoclub.ui.mvp.PresenterProvider;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
 /**
  * Класс, управляющий презентерами.
  *
  * @author Grigoriy Pryamov.
  */
+@Singleton
 public class MvpProcessor {
 
     private final PresenterStore presenterStore;
