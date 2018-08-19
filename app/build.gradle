@@ -69,6 +69,10 @@ android {
 dependencies {
     // Logger
     implementation project(':logger')
+    // Network
+    implementation project(':network')
+    // Local DataBase
+    implementation project(':localdb')
     // Dagger
     depsDagger()
     //Test
