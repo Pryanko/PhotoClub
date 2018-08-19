@@ -1,13 +1,19 @@
 package com.photoprint.photoclub.ui.activity.run;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 
 import com.photoprint.logger.Logger;
 import com.photoprint.logger.LoggerFactory;
 import com.photoprint.photoclub.R;
 import com.photoprint.photoclub.ui.activity.base.ActivityModule;
 import com.photoprint.photoclub.ui.activity.base.MvpActivity;
+
+import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 
@@ -21,6 +27,15 @@ public class RunActivity extends MvpActivity implements RunView {
 
     private static final Logger logger = LoggerFactory.getLogger(RunActivity.class);
 
+    /**
+     * Время анимации появления прогресс бара
+     */
+    private static final long ANIMATE_DURATION = TimeUnit.SECONDS.toMillis(1);
+    /**
+     * Константа прозрачности
+     */
+    private static final float ANIMATE_ALPHA = 1.0f;
+
     //region Di
     RunScreenComponent screenComponent;
     RunComponent component;
@@ -30,6 +45,8 @@ public class RunActivity extends MvpActivity implements RunView {
     //region views
     @BindView(R.id.nextButton)
     Button nextButton;
+    @BindView(R.id.progressBar)
+    ProgressBar progressBar;
     //endRegion
     private RunPresenter presenter;
 
@@ -65,11 +82,28 @@ public class RunActivity extends MvpActivity implements RunView {
     @Override
     public void setLoading(boolean loading) {
         logger.trace("setLoading");
+        if (loading) {
+            progressBar
+                    .animate()
+                    .alpha(ANIMATE_ALPHA)
+                    .setDuration(ANIMATE_DURATION)
+                    .setListener(new AnimatorListenerAdapter() {
+                        @Override
+                        public void onAnimationEnd(Animator animation) {
+                            super.onAnimationEnd(animation);
+                            progressBar.setVisibility(View.VISIBLE);
+                        }
+                    });
+        } else {
+            progressBar.setVisibility(View.GONE);
+        }
+
     }
 
     @Override
     public void setBtnVisible(boolean visible) {
         logger.trace("setBtnVisible");
+        nextButton.setVisibility(visible ? View.VISIBLE : View.GONE);
     }
 
     private RunScreenComponent getScreenComponent() {

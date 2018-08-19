@@ -9,13 +9,17 @@ import javax.inject.Inject;
  */
 class RunViewState extends BaseMvpViewState<RunView> implements RunView {
 
+    private boolean buttonNextVisible;
+    private boolean loading;
+
     @Inject
-    public RunViewState() {
+    RunViewState() {
     }
 
     @Override
     protected void onViewAttached(RunView view) {
-
+        view.setBtnVisible(buttonNextVisible);
+        view.setLoading(loading);
     }
 
     @Override
@@ -25,11 +29,13 @@ class RunViewState extends BaseMvpViewState<RunView> implements RunView {
 
     @Override
     public void setLoading(boolean loading) {
-
+        this.loading = loading;
+        forEachView(view -> view.setLoading(loading));
     }
 
     @Override
     public void setBtnVisible(boolean visible) {
-
+        this.buttonNextVisible = visible;
+        forEachView(view -> view.setBtnVisible(visible));
     }
 }

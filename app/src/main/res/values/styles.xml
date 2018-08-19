@@ -24,6 +24,10 @@
         <item name="colorAccent">@color/appGray</item>
     </style>
 
+    <style name="Widget.App.ProgressBar.RunActivity" parent="AppTheme">
+        <item name="colorAccent">@color/appYellow</item>
+    </style>
+
     <style name="Widget.App.Toolbar" parent="Widget.AppCompat.Toolbar">
         <item name="titleTextAppearance">@style/TextAppearance.Widget.App.Toolbar.Title</item>
         <item name="subtitleTextAppearance">@style/TextAppearance.Widget.App.Toolbar.Subtitle</item>
