@@ -8,6 +8,8 @@ import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
+import com.photoprint.logger.Logger;
+import com.photoprint.logger.LoggerFactory;
 import com.photoprint.photoclub.di.Dagger;
 import com.photoprint.photoclub.helper.runtimepermission.RxErrorHandler;
 
@@ -20,20 +22,24 @@ import io.reactivex.plugins.RxJavaPlugins;
  */
 public class AppInitProvider extends ContentProvider {
 
+    private static final Logger logger = LoggerFactory.getLogger(AppInitProvider.class);
+
     @Override
     public boolean onCreate() {
-        initDi(getContext());
+        logger.trace("onCreate");
+        initDi();
         initRxJavaPlugins();
         return false;
     }
 
-    private void initDi(Context appContext) {
-        App app = (App) appContext;
+    private void initDi() {
+        logger.trace("initDi");
         Dagger.setAppComponent(DaggerAppComponent.create());
         Dagger.appComponent().inject(this);
     }
 
     private void initRxJavaPlugins() {
+        logger.trace("initRxJavaPlugins");
         RxJavaPlugins.setErrorHandler(new RxErrorHandler());
     }
 

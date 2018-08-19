@@ -24,7 +24,7 @@ android {
             // Ресурсы
             resValue "string", "app_name", "PhotoClub debug"
             // Константы
-
+            buildConfigField('String', 'API_BASE_URL', '"http://photo.it33.ru/api/"')
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules-main.pro', 'proguard-rules-debug.pro'
             testProguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules-main.pro', 'proguard-rules-debug.pro'
@@ -34,7 +34,8 @@ android {
             def betaSubVersion = "1"
             applicationIdSuffix ".beta"
             versionNameSuffix "-beta" + betaSubVersion
-            // Ресурсы
+            // Константы
+            buildConfigField('String', 'API_BASE_URL', '"http://photo.it33.ru/api/"')
             resValue "string", "app_name", "PhotoClub β"
             // Константы
             matchingFallbacks = ['release']
@@ -46,7 +47,8 @@ android {
         release {
             // Ресурсы
             resValue "string", "app_name", "PhotoClub"
-
+            // Константы
+            buildConfigField('String', 'API_BASE_URL', '"http://photo.it33.ru/api/"')
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
