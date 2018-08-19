@@ -8,6 +8,8 @@ import dagger.Component;
  * @author Grigoriy Pryamov.
  */
 @Singleton
-@Component
+@Component(modules = {AppModule.class})
 public interface AppComponent {
+
+    void inject(AppInitProvider appInitProvider);
 }

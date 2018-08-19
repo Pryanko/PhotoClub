@@ -5,6 +5,8 @@ import android.support.annotation.NonNull;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.inject.Inject;
+
 /**
  * Счетчик используемых презентеров.
  *

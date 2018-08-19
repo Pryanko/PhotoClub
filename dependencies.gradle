@@ -5,13 +5,6 @@ def dependencyGroup(Closure closure) {
 
 ext {
 
-    // Dagger
-    depsDagger = dependencyGroup {
-        implementation "com.google.dagger:dagger:${versions.dagger}"
-        annotationProcessor "com.google.dagger:dagger-compiler:${versions.dagger}"
-        compileOnly 'javax.annotation:jsr250-api:1.0'
-    }
-
     setup = [
             minSdk        : 21,
             compileSdk    : 27,
@@ -24,21 +17,56 @@ ext {
 
     versions = [
             support          : '27.1.1',
+            mapStruct        : '1.2.0.Final',
             oldGlide         : '3.8.0',
             fresco           : '1.8.1',
             frescoimageviewer: '0.5.0',
             pageindicatorview: '1.0.0',
             constraint       : '1.1.2',
-            dagger           : '2.14',
+            dagger           : '2.16',
             cicerone         : '3.0.0',
             butterknife      : '8.8.1',
             retrofit2        : '2.4.0',
             retriever        : '1.0.0',
             rx               : [
-                    java   : '2.1.2',
+                    java   : '2.1.5',
                     android: "2.0.1",
             ],
 
     ]
 
+    // Dagger
+    depsDagger = dependencyGroup {
+        implementation "com.google.dagger:dagger:${versions.dagger}"
+        annotationProcessor "com.google.dagger:dagger-compiler:${versions.dagger}"
+        compileOnly 'javax.annotation:jsr250-api:1.0'
+    }
+
+    // RxJava
+    depsRxJava = dependencyGroup {
+        implementation "io.reactivex.rxjava2:rxjava:${versions.rx.java}"
+        implementation "io.reactivex.rxjava2:rxandroid:${versions.rx.android}"
+    }
+
+    // MapStruct
+    depsMapStruct = dependencyGroup {
+        implementation 'org.glassfish:javax.annotation:3.1.1'
+        implementation "org.mapstruct:mapstruct:${versions.mapStruct}"
+        annotationProcessor "org.mapstruct:mapstruct-processor:${versions.mapStruct}"
+    }
+
+    // Android annotations
+    depsAndroidAnnotations = dependencyGroup {
+        implementation "com.android.support:support-annotations:${versions.support}"
+    }
+
+    // Tests
+    depsTests = dependencyGroup {
+        // JUnit
+        testImplementation "junit:junit:4.12"
+        // Test runner
+        androidTestImplementation "com.android.support.test:runner:1.0.2"
+        // Espresso
+        androidTestImplementation "com.android.support.test.espresso:espresso-core:3.0.2"
+    }
 }

@@ -7,6 +7,8 @@ import com.photoprint.photoclub.ui.mvp.presenter.MvpPresenter;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.inject.Inject;
+
 /**
  * Хранилище презентеров.
  *
