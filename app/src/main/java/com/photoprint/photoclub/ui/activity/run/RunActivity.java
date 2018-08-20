@@ -11,8 +11,6 @@ import com.photoprint.photoclub.R;
 import com.photoprint.photoclub.ui.activity.base.ActivityModule;
 import com.photoprint.photoclub.ui.activity.base.MvpActivity;
 
-import java.util.concurrent.TimeUnit;
-
 import javax.inject.Inject;
 
 import butterknife.BindView;
@@ -24,15 +22,6 @@ import butterknife.ButterKnife;
 public class RunActivity extends MvpActivity implements RunView {
 
     private static final Logger logger = LoggerFactory.getLogger(RunActivity.class);
-
-    /**
-     * Время анимации появления прогресс бара
-     */
-    private static final long ANIMATE_DURATION = TimeUnit.SECONDS.toMillis(1);
-    /**
-     * Константа прозрачности
-     */
-    private static final float ANIMATE_ALPHA = 1.0f;
 
     //region Di
     RunScreenComponent screenComponent;
