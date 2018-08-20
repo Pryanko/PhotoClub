@@ -1,7 +1,5 @@
 package com.photoprint.photoclub.ui.activity.run;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -82,22 +80,7 @@ public class RunActivity extends MvpActivity implements RunView {
     @Override
     public void setLoading(boolean loading) {
         logger.trace("setLoading");
-        if (loading) {
-            progressBar
-                    .animate()
-                    .alpha(ANIMATE_ALPHA)
-                    .setDuration(ANIMATE_DURATION)
-                    .setListener(new AnimatorListenerAdapter() {
-                        @Override
-                        public void onAnimationEnd(Animator animation) {
-                            super.onAnimationEnd(animation);
-                            progressBar.setVisibility(View.VISIBLE);
-                        }
-                    });
-        } else {
-            progressBar.setVisibility(View.GONE);
-        }
-
+        progressBar.setVisibility(loading ? View.VISIBLE : View.GONE);
     }
 
     @Override

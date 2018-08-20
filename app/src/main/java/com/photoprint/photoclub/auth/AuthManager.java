@@ -21,7 +21,7 @@ public class AuthManager {
     private final AuthApiWorker authApiWorker;
 
     @Inject
-    public AuthManager(AuthApiWorker authApiWorker) {
+    AuthManager(AuthApiWorker authApiWorker) {
         this.authApiWorker = authApiWorker;
     }
 

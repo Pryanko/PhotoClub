@@ -34,9 +34,9 @@ public class RunPresenter extends BaseMvpViewStatePresenter<RunView, RunViewStat
         logger.trace("onInitialize");
         loadDisposable = authManager
                 .register()
-                .doOnSubscribe(disposable -> view.setLoading(true))
                 .onErrorReturn(throwable -> new DataToken())
                 .observeOn(AppSchedulers.ui())
+                .doOnSubscribe(disposable -> view.setLoading(true))
                 .subscribe(dataToken -> {
                     logger.trace(dataToken.getDeviceToken().toString());
                     view.setLoading(false);
