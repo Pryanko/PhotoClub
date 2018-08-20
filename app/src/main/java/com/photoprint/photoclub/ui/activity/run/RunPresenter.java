@@ -2,14 +2,13 @@ package com.photoprint.photoclub.ui.activity.run;
 
 import com.photoprint.logger.Logger;
 import com.photoprint.logger.LoggerFactory;
+import com.photoprint.network.auth.model.login.DataToken;
+import com.photoprint.photoclub.auth.AuthManager;
+import com.photoprint.photoclub.helper.runtimepermission.AppSchedulers;
 import com.photoprint.photoclub.ui.mvp.presenter.BaseMvpViewStatePresenter;
-
-import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 
-import io.reactivex.Completable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.disposables.Disposables;
 
@@ -20,21 +19,26 @@ public class RunPresenter extends BaseMvpViewStatePresenter<RunView, RunViewStat
 
     private static final Logger logger = LoggerFactory.getLogger(RunPresenter.class);
 
+    private final AuthManager authManager;
     private Disposable loadDisposable = Disposables.disposed();
 
     @Inject
-    RunPresenter(RunViewState viewState) {
+    RunPresenter(RunViewState viewState,
+                 AuthManager authManager) {
         super(viewState);
+        this.authManager = authManager;
     }
 
     @Override
     protected void onInitialize() {
         logger.trace("onInitialize");
-        loadDisposable = Completable
-                .timer(10, TimeUnit.SECONDS)
+        loadDisposable = authManager
+                .register()
                 .doOnSubscribe(disposable -> view.setLoading(true))
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(() -> {
+                .onErrorReturn(throwable -> new DataToken())
+                .observeOn(AppSchedulers.ui())
+                .subscribe(dataToken -> {
+                    logger.trace(dataToken.getDeviceToken().toString());
                     view.setLoading(false);
                     view.setBtnVisible(true);
                 });

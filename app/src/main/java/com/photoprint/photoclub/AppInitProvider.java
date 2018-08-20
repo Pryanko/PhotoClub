@@ -27,14 +27,17 @@ public class AppInitProvider extends ContentProvider {
     @Override
     public boolean onCreate() {
         logger.trace("onCreate");
-        initDi();
+        initDi(getContext());
         initRxJavaPlugins();
         return false;
     }
 
-    private void initDi() {
+    private void initDi(Context appContext) {
         logger.trace("initDi");
-        Dagger.setAppComponent(DaggerAppComponent.create());
+        App app = (App) appContext;
+        Dagger.setAppComponent(DaggerAppComponent.builder()
+                .appModule(new AppModule(app))
+                .build());
         Dagger.appComponent().inject(this);
     }
 
