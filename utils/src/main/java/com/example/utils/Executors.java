@@ -1,4 +1,4 @@
-package com.photoprint.photoclub.helper.runtimepermission;
+package com.example.utils;
 
 import com.photoprint.logger.Logger;
 import com.photoprint.logger.LoggerFactory;

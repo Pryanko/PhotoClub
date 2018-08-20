@@ -97,6 +97,8 @@ dependencies {
     implementation project(':network')
     // Local DataBase
     implementation project(':localdb')
+    // Utils
+    implementation project(':utils')
     // Dagger
     depsDagger()
     //Test

@@ -23,3 +23,12 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 }
+
+dependencies {
+    // Logger
+    implementation project(':logger')
+    // Android annotations
+    depsAndroidAnnotations()
+    // Tests
+    depsTests()
+}
