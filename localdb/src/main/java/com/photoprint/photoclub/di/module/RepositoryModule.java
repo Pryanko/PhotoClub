@@ -1,5 +1,9 @@
 package com.photoprint.photoclub.di.module;
 
+import com.photoprint.photoclub.impl.UserRepositoryImpl;
+import com.photoprint.photoclub.repository.UserRepository;
+
+import dagger.Binds;
 import dagger.Module;
 
 /**
@@ -9,4 +13,6 @@ import dagger.Module;
  */
 @Module
 public abstract class RepositoryModule {
+    @Binds
+    abstract UserRepository userRepository(UserRepositoryImpl userRepository);
 }

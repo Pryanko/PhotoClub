@@ -39,6 +39,8 @@ def room_version = "1.0.0"
 dependencies {
     // Logger
     implementation project(':logger')
+    // Utils
+    implementation project(':utils')
     // RxJava
     depsRxJava()
     // Dagger                                                                
