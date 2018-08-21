@@ -2,7 +2,6 @@ package com.photoprint.photoclub.ui.activity.run;
 
 import com.photoprint.logger.Logger;
 import com.photoprint.logger.LoggerFactory;
-import com.photoprint.network.auth.model.login.DataToken;
 import com.photoprint.photoclub.auth.AuthManager;
 import com.photoprint.photoclub.helper.runtimepermission.AppSchedulers;
 import com.photoprint.photoclub.ui.mvp.presenter.BaseMvpViewStatePresenter;
@@ -21,6 +20,7 @@ public class RunPresenter extends BaseMvpViewStatePresenter<RunView, RunViewStat
 
     private final AuthManager authManager;
     private Disposable loadDisposable = Disposables.disposed();
+    private Disposable registerDisposable = Disposables.disposed();
 
     @Inject
     RunPresenter(RunViewState viewState,
@@ -32,13 +32,18 @@ public class RunPresenter extends BaseMvpViewStatePresenter<RunView, RunViewStat
     @Override
     protected void onInitialize() {
         logger.trace("onInitialize");
-        loadDisposable = authManager
+        registration();
+    }
+
+    /**
+     * Метот инициализирующий регистрацию устроства на сервере
+     */
+    private void registration() {
+        registerDisposable = authManager
                 .register()
-                .onErrorReturn(throwable -> new DataToken())
                 .observeOn(AppSchedulers.ui())
                 .doOnSubscribe(disposable -> view.setLoading(true))
-                .subscribe(dataToken -> {
-                    logger.trace(dataToken.getDeviceToken().toString());
+                .subscribe(() -> {
                     view.setLoading(false);
                     view.setBtnVisible(true);
                 });
@@ -51,6 +56,7 @@ public class RunPresenter extends BaseMvpViewStatePresenter<RunView, RunViewStat
     @Override
     public void destroy() {
         loadDisposable.dispose();
+        registerDisposable.dispose();
         super.destroy();
     }
 }
