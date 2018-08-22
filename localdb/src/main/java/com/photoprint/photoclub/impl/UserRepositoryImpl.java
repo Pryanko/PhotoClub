@@ -23,18 +23,18 @@ import io.reactivex.Single;
 @Singleton
 public class UserRepositoryImpl extends BaseRepositoryImpl<User, UserEntity, Long> implements UserRepository {
 
-    private final UserMapper userMapper;
+    private final UserMapper mapper;
 
     @Inject
     UserRepositoryImpl(AppDatabase appDatabase,
                        UserMapper userMapper) {
         super(appDatabase);
-        this.userMapper = userMapper;
+        this.mapper = userMapper;
     }
 
     @Override
     protected UserMapper mapper() {
-        return userMapper;
+        return mapper;
     }
 
     @Override
@@ -56,7 +56,7 @@ public class UserRepositoryImpl extends BaseRepositoryImpl<User, UserEntity, Lon
                     if (userEntity == null) {
                         return Ref.<User>nullRef();
                     } else {
-                        User user = mapper().entityToModel(userEntity);
+                        User user = mapper.entityToModel(userEntity);
                         return new Ref<>(user);
                     }
                 });

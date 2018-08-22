@@ -1,5 +1,7 @@
 package com.photoprint.photoclub.di.module;
 
+import com.photoprint.photoclub.room.mapper.CategoryMapper;
+import com.photoprint.photoclub.room.mapper.CategoryMapperImpl;
 import com.photoprint.photoclub.room.mapper.UserMapper;
 import com.photoprint.photoclub.room.mapper.UserMapperImpl;
 
@@ -14,9 +16,16 @@ import dagger.Reusable;
  */
 @Module
 public class MapperModule {
+
     @Provides
     @Reusable
     UserMapper userMapper() {
         return new UserMapperImpl();
+    }
+
+    @Provides
+    @Reusable
+    CategoryMapper categoryMapper() {
+        return new CategoryMapperImpl();
     }
 }
