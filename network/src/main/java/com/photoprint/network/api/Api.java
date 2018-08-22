@@ -29,13 +29,13 @@ public interface Api {
      * @return категории услуг
      */
     @GET("category")
-    Single<Data<Category>> getCategory();
+    Single<Response<Data<Category>>> getCategory();
 
     /**
      * Метод получающий услуги
      */
     @GET("service")
-    Single<Data<Service>> getService();
+    Single<Response<Data<Service>>> getService();
 
 //    /**
 //     * Метод для получения описания услуги

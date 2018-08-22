@@ -25,10 +25,10 @@ public interface ApiWorker {
      *
      * @return категории услуг
      */
-    Single<Data<Category>> getCategory();
+    Single<Response<Data<Category>>> getCategory();
 
     /**
      * Метод получающий услуги
      */
-    Single<Data<Service>> getService();
+    Single<Response<Data<Service>>> getService();
 }

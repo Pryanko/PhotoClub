@@ -32,12 +32,14 @@ public class DefaultApiWorker implements ApiWorker {
     }
 
     @Override
-    public Single<Data<Category>> getCategory() {
-        return null;
+    public Single<Response<Data<Category>>> getCategory() {
+        return api.getCategory()
+                .map(ResponseConverter::convert);
     }
 
     @Override
-    public Single<Data<Service>> getService() {
-        return null;
+    public Single<Response<Data<Service>>> getService() {
+        return api.getService()
+                .map(ResponseConverter::convert);
     }
 }
