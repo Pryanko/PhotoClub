@@ -50,7 +50,7 @@ public class AuthManager {
             logger.trace("start register");
             return authApiWorker
                     .register()
-                    .map(Response::getData)
+                    .map(Response::get)
                     .observeOn(AppSchedulers.db())
                     .doOnSuccess(dataToken -> dbTransaction.callInTx(() -> storeUserName(dataToken)))
                     .onErrorReturn(throwable -> new DataToken())

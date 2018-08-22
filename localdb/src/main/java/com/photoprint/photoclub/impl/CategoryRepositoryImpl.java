@@ -1,6 +1,6 @@
 package com.photoprint.photoclub.impl;
 
-import android.support.annotation.Nullable;
+import android.support.annotation.NonNull;
 
 import com.photoprint.photoclub.base.AppDatabase;
 import com.photoprint.photoclub.impl.base.BaseRepositoryImpl;
@@ -40,7 +40,7 @@ public class CategoryRepositoryImpl extends BaseRepositoryImpl<Category, Categor
         return appDatabase.categoryDao();
     }
 
-    @Nullable
+    @NonNull
     @Override
     public List<Category> getCategories() {
         return mapper.entityListToModelList(dao().getCategories());

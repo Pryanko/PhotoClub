@@ -97,6 +97,13 @@ public class ListUtils {
     }
 
     /**
+     * Обратный методу isEmpty
+     */
+    public static <T> boolean notEmpty(@Nullable List<T> list) {
+        return list == null || !list.isEmpty();
+    }
+
+    /**
      * Преобразует список в строку
      *
      * @param list      список

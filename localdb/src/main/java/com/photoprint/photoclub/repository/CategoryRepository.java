@@ -1,6 +1,6 @@
 package com.photoprint.photoclub.repository;
 
-import android.support.annotation.Nullable;
+import android.support.annotation.NonNull;
 
 import com.photoprint.photoclub.model.Category;
 import com.photoprint.photoclub.repository.base.BaseRepository;
@@ -16,7 +16,7 @@ public interface CategoryRepository extends BaseRepository<Category, Long> {
     /**
      * Возврщащет список всех категорий
      */
-    @Nullable
+    @NonNull
     List<Category> getCategories();
 
     /**

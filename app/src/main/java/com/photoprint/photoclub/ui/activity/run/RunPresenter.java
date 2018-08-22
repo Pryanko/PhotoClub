@@ -2,8 +2,8 @@ package com.photoprint.photoclub.ui.activity.run;
 
 import com.photoprint.logger.Logger;
 import com.photoprint.logger.LoggerFactory;
-import com.photoprint.photoclub.auth.AuthManager;
 import com.photoprint.photoclub.helper.runtimepermission.AppSchedulers;
+import com.photoprint.photoclub.ui.activity.run.interactor.RunInitializer;
 import com.photoprint.photoclub.ui.mvp.presenter.BaseMvpViewStatePresenter;
 
 import javax.inject.Inject;
@@ -18,35 +18,36 @@ public class RunPresenter extends BaseMvpViewStatePresenter<RunView, RunViewStat
 
     private static final Logger logger = LoggerFactory.getLogger(RunPresenter.class);
 
-    private final AuthManager authManager;
-    private Disposable loadDisposable = Disposables.disposed();
-    private Disposable registerDisposable = Disposables.disposed();
+    private final RunInitializer runInitializer;
+    private Disposable initDisposable = Disposables.disposed();
 
     @Inject
     RunPresenter(RunViewState viewState,
-                 AuthManager authManager) {
+                 RunInitializer runInitializer) {
         super(viewState);
-        this.authManager = authManager;
+        this.runInitializer = runInitializer;
     }
 
     @Override
     protected void onInitialize() {
         logger.trace("onInitialize");
-        registration();
+        init();
     }
 
     /**
-     * Метод инициализирующий регистрацию устройства на сервере
+     * Метод инициализирующий регистрацию устройства и синхронизацию данных на сервере
      */
-    private void registration() {
-        registerDisposable = authManager
-                .register()
+    private void init() {
+        initDisposable = runInitializer.init()
+                .subscribeOn(AppSchedulers.network())
                 .observeOn(AppSchedulers.ui())
                 .doOnSubscribe(disposable -> view.setLoading(true))
-                .subscribe(() -> {
-                    view.setLoading(false);
-                    view.setBtnVisible(true);
-                });
+                .subscribe(result -> {
+                    if (result.isSuccessful()) {
+                        view.setLoading(false);
+                        view.setBtnVisible(true);
+                    }
+                }, logger::error);
     }
 
     public void onNextBtnClicked() {
@@ -55,8 +56,7 @@ public class RunPresenter extends BaseMvpViewStatePresenter<RunView, RunViewStat
 
     @Override
     public void destroy() {
-        loadDisposable.dispose();
-        registerDisposable.dispose();
+        initDisposable.dispose();
         super.destroy();
     }
 }

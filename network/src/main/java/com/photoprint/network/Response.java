@@ -15,7 +15,7 @@ public class Response<T> {
         this.code = code;
     }
 
-    public T getData() {
+    public T get() {
         return data;
     }
 
