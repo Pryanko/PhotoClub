@@ -10,7 +10,7 @@ public class Guide {
 
     @SerializedName("id")
     @Expose
-    private Integer id;
+    private long id;
     @SerializedName("header")
     @Expose
     private String header;
@@ -24,11 +24,11 @@ public class Guide {
     @Expose
     private String text;
 
-    public Integer getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(long id) {
         this.id = id;
     }
 

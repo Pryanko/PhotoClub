@@ -6,12 +6,11 @@ import com.google.gson.annotations.SerializedName;
 /**
  * @author Libgo on 24.03.2018.
  */
-
 public class Service {
 
     @SerializedName("id")
     @Expose
-    private Integer id;
+    private long id;
     @SerializedName("category_id")
     @Expose
     private Integer categoryId;
@@ -52,11 +51,11 @@ public class Service {
     @Expose
     private String categoryName;
 
-    public Integer getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(long id) {
         this.id = id;
     }
 

@@ -1,5 +1,9 @@
 package com.photoprint.network;
 
+import com.photoprint.network.api.Api;
+import com.photoprint.network.api.ApiRetrofitBuilder;
+import com.photoprint.network.api.ApiWorker;
+import com.photoprint.network.api.DefaultApiWorker;
 import com.photoprint.network.auth.AuthApi;
 import com.photoprint.network.auth.AuthApiWorker;
 import com.photoprint.network.auth.AuthRetrofitBuilder;
@@ -32,5 +36,13 @@ public class NetworkModule {
         Retrofit retrofit = authRetrofitBuilder.build();
         AuthApi authApi = retrofit.create(AuthApi.class);
         return new DefaultAuthApiWorker(authApi);
+    }
+
+    @Provides
+    @Singleton
+    ApiWorker apiWorker(ApiRetrofitBuilder apiRetrofitBuilder) {
+        Retrofit retrofit = apiRetrofitBuilder.build();
+        Api api = retrofit.create(Api.class);
+        return new DefaultApiWorker(api);
     }
 }

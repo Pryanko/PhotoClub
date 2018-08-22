@@ -36,7 +36,7 @@ public class RunPresenter extends BaseMvpViewStatePresenter<RunView, RunViewStat
     }
 
     /**
-     * Метот инициализирующий регистрацию устроства на сервере
+     * Метод инициализирующий регистрацию устройства на сервере
      */
     private void registration() {
         registerDisposable = authManager

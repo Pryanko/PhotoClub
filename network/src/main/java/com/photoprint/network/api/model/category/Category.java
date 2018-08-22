@@ -1,30 +1,105 @@
 package com.photoprint.network.api.model.category;
 
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.util.List;
 
+public class Category {
+    /**
+     * Id категории
+     */
+    @SerializedName("id")
+    @Expose
+    private long id;
+    /**
+     * Наименование категории
+     */
+    @SerializedName("name")
+    @Expose
+    private String name;
+    /**
+     * Описание категории
+     */
+    @SerializedName("description")
+    @Expose
+    private String description;
+    /**
+     * Тип категории
+     */
+    @SerializedName("type")
+    @Expose
+    private String type;
+    /**
+     * image категории для экранов с маленьким разрешением
+     */
+    @SerializedName("image480")
+    @Expose
+    private String image480;
+    /**
+     * image категории для экранов с большим разрешением
+     */
+    @SerializedName("image1024")
+    @Expose
+    private String image1024;
 
-public class Category{
+    public long getId() {
+        return id;
+    }
 
-	@SerializedName("data")
-	@Expose
-	private List<ItemCategory> itemCategoryList;
+    public void setId(long id) {
+        this.id = id;
+    }
 
-	public void setData(List<ItemCategory> data){
-		this.itemCategoryList = data;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public List<ItemCategory> getListCategory(){
-		return itemCategoryList;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	@Override
- 	public String toString(){
-		return 
-			"Category{" + 
-			"data = '" + itemCategoryList + '\'' +
-			"}";
-		}
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getImage480() {
+        return image480;
+    }
+
+    public void setImage480(String image480) {
+        this.image480 = image480;
+    }
+
+    public String getImage1024() {
+        return image1024;
+    }
+
+    public void setImage1024(String image1024) {
+        this.image1024 = image1024;
+    }
+
+    @Override
+    public String toString() {
+        return "Category{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", type='" + type + '\'' +
+                ", image480='" + image480 + '\'' +
+                ", image1024='" + image1024 + '\'' +
+                '}';
+    }
 }

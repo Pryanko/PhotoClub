@@ -12,5 +12,8 @@ import io.reactivex.Single;
  */
 public interface AuthApiWorker {
 
+    /**
+     * Метод для первичной регистрации
+     */
     Single<Response<DataToken>> register();
 }
