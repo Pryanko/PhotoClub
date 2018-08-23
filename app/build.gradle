@@ -27,7 +27,7 @@ android {
 
             // Константы
             buildConfigField('String', 'API_BASE_URL', '"http://photo.it33.ru/api/"')
-            buildConfigField('int', 'SQLITE_STUDIO_SERVICE_PORT', '12127')
+            buildConfigField('int', 'SQLITE_STUDIO_SERVICE_PORT', '12135')
             // Плейсхолдеры
             manifestPlaceholders = [
                     defaultOrientation: "unspecified"
