@@ -12,6 +12,9 @@ import com.photoprint.logger.Logger;
 import com.photoprint.logger.LoggerFactory;
 import com.photoprint.photoclub.di.Dagger;
 import com.photoprint.photoclub.helper.runtimepermission.RxErrorHandler;
+import com.photoprint.photoclub.tools.SQLiteConnectionService;
+
+import javax.inject.Inject;
 
 import io.reactivex.plugins.RxJavaPlugins;
 
@@ -24,11 +27,17 @@ public class AppInitProvider extends ContentProvider {
 
     private static final Logger logger = LoggerFactory.getLogger(AppInitProvider.class);
 
+    //region DI
+    @Inject
+    SQLiteConnectionService sqLiteConnectionService;
+    //endregion
+
     @Override
     public boolean onCreate() {
         logger.trace("onCreate");
         initDi(getContext());
         initRxJavaPlugins();
+        initExternalSQLiteTool();
         return false;
     }
 
@@ -44,6 +53,10 @@ public class AppInitProvider extends ContentProvider {
     private void initRxJavaPlugins() {
         logger.trace("initRxJavaPlugins");
         RxJavaPlugins.setErrorHandler(new RxErrorHandler());
+    }
+
+    private void initExternalSQLiteTool() {
+        sqLiteConnectionService.start();
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////

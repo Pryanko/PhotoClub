@@ -27,7 +27,7 @@ android {
 
             // Константы
             buildConfigField('String', 'API_BASE_URL', '"http://photo.it33.ru/api/"')
-
+            buildConfigField('int', 'SQLITE_STUDIO_SERVICE_PORT', '12127')
             // Плейсхолдеры
             manifestPlaceholders = [
                     defaultOrientation: "unspecified"
@@ -110,10 +110,10 @@ dependencies {
     //butterknife
     implementation "com.jakewharton:butterknife:${versions.butterknife}"
     annotationProcessor "com.jakewharton:butterknife-compiler:${versions.butterknife}"
-
     //Default
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation "com.android.support:recyclerview-v7:${versions.support}"
     implementation "com.android.support:design:${versions.support}"
     implementation "com.android.support:appcompat-v7:${versions.support}"
+    implementation files('libsDebug/SQLiteStudioRemote.jar')
 }

@@ -6,7 +6,6 @@ import javax.inject.Inject;
 
 import io.reactivex.annotations.NonNull;
 import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
 
 /**
  * @author Grigoriy Pryamov.
