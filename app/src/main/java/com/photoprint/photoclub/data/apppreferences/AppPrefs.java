@@ -49,7 +49,7 @@ public class AppPrefs {
         return prefs.getLong(Entities.DATA_SYNC_TIME, 0);
     }
 
-    public void setDataSyncTime(long dictionariesSyncTime) {
-        prefs.edit().putLong(Entities.DATA_SYNC_TIME, dictionariesSyncTime).apply();
+    public void setDataSyncTime(long syncTime) {
+        prefs.edit().putLong(Entities.DATA_SYNC_TIME, syncTime).apply();
     }
 }

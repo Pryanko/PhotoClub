@@ -5,6 +5,8 @@ import android.content.Context;
 import com.photoprint.network.ApiConfig;
 import com.photoprint.photoclub.data.authtokenstorage.AuthTokenStorage;
 import com.photoprint.photoclub.data.authtokenstorage.AuthTokenStorageImpl;
+import com.photoprint.photoclub.helper.system.AppSystemMetrics;
+import com.photoprint.photoclub.helper.system.AppSystemMetricsImpl;
 
 import dagger.Module;
 import dagger.Provides;
@@ -38,5 +40,10 @@ class AppModule {
     @Provides
     AuthTokenStorage authTokenStorage(AuthTokenStorageImpl authTokenStorage) {
         return authTokenStorage;
+    }
+
+    @Provides
+    AppSystemMetrics appSystemMetrics(AppSystemMetricsImpl appSystemMetrics) {
+        return appSystemMetrics;
     }
 }
