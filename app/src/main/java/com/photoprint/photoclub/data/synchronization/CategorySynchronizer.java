@@ -43,7 +43,7 @@ public class CategorySynchronizer extends BaseSynchronizer<Category> {
     }
 
     @Override
-    protected Single<Response<Data<Category>>> getSync() {
+    protected Single<Response<Data<Category>>> getApiSource() {
         logger.trace("Category sync: Start");
         return apiWorker.getCategory();
     }

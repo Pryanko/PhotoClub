@@ -1,36 +1,45 @@
-package com.photoprint.network.api.model.manual;
+package com.photoprint.photoclub.model;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
+import android.arch.persistence.room.PrimaryKey;
+
+import com.photoprint.photoclub.model.base.ModelWithId;
 
 /**
- * Гайд для обучения
+ * Основная модель для экрана обучения
  *
- * @autor user on 16.01.2018.
+ * @author Grigoriy Pryamov.
  */
-public class Guide {
+public class Guide implements ModelWithId<Long> {
 
-    @SerializedName("id")
-    @Expose
+    /**
+     * Id мануала
+     */
+    @PrimaryKey
     private long id;
-    @SerializedName("header")
-    @Expose
+    /**
+     * Заголовок (нименование)
+     */
     private String header;
-    @SerializedName("image1024")
-    @Expose
+    /**
+     * Картинка для большого разрешения
+     */
     private String image1024;
-    @SerializedName("image480")
-    @Expose
+    /**
+     * Картинка для экранов с маленьким разрешением
+     */
     private String image480;
-    @SerializedName("text")
-    @Expose
+    /**
+     * Текст мануала
+     */
     private String text;
 
-    public long getId() {
+    @Override
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    @Override
+    public void setId(Long id) {
         this.id = id;
     }
 

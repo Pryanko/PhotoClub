@@ -1,8 +1,10 @@
 package com.photoprint.photoclub.di.module;
 
 import com.photoprint.photoclub.impl.CategoryRepositoryImpl;
+import com.photoprint.photoclub.impl.GuideRepositoryImpl;
 import com.photoprint.photoclub.impl.UserRepositoryImpl;
 import com.photoprint.photoclub.repository.CategoryRepository;
+import com.photoprint.photoclub.repository.GuideRepository;
 import com.photoprint.photoclub.repository.UserRepository;
 
 import dagger.Binds;
@@ -20,4 +22,7 @@ public abstract class RepositoryModule {
 
     @Binds
     abstract CategoryRepository categoryRepository(CategoryRepositoryImpl categoryRepository);
+
+    @Binds
+    abstract GuideRepository guideRepository(GuideRepositoryImpl guideRepository);
 }

@@ -2,6 +2,8 @@ package com.photoprint.photoclub.di.module;
 
 import com.photoprint.photoclub.room.mapper.CategoryMapper;
 import com.photoprint.photoclub.room.mapper.CategoryMapperImpl;
+import com.photoprint.photoclub.room.mapper.GuideMapper;
+import com.photoprint.photoclub.room.mapper.GuideMapperImpl;
 import com.photoprint.photoclub.room.mapper.UserMapper;
 import com.photoprint.photoclub.room.mapper.UserMapperImpl;
 
@@ -27,5 +29,11 @@ public class MapperModule {
     @Reusable
     CategoryMapper categoryMapper() {
         return new CategoryMapperImpl();
+    }
+
+    @Provides
+    @Reusable
+    GuideMapper guideMapper() {
+        return new GuideMapperImpl();
     }
 }

@@ -14,6 +14,9 @@ import io.reactivex.Completable;
 import io.reactivex.Single;
 
 /**
+ * Базовый класс синхронизации
+ * T - тип модели апи
+ *
  * @author Grigoriy Pryamov.
  */
 public abstract class BaseSynchronizer<T> {
@@ -27,8 +30,11 @@ public abstract class BaseSynchronizer<T> {
         this.transaction = transaction;
     }
 
+    /**
+     * Основной метод синхронизации
+     */
     public Completable sync() {
-        return getSync()
+        return getApiSource()
                 .map(Response::get)
                 .map(Data::getData)
                 .observeOn(AppSchedulers.db())
@@ -36,7 +42,15 @@ public abstract class BaseSynchronizer<T> {
                 .toCompletable();
     }
 
-    protected abstract Single<Response<Data<T>>> getSync();
+    /**
+     * Метод должен вернуть источник апи -
+     */
+    protected abstract Single<Response<Data<T>>> getApiSource();
 
+    /**
+     * Метод записывающий данные в бд - реализаци вынесена в наследника, для реализации разной логики
+     *
+     * @param entities список для записи
+     */
     protected abstract List<T> store(@NonNull List<T> entities);
 }
