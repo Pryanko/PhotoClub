@@ -3,6 +3,7 @@ package com.photoprint.photoclub.repository;
 import android.support.annotation.NonNull;
 
 import com.photoprint.photoclub.model.Guide;
+import com.photoprint.photoclub.repository.base.BaseRepository;
 
 import java.util.List;
 
@@ -11,7 +12,7 @@ import java.util.List;
  *
  * @author Grigoriy Pryamov.
  */
-public interface GuideRepository {
+public interface GuideRepository extends BaseRepository<Guide, Long> {
     /**
      * Возврщащет список всех гайдов
      */

@@ -26,13 +26,18 @@ public class AppSynchronizer {
     private static final long APP_DATA_ACTUALITY_TIME = TimeUnit.DAYS.toMillis(1); //1 день
 
     private final CategorySynchronizer categorySynchronizer;
+    private final GuideSynchronizer guideSynchronizer;
 
     @Inject
-    AppSynchronizer(CategorySynchronizer categorySynchronizer) {
+    AppSynchronizer(CategorySynchronizer categorySynchronizer,
+                    GuideSynchronizer guideSynchronizer) {
         this.categorySynchronizer = categorySynchronizer;
+        this.guideSynchronizer = guideSynchronizer;
     }
 
     public Completable appDataSync() {
-        return categorySynchronizer.sync();
+        logger.trace("appDataSync");
+        return categorySynchronizer.sync()
+                .andThen(guideSynchronizer.sync());
     }
 }
