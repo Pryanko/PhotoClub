@@ -4,6 +4,8 @@ import com.photoprint.photoclub.room.mapper.CategoryMapper;
 import com.photoprint.photoclub.room.mapper.CategoryMapperImpl;
 import com.photoprint.photoclub.room.mapper.GuideMapper;
 import com.photoprint.photoclub.room.mapper.GuideMapperImpl;
+import com.photoprint.photoclub.room.mapper.ServiceMapper;
+import com.photoprint.photoclub.room.mapper.ServiceMapperImpl;
 import com.photoprint.photoclub.room.mapper.UserMapper;
 import com.photoprint.photoclub.room.mapper.UserMapperImpl;
 
@@ -17,7 +19,7 @@ import dagger.Reusable;
  * @author Grigoriy Pryamov.
  */
 @Module
-public class MapperModule {
+class MapperModule {
 
     @Provides
     @Reusable
@@ -35,5 +37,11 @@ public class MapperModule {
     @Reusable
     GuideMapper guideMapper() {
         return new GuideMapperImpl();
+    }
+
+    @Provides
+    @Reusable
+    ServiceMapper serviceMapper() {
+        return new ServiceMapperImpl();
     }
 }

@@ -1,63 +1,83 @@
-package com.photoprint.network.api.model.services;
+package com.photoprint.photoclub.room.entity;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
+
+import com.photoprint.photoclub.room.entity.base.EntityWithId;
 
 /**
- * Модель апи услуг
- *
- * @author Libgo on 24.03.2018.
+ * @author Grigoriy Pryamov.
  */
-public class Service {
+@Entity(tableName = "Service")
+public class ServiceEntity implements EntityWithId<Long> {
 
-    @SerializedName("id")
-    @Expose
+    /**
+     * Id услуги
+     */
+    @PrimaryKey
     private long id;
-    @SerializedName("category_id")
-    @Expose
+    /**
+     * Id категории к которой привязана услуга
+     */
     private Integer categoryId;
-    @SerializedName("name")
-    @Expose
+    /**
+     * Наименование услуги
+     */
     private String name;
-    @SerializedName("description")
-    @Expose
+    /**
+     * Описание услуги
+     */
     private String description;
-    @SerializedName("multiply")
-    @Expose
+    /**
+     * Тип составной услуги
+     * 0 - обычная услуга например печать фотографии,
+     * 1 - составная услуга где в одной услуге несколько фотографий например печать календаря
+     */
     private Integer multiply;
-    @SerializedName("price")
-    @Expose
+    /**
+     * Стоимость услуги
+     */
     private String price;
-    @SerializedName("image480")
-    @Expose
+    /**
+     * Image для экранов с маленьким разрешением
+     */
     private String image480;
-    @SerializedName("image480_width")
-    @Expose
+    /**
+     * Ширина
+     */
     private Integer image480Width;
-    @SerializedName("image480_height")
-    @Expose
+    /**
+     * Высота
+     */
     private Integer image480Height;
-    @SerializedName("image1024")
-    @Expose
+    /**
+     * Image для экранов с большим разрешением
+     */
     private String image1024;
-    @SerializedName("image1024_width")
-    @Expose
+    /**
+     * Ширина
+     */
     private Integer image1024Width;
-    @SerializedName("image1024_height")
-    @Expose
+    /**
+     * Высота
+     */
     private Integer image1024Height;
-    @SerializedName("sort")
-    @Expose
+    /**
+     * Порядок сортировки в списке категории, тип integer, по возрастанию, 0 первый
+     */
     private Integer sort;
-    @SerializedName("category_name")
-    @Expose
+    /**
+     * Имя категории к которйо принадлежит услуга
+     */
     private String categoryName;
 
-    public long getId() {
+    @Override
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    @Override
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -167,7 +187,7 @@ public class Service {
 
     @Override
     public String toString() {
-        return "Service{" +
+        return "ServiceEntity{" +
                 "id=" + id +
                 ", categoryId=" + categoryId +
                 ", name='" + name + '\'' +

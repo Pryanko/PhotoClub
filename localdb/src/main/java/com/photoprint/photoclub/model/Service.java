@@ -1,63 +1,81 @@
-package com.photoprint.network.api.model.services;
+package com.photoprint.photoclub.model;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
+import com.photoprint.photoclub.model.base.ModelWithId;
+import com.photoprint.photoclub.model.enums.ServiceType;
 
 /**
- * Модель апи услуг
+ * Основная модель для услуг
  *
- * @author Libgo on 24.03.2018.
+ * @author Grigoriy Pryamov.
  */
-public class Service {
+public class Service implements ModelWithId<Long> {
 
-    @SerializedName("id")
-    @Expose
+    /**
+     * Id услуги
+     */
     private long id;
-    @SerializedName("category_id")
-    @Expose
+    /**
+     * Id категории к которой привязана услуга
+     */
     private Integer categoryId;
-    @SerializedName("name")
-    @Expose
+    /**
+     * Наименование услуги
+     */
     private String name;
-    @SerializedName("description")
-    @Expose
+    /**
+     * Описание услуги
+     */
     private String description;
-    @SerializedName("multiply")
-    @Expose
-    private Integer multiply;
-    @SerializedName("price")
-    @Expose
+    /**
+     * Тип составной услуги
+     * 0 - обычная услуга например печать фотографии,
+     * 1 - составная услуга где в одной услуге несколько фотографий например печать календаря
+     */
+    private ServiceType serviceType;
+    /**
+     * Стоимость услуги
+     */
     private String price;
-    @SerializedName("image480")
-    @Expose
+    /**
+     * Image для экранов с маленьким разрешением
+     */
     private String image480;
-    @SerializedName("image480_width")
-    @Expose
+    /**
+     * Ширина
+     */
     private Integer image480Width;
-    @SerializedName("image480_height")
-    @Expose
+    /**
+     * Высота
+     */
     private Integer image480Height;
-    @SerializedName("image1024")
-    @Expose
+    /**
+     * Image для экранов с большим разрешением
+     */
     private String image1024;
-    @SerializedName("image1024_width")
-    @Expose
+    /**
+     * Ширина
+     */
     private Integer image1024Width;
-    @SerializedName("image1024_height")
-    @Expose
+    /**
+     * Высота
+     */
     private Integer image1024Height;
-    @SerializedName("sort")
-    @Expose
+    /**
+     * Порядок сортировки в списке категории, тип integer, по возрастанию, 0 первый
+     */
     private Integer sort;
-    @SerializedName("category_name")
-    @Expose
+    /**
+     * Имя категории к которйо принадлежит услуга
+     */
     private String categoryName;
 
-    public long getId() {
+    @Override
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    @Override
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -85,12 +103,12 @@ public class Service {
         this.description = description;
     }
 
-    public Integer getMultiply() {
-        return multiply;
+    public ServiceType getServiceType() {
+        return serviceType;
     }
 
-    public void setMultiply(Integer multiply) {
-        this.multiply = multiply;
+    public void setServiceType(ServiceType serviceType) {
+        this.serviceType = serviceType;
     }
 
     public String getPrice() {
@@ -172,7 +190,7 @@ public class Service {
                 ", categoryId=" + categoryId +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
-                ", multiply=" + multiply +
+                ", serviceType=" + serviceType +
                 ", price='" + price + '\'' +
                 ", image480='" + image480 + '\'' +
                 ", image480Width=" + image480Width +
