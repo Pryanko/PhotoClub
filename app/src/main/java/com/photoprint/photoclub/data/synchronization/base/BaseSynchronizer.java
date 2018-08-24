@@ -15,11 +15,10 @@ import io.reactivex.Single;
 
 /**
  * Базовый класс синхронизации
- * T - тип модели апи
  *
  * @author Grigoriy Pryamov.
  */
-public abstract class BaseSynchronizer<T> {
+public abstract class BaseSynchronizer<entity> {
 
     protected final ApiWorker apiWorker;
     private final DbTransaction transaction;
@@ -45,12 +44,12 @@ public abstract class BaseSynchronizer<T> {
     /**
      * Метод должен вернуть источник апи -
      */
-    protected abstract Single<Response<Data<T>>> getApiSource();
+    protected abstract Single<Response<Data<entity>>> getApiSource();
 
     /**
      * Метод записывающий данные в бд - реализаци вынесена в наследника, для реализации разной логики
      *
      * @param entities список для записи
      */
-    protected abstract List<T> store(@NonNull List<T> entities);
+    protected abstract List<entity> store(@NonNull List<entity> entities);
 }

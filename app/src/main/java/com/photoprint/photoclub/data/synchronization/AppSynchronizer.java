@@ -27,17 +27,21 @@ public class AppSynchronizer {
 
     private final CategorySynchronizer categorySynchronizer;
     private final GuideSynchronizer guideSynchronizer;
+    private final ServiceSynchronizer serviceSynchronizer;
 
     @Inject
     AppSynchronizer(CategorySynchronizer categorySynchronizer,
-                    GuideSynchronizer guideSynchronizer) {
+                    GuideSynchronizer guideSynchronizer,
+                    ServiceSynchronizer serviceSynchronizer) {
         this.categorySynchronizer = categorySynchronizer;
         this.guideSynchronizer = guideSynchronizer;
+        this.serviceSynchronizer = serviceSynchronizer;
     }
 
     public Completable appDataSync() {
         logger.trace("appDataSync");
         return categorySynchronizer.sync()
-                .andThen(guideSynchronizer.sync());
+                .concatWith(guideSynchronizer.sync())
+                .concatWith(serviceSynchronizer.sync());
     }
 }

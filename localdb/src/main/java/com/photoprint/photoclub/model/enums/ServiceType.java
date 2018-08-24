@@ -22,7 +22,7 @@ public enum ServiceType {
      */
     COMPOSITE(1);
 
-    private final int code;
+    public final int code;
 
     ServiceType(int code) {
         this.code = code;

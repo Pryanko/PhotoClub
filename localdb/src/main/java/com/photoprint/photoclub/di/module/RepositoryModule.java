@@ -18,7 +18,7 @@ import dagger.Module;
  * @author Grigoriy Pryamov.
  */
 @Module
-abstract class RepositoryModule {
+public abstract class RepositoryModule {
     @Binds
     abstract UserRepository userRepository(UserRepositoryImpl userRepository);
 

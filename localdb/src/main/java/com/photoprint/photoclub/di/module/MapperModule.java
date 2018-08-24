@@ -19,7 +19,7 @@ import dagger.Reusable;
  * @author Grigoriy Pryamov.
  */
 @Module
-class MapperModule {
+public class MapperModule {
 
     @Provides
     @Reusable

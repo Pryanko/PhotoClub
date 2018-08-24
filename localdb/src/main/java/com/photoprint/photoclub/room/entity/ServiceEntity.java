@@ -33,7 +33,7 @@ public class ServiceEntity implements EntityWithId<Long> {
      * 0 - обычная услуга например печать фотографии,
      * 1 - составная услуга где в одной услуге несколько фотографий например печать календаря
      */
-    private Integer multiply;
+    private Integer serviceType;
     /**
      * Стоимость услуги
      */
@@ -105,12 +105,12 @@ public class ServiceEntity implements EntityWithId<Long> {
         this.description = description;
     }
 
-    public Integer getMultiply() {
-        return multiply;
+    public Integer getServiceType() {
+        return serviceType;
     }
 
-    public void setMultiply(Integer multiply) {
-        this.multiply = multiply;
+    public void setServiceType(Integer serviceType) {
+        this.serviceType = serviceType;
     }
 
     public String getPrice() {
@@ -192,7 +192,7 @@ public class ServiceEntity implements EntityWithId<Long> {
                 ", categoryId=" + categoryId +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
-                ", multiply=" + multiply +
+                ", multiply=" + serviceType +
                 ", price='" + price + '\'' +
                 ", image480='" + image480 + '\'' +
                 ", image480Width=" + image480Width +
