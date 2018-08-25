@@ -25,7 +25,7 @@ public class RunActivity extends MvpActivity implements RunView {
 
     private static final Logger logger = LoggerFactory.getLogger(RunActivity.class);
 
-    //region вш
+    //region di
     RunScreenComponent screenComponent;
     RunComponent component;
     @Inject

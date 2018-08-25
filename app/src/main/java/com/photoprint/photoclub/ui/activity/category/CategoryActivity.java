@@ -79,6 +79,18 @@ public class CategoryActivity extends MvpActivity implements CategoryView {
         presenter.initialize();
     }
 
+    @Override
+    protected void onResume() {
+        navigator.onResume(this);
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        navigator.onPause();
+        super.onPause();
+    }
+
     private CategoryScreenComponent getScreenComponent() {
         Object saved = getLastCustomNonConfigurationInstance();
         if (saved == null) {

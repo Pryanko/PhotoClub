@@ -38,6 +38,11 @@
             android:name=".ui.activity.category.CategoryActivity"
             android:screenOrientation="${defaultOrientation}" />
 
+        <activity
+            android:name=".ui.activity.guide.GuideActivity"
+            android:noHistory="true"
+            android:screenOrientation="${defaultOrientation}" />
+
     </application>
 
 </manifest>

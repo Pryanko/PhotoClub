@@ -107,7 +107,7 @@ dependencies {
     depsMapStruct()
     // RxJava
     depsRxJava()
-    //butterknife
+    //ButterKnife
     implementation "com.jakewharton:butterknife:${versions.butterknife}"
     annotationProcessor "com.jakewharton:butterknife-compiler:${versions.butterknife}"
     //Default
