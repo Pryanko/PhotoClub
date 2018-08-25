@@ -17,6 +17,10 @@ public class Navigator extends BaseNavigator<RunActivity> {
         super(activityNavigator);
     }
 
+    public void navigateToGuideActivity() {
+        activityNavigator.navigateToGuideActivity(activity);
+    }
+
     public void navigateToCategoryActivity() {
         activityNavigator.navigateToCategoryActivity(activity);
     }

@@ -5,6 +5,7 @@ import android.content.Intent;
 
 import com.photoprint.photoclub.R;
 import com.photoprint.photoclub.ui.activity.category.CategoryActivity;
+import com.photoprint.photoclub.ui.activity.guide.GuideActivity;
 
 import javax.inject.Inject;
 
@@ -21,6 +22,12 @@ public class ActivityNavigator {
 
     public void navigateToCategoryActivity(Activity activity) {
         Intent intent = CategoryActivity.getCallingIntent(activity);
+        activity.startActivity(intent);
+        animForward(activity);
+    }
+
+    public void navigateToGuideActivity(Activity activity) {
+        Intent intent = GuideActivity.getCallingIntent(activity);
         activity.startActivity(intent);
         animForward(activity);
     }

@@ -115,7 +115,9 @@ dependencies {
     implementation "com.facebook.fresco:fresco:${versions.fresco}"
     implementation "com.android.support:recyclerview-v7:${versions.support}"
     implementation "com.android.support:design:${versions.support}"
+    implementation "com.romandanylyk:pageindicatorview:${versions.pageindicatorview}"
     implementation "com.android.support:appcompat-v7:${versions.support}"
     implementation "com.android.support:cardview-v7:${versions.support}"
     implementation files('libsDebug/SQLiteStudioRemote.jar')
+    implementation 'com.android.support.constraint:constraint-layout:1.1.2'
 }

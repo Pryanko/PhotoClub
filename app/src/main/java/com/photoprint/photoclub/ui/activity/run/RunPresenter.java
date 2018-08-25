@@ -55,7 +55,7 @@ public class RunPresenter extends BaseMvpViewStatePresenter<RunView, RunViewStat
 
     public void onNextBtnClicked() {
         logger.trace("onNextBtnClicked");
-        navigator.navigateToCategoryActivity();
+        navigator.navigateToGuideActivity();
     }
 
     @Override

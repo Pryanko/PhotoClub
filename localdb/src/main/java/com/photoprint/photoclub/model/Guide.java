@@ -1,6 +1,8 @@
 package com.photoprint.photoclub.model;
 
 import android.arch.persistence.room.PrimaryKey;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import com.photoprint.photoclub.model.base.ModelWithId;
 
@@ -9,7 +11,7 @@ import com.photoprint.photoclub.model.base.ModelWithId;
  *
  * @author Grigoriy Pryamov.
  */
-public class Guide implements ModelWithId<Long> {
+public class Guide implements ModelWithId<Long>,Parcelable {
 
     /**
      * Id мануала
@@ -85,4 +87,67 @@ public class Guide implements ModelWithId<Long> {
                 ", text='" + text + '\'' +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Guide guide = (Guide) o;
+
+        if (id != guide.id) return false;
+        if (header != null ? !header.equals(guide.header) : guide.header != null) return false;
+        if (image1024 != null ? !image1024.equals(guide.image1024) : guide.image1024 != null)
+            return false;
+        if (image480 != null ? !image480.equals(guide.image480) : guide.image480 != null)
+            return false;
+        return text != null ? text.equals(guide.text) : guide.text == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = (int) (id ^ (id >>> 32));
+        result = 31 * result + (header != null ? header.hashCode() : 0);
+        result = 31 * result + (image1024 != null ? image1024.hashCode() : 0);
+        result = 31 * result + (image480 != null ? image480.hashCode() : 0);
+        result = 31 * result + (text != null ? text.hashCode() : 0);
+        return result;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeLong(this.id);
+        dest.writeString(this.header);
+        dest.writeString(this.image1024);
+        dest.writeString(this.image480);
+        dest.writeString(this.text);
+    }
+
+    public Guide() {
+    }
+
+    protected Guide(Parcel in) {
+        this.id = in.readLong();
+        this.header = in.readString();
+        this.image1024 = in.readString();
+        this.image480 = in.readString();
+        this.text = in.readString();
+    }
+
+    public static final Parcelable.Creator<Guide> CREATOR = new Parcelable.Creator<Guide>() {
+        @Override
+        public Guide createFromParcel(Parcel source) {
+            return new Guide(source);
+        }
+
+        @Override
+        public Guide[] newArray(int size) {
+            return new Guide[size];
+        }
+    };
 }

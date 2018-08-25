@@ -1,5 +1,7 @@
 package com.photoprint.photoclub.ui.activity.guide;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.photoprint.logger.Logger;
@@ -18,6 +20,10 @@ import butterknife.ButterKnife;
 public class GuideActivity extends MvpActivity implements GuideView {
 
     private static final Logger logger = LoggerFactory.getLogger(GuideActivity.class);
+
+    public static Intent getCallingIntent(Context context) {
+        return new Intent(context, GuideActivity.class);
+    }
 
     //region di
     GuideScreenComponent screenComponent;

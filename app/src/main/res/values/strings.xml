@@ -6,4 +6,8 @@
     <!--CategoryActivity-->
     <string name="category_title">Категории</string>
 
+    <!--GuideActivity-->
+    <string name="guide_back_btn">Назад</string>
+    <string name="guide_forward_btn">Далее</string>
+
 </resources>
