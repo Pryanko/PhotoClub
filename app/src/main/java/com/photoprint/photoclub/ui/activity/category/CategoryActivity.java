@@ -3,6 +3,7 @@ package com.photoprint.photoclub.ui.activity.category;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.photoprint.logger.Logger;
@@ -10,6 +11,8 @@ import com.photoprint.logger.LoggerFactory;
 import com.photoprint.photoclub.R;
 import com.photoprint.photoclub.ui.activity.base.ActivityModule;
 import com.photoprint.photoclub.ui.activity.base.MvpActivity;
+import com.photoprint.photoclub.ui.activity.category.adapter.CategoryListAdapterImpl;
+import com.photoprint.photoclub.ui.activity.category.adapter.ItemDecoration;
 import com.photoprint.photoclub.ui.activity.delegate.ToolbarDelegate;
 
 import javax.inject.Inject;
@@ -37,10 +40,12 @@ public class CategoryActivity extends MvpActivity implements CategoryView {
     Navigator navigator;
     @Inject
     ToolbarDelegate toolbarDelegate;
+    @Inject
+    CategoryListAdapterImpl categoryListAdapter;
     //endregion
     //region view
     @BindView(R.id.recyclerView)
-    private RecyclerView recyclerView;
+    RecyclerView recyclerView;
     //endregion
     private CategoryPresenter presenter;
 
@@ -61,6 +66,16 @@ public class CategoryActivity extends MvpActivity implements CategoryView {
         toolbarDelegate.setTitle(R.string.category_title);
         toolbarDelegate.setNavigationOnClickListener(v -> logger.trace("Menu item Clicked"));
 
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.addItemDecoration(new ItemDecoration(
+                getResources().getDimensionPixelOffset(R.dimen.offset_category_item_sides),
+                getResources().getDimensionPixelOffset(R.dimen.offset_category_item_sides),
+                getResources().getDimensionPixelOffset(R.dimen.offset_category_item_top),
+                getResources().getDimensionPixelOffset(R.dimen.offset_category_item_bottom)));
+        recyclerView.setAdapter(categoryListAdapter);
+
+        categoryListAdapter.setInteractionListener(position -> presenter.onCategoryClicked(position));
+
         presenter.initialize();
     }
 
@@ -76,5 +91,11 @@ public class CategoryActivity extends MvpActivity implements CategoryView {
     @Override
     public Object onRetainCustomNonConfigurationInstance() {
         return screenComponent;
+    }
+
+    @Override
+    public void onDestroy() {
+        recyclerView.setAdapter(null);
+        super.onDestroy();
     }
 }

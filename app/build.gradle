@@ -112,8 +112,10 @@ dependencies {
     annotationProcessor "com.jakewharton:butterknife-compiler:${versions.butterknife}"
     //Default
     implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation "com.facebook.fresco:fresco:${versions.fresco}"
     implementation "com.android.support:recyclerview-v7:${versions.support}"
     implementation "com.android.support:design:${versions.support}"
     implementation "com.android.support:appcompat-v7:${versions.support}"
+    implementation "com.android.support:cardview-v7:${versions.support}"
     implementation files('libsDebug/SQLiteStudioRemote.jar')
 }

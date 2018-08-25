@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
 import com.photoprint.logger.Logger;
 import com.photoprint.logger.LoggerFactory;
 import com.photoprint.photoclub.di.Dagger;
@@ -38,6 +39,7 @@ public class AppInitProvider extends ContentProvider {
         initDi(getContext());
         initRxJavaPlugins();
         initExternalSQLiteTool();
+        frescoInit(getContext());
         return false;
     }
 
@@ -53,6 +55,10 @@ public class AppInitProvider extends ContentProvider {
     private void initRxJavaPlugins() {
         logger.trace("initRxJavaPlugins");
         RxJavaPlugins.setErrorHandler(new RxErrorHandler());
+    }
+
+    private void frescoInit(Context context) {
+        Fresco.initialize(context);
     }
 
     private void initExternalSQLiteTool() {

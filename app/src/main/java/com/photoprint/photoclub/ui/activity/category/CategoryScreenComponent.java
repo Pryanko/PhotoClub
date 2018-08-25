@@ -8,7 +8,7 @@ import dagger.Subcomponent;
  * @author Grigoriy Pryamov.
  */
 @ScreenScope
-@Subcomponent
+@Subcomponent(modules = {CategoryModule.class})
 public interface CategoryScreenComponent {
 
     CategoryComponent.Builder categoryComponentBuilder();
