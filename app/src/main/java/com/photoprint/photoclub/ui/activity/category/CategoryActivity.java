@@ -3,6 +3,7 @@ package com.photoprint.photoclub.ui.activity.category;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 
 import com.photoprint.logger.Logger;
 import com.photoprint.logger.LoggerFactory;
@@ -13,6 +14,7 @@ import com.photoprint.photoclub.ui.activity.delegate.ToolbarDelegate;
 
 import javax.inject.Inject;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
@@ -37,6 +39,8 @@ public class CategoryActivity extends MvpActivity implements CategoryView {
     ToolbarDelegate toolbarDelegate;
     //endregion
     //region view
+    @BindView(R.id.recyclerView)
+    private RecyclerView recyclerView;
     //endregion
     private CategoryPresenter presenter;
 
