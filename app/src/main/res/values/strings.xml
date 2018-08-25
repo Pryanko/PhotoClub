@@ -3,4 +3,7 @@
     <!--RunActivity-->
     <string name="run_next_btn">Продолжить</string>
 
+    <!--CategoryActivity-->
+    <string name="category_title">Категории</string>
+
 </resources>

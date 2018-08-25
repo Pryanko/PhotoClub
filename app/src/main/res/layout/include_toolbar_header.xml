@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/appWhite"
+    android:minHeight="?attr/actionBarSize"
+    android:orientation="vertical">
+
+    <com.photoprint.photoclub.ui.widget.CustomTextView
+        android:id="@+id/customTitle"
+        style="@style/TextAppearance.Widget.App.Toolbar.Title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="15dp"
+        android:ellipsize="end"
+        android:gravity="center_vertical"
+        android:singleLine="true"
+        tools:text="Заголовок" />
+
+    <com.photoprint.photoclub.ui.widget.CustomTextView
+        android:id="@+id/customSubtitle"
+        style="@style/TextAppearance.Widget.App.Toolbar.Subtitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="14dp"
+        android:ellipsize="end"
+        android:gravity="center_vertical"
+        android:singleLine="true"
+        android:visibility="gone"
+        tools:text="Подзаголовок"
+        tools:visibility="visible" />
+
+</LinearLayout>

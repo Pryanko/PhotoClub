@@ -13,6 +13,7 @@
         <item name="colorPrimary">@color/appWhite</item>
         <item name="colorPrimaryDark">@color/appYellow</item>
         <item name="colorAccent">@color/appGray</item>
+        <item name="toolbarStyle">@style/Widget.App.Toolbar</item>
         <item name="android:fontFamily" tools:ignore="NewApi">@font/roboto_regular</item>
     </style>
 
@@ -38,16 +39,11 @@
 
     <style name="TextAppearance.Widget.App.Toolbar.Title" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
         <item name="android:textSize" tools:ignore="SpUsage">18dp</item>
-        <item name="android:textColor">@android:color/white</item>
-    </style>
-
-    <style name="Tepp.Toolbar.Title" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
-        <item name="android:textSize" tools:ignore="SpUsage">18dp</item>
-        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textColor">@color/appYellow</item>
     </style>
 
     <style name="TextAppearance.Widget.App.Toolbar.Subtitle" parent="TextAppearance.Widget.AppCompat.Toolbar.Subtitle">
-        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textColor">@color/appYellow</item>
     </style>
 
     <style name="Widget.App.Button.Yellow" parent="Theme.AppCompat.Light">

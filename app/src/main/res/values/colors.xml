@@ -13,6 +13,7 @@
     <color name="appWhite">#ffffff</color>
     <color name="appYellow">#ffffbe75</color>
     <color name="appGray">#a7a7a7</color>
+    <color name="appDarkGray">#33ffffff</color>
 
     <!--Theme colors-->
     <color name="windowBackground">@android:color/white</color>

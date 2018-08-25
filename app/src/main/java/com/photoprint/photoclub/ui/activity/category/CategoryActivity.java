@@ -9,7 +9,7 @@ import com.photoprint.logger.LoggerFactory;
 import com.photoprint.photoclub.R;
 import com.photoprint.photoclub.ui.activity.base.ActivityModule;
 import com.photoprint.photoclub.ui.activity.base.MvpActivity;
-import com.photoprint.photoclub.ui.activity.run.RunActivity;
+import com.photoprint.photoclub.ui.activity.delegate.ToolbarDelegate;
 
 import javax.inject.Inject;
 
@@ -22,7 +22,7 @@ import butterknife.ButterKnife;
  */
 public class CategoryActivity extends MvpActivity implements CategoryView {
 
-    private static final Logger logger = LoggerFactory.getLogger(RunActivity.class);
+    private static final Logger logger = LoggerFactory.getLogger(CategoryActivity.class);
 
     public static Intent getCallingIntent(Context context) {
         return new Intent(context, CategoryActivity.class);
@@ -33,6 +33,8 @@ public class CategoryActivity extends MvpActivity implements CategoryView {
     CategoryComponent component;
     @Inject
     Navigator navigator;
+    @Inject
+    ToolbarDelegate toolbarDelegate;
     //endregion
     //region view
     //endregion
@@ -50,9 +52,13 @@ public class CategoryActivity extends MvpActivity implements CategoryView {
         setContentView(R.layout.activity_category);
         ButterKnife.bind(this);
 
+        toolbarDelegate.init();
+        toolbarDelegate.setNavigationIcon(R.drawable.ic_menu);
+        toolbarDelegate.setTitle(R.string.category_title);
+        toolbarDelegate.setNavigationOnClickListener(v -> logger.trace("Menu item Clicked"));
+
         presenter.initialize();
     }
-
 
     private CategoryScreenComponent getScreenComponent() {
         Object saved = getLastCustomNonConfigurationInstance();
