@@ -19,13 +19,16 @@ public class RunPresenter extends BaseMvpViewStatePresenter<RunView, RunViewStat
     private static final Logger logger = LoggerFactory.getLogger(RunPresenter.class);
 
     private final RunInitializer runInitializer;
+    private final Navigator navigator;
     private Disposable initDisposable = Disposables.disposed();
 
     @Inject
     RunPresenter(RunViewState viewState,
-                 RunInitializer runInitializer) {
+                 RunInitializer runInitializer,
+                 Navigator navigator) {
         super(viewState);
         this.runInitializer = runInitializer;
+        this.navigator = navigator;
     }
 
     @Override
@@ -52,6 +55,7 @@ public class RunPresenter extends BaseMvpViewStatePresenter<RunView, RunViewStat
 
     public void onNextBtnClicked() {
         logger.trace("onNextBtnClicked");
+        navigator.navigateToCategoryActivity();
     }
 
     @Override

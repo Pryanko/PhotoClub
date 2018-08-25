@@ -34,6 +34,10 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".ui.activity.category.CategoryActivity"
+            android:screenOrientation="${defaultOrientation}" />
+
     </application>
 
 </manifest>

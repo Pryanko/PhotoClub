@@ -1,8 +1,10 @@
 package com.photoprint.photoclub.ui.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 
 import com.photoprint.photoclub.R;
+import com.photoprint.photoclub.ui.activity.category.CategoryActivity;
 
 import javax.inject.Inject;
 
@@ -15,6 +17,12 @@ public class ActivityNavigator {
 
     @Inject
     ActivityNavigator() {
+    }
+
+    public void navigateToCategoryActivity(Activity activity) {
+        Intent intent = CategoryActivity.getCallingIntent(activity);
+        activity.startActivity(intent);
+        animForward(activity);
     }
 
     public void navigateBack(Activity activity) {

@@ -2,6 +2,7 @@ package com.photoprint.photoclub;
 
 import com.photoprint.network.NetworkModule;
 import com.photoprint.photoclub.di.module.LocalDatabaseModule;
+import com.photoprint.photoclub.ui.activity.category.CategoryScreenComponent;
 import com.photoprint.photoclub.ui.activity.run.RunScreenComponent;
 import com.photoprint.photoclub.ui.mvp.core.MvpProcessor;
 
@@ -23,4 +24,6 @@ public interface AppComponent {
     MvpProcessor mvpProcessor();
 
     RunScreenComponent runScreenComponent();
+
+    CategoryScreenComponent categoryScreenComponent();
 }

@@ -1,4 +1,4 @@
-package com.photoprint.photoclub.ui.activity.run;
+package com.photoprint.photoclub.ui.activity.category;
 
 import com.photoprint.photoclub.di.ScreenScope;
 import com.photoprint.photoclub.ui.activity.ActivityNavigator;
@@ -11,7 +11,7 @@ import javax.inject.Inject;
 @ScreenScope
 public class Navigator {
 
-    private RunActivity activity;
+    private CategoryActivity activity;
     private final ActivityNavigator activityNavigator;
 
     @Inject
@@ -19,12 +19,8 @@ public class Navigator {
         this.activityNavigator = activityNavigator;
     }
 
-    public void navigateToCategoryActivity() {
-        activityNavigator.navigateToCategoryActivity(activity);
-    }
-
-    public void onResume(RunActivity runActivity) {
-        this.activity = runActivity;
+    public void onResume(CategoryActivity activity) {
+        this.activity = activity;
     }
 
     public void onPause() {

@@ -17,13 +17,15 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
+ * Стартовый экран
+ *
  * @author Grigoriy Pryamov.
  */
 public class RunActivity extends MvpActivity implements RunView {
 
     private static final Logger logger = LoggerFactory.getLogger(RunActivity.class);
 
-    //region Di
+    //region вш
     RunScreenComponent screenComponent;
     RunComponent component;
     @Inject
