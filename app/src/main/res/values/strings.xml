@@ -9,5 +9,7 @@
     <!--GuideActivity-->
     <string name="guide_back_btn">Назад</string>
     <string name="guide_forward_btn">Далее</string>
+    <string name="guide_next_btn">Продолжить</string>
+    <string name="guide_close_btn">Закрыть</string>
 
 </resources>

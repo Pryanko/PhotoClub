@@ -1,15 +1,19 @@
 package com.photoprint.photoclub.ui.activity.guide.adapter;
 
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.photoprint.photoclub.model.Guide;
+import com.photoprint.photoclub.ui.activity.guide.fragment.GuideFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Адаптер для экрана гайдов
+ *
  * @author Grigoriy Pryamov.
  */
 public class GuideAdapterImpl extends FragmentStatePagerAdapter {
@@ -22,7 +26,11 @@ public class GuideAdapterImpl extends FragmentStatePagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        return null;
+        GuideFragment guideFragment = new GuideFragment();
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(GuideFragment.EXTRA_GUIDE, guides.get(position));
+        guideFragment.setArguments(bundle);
+        return guideFragment;
     }
 
     @Override
@@ -32,5 +40,6 @@ public class GuideAdapterImpl extends FragmentStatePagerAdapter {
 
     public void setGuides(List<Guide> guides) {
         this.guides = guides;
+        notifyDataSetChanged();
     }
 }

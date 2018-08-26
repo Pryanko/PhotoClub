@@ -26,4 +26,8 @@ public class Navigator extends BaseNavigator<GuideActivity> {
     public void onPause() {
         activity = null;
     }
+
+    public void navigateToCategoryActivity() {
+        activityNavigator.navigateToCategoryActivity(activity);
+    }
 }
