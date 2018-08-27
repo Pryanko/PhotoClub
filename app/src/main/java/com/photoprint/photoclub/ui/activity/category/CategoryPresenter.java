@@ -6,6 +6,7 @@ import com.photoprint.photoclub.helper.runtimepermission.AppSchedulers;
 import com.photoprint.photoclub.model.Category;
 import com.photoprint.photoclub.ui.activity.category.adapter.CategoryListAdapter;
 import com.photoprint.photoclub.ui.activity.category.interactor.CategoryLoader;
+import com.photoprint.photoclub.ui.activity.service.model.ServiceParams;
 import com.photoprint.photoclub.ui.mvp.presenter.BaseMvpViewStatePresenter;
 
 import java.util.Collections;
@@ -27,15 +28,17 @@ public class CategoryPresenter extends BaseMvpViewStatePresenter<CategoryView, C
 
     private final CategoryLoader categoryLoader;
     private final CategoryListAdapter categoryListAdapter;
+    private final Navigator navigator;
     private Disposable loadDisposable = Disposables.disposed();
 
     @Inject
     CategoryPresenter(CategoryViewState viewState,
                       CategoryLoader categoryLoader,
-                      CategoryListAdapter categoryListAdapter) {
+                      CategoryListAdapter categoryListAdapter, Navigator navigator) {
         super(viewState);
         this.categoryLoader = categoryLoader;
         this.categoryListAdapter = categoryListAdapter;
+        this.navigator = navigator;
     }
 
 
@@ -63,5 +66,9 @@ public class CategoryPresenter extends BaseMvpViewStatePresenter<CategoryView, C
 
     public void onCategoryClicked(int position) {
         logger.trace("onCategoryClicked - position:" + position);
+        Category category = categories.get(position);
+        ServiceParams serviceParams = new ServiceParams();
+        serviceParams.setCategoryId(category.getId());
+        navigator.navigateToServiceActivity(serviceParams);
     }
 }

@@ -6,6 +6,8 @@ import android.content.Intent;
 import com.photoprint.photoclub.R;
 import com.photoprint.photoclub.ui.activity.category.CategoryActivity;
 import com.photoprint.photoclub.ui.activity.guide.GuideActivity;
+import com.photoprint.photoclub.ui.activity.service.ServiceActivity;
+import com.photoprint.photoclub.ui.activity.service.model.ServiceParams;
 
 import javax.inject.Inject;
 
@@ -18,6 +20,12 @@ public class ActivityNavigator {
 
     @Inject
     ActivityNavigator() {
+    }
+
+    public void navigateToServiceActivity(Activity activity, ServiceParams serviceParams) {
+        Intent intent = ServiceActivity.getCallingIntent(activity, serviceParams);
+        activity.startActivity(intent);
+        animForward(activity);
     }
 
     public void navigateToCategoryActivity(Activity activity) {
@@ -44,4 +52,6 @@ public class ActivityNavigator {
     private void animBack(Activity activity) {
         activity.overridePendingTransition(R.anim.zero_animation, R.anim.slide_to_right);
     }
+
+
 }

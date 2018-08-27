@@ -1,9 +1,8 @@
-package com.photoprint.photoclub.ui.activity.category;
+package com.photoprint.photoclub.ui.activity.service;
 
 import com.photoprint.photoclub.di.ScreenScope;
 import com.photoprint.photoclub.ui.activity.ActivityNavigator;
 import com.photoprint.photoclub.ui.activity.base.BaseNavigator;
-import com.photoprint.photoclub.ui.activity.service.model.ServiceParams;
 
 import javax.inject.Inject;
 
@@ -11,25 +10,23 @@ import javax.inject.Inject;
  * @author Grigoriy Pryamov.
  */
 @ScreenScope
-public class Navigator extends BaseNavigator<CategoryActivity> {
+public class Navigator extends BaseNavigator<ServiceActivity> {
 
     @Inject
     Navigator(ActivityNavigator activityNavigator) {
         super(activityNavigator);
     }
 
-    public void navigateToServiceActivity(ServiceParams serviceParams) {
-        activityNavigator.navigateToServiceActivity(activity, serviceParams);
-    }
-
     public void navigateBack() {
         activityNavigator.navigateBack(activity);
     }
 
-    public void onResume(CategoryActivity activity) {
+    @Override
+    public void onResume(ServiceActivity activity) {
         this.activity = activity;
     }
 
+    @Override
     public void onPause() {
         this.activity = null;
     }

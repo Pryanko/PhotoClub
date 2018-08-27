@@ -5,6 +5,7 @@ import com.photoprint.photoclub.di.module.LocalDatabaseModule;
 import com.photoprint.photoclub.ui.activity.category.CategoryScreenComponent;
 import com.photoprint.photoclub.ui.activity.guide.GuideScreenComponent;
 import com.photoprint.photoclub.ui.activity.run.RunScreenComponent;
+import com.photoprint.photoclub.ui.activity.service.ServiceScreenComponent;
 import com.photoprint.photoclub.ui.mvp.core.MvpProcessor;
 
 import javax.inject.Singleton;
@@ -29,4 +30,6 @@ public interface AppComponent {
     CategoryScreenComponent categoryScreenComponent();
 
     GuideScreenComponent guideScreenComponent();
+
+    ServiceScreenComponent serviceScreenComponent();
 }
