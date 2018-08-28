@@ -20,7 +20,7 @@ public interface ServiceDao extends BaseDao<ServiceEntity> {
     List<ServiceEntity> getServices();
 
     @Query("SELECT * FROM Service WHERE categoryId = :categoryId")
-    List<ServiceEntity> getServicesByCategoryId(int categoryId);
+    List<ServiceEntity> getServicesByCategoryId(long categoryId);
 
     @Query("SELECT * FROM Service WHERE id = :serviceId")
     ServiceEntity getServiceById(int serviceId);

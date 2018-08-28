@@ -3,6 +3,7 @@ package com.photoprint.photoclub.ui.activity.service;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.photoprint.logger.Logger;
@@ -12,7 +13,9 @@ import com.photoprint.photoclub.ui.activity.base.ActivityModule;
 import com.photoprint.photoclub.ui.activity.base.MvpActivity;
 import com.photoprint.photoclub.ui.activity.category.CategoryActivity;
 import com.photoprint.photoclub.ui.activity.delegate.ToolbarDelegate;
+import com.photoprint.photoclub.ui.activity.service.adapter.ServiceListAdapterImpl;
 import com.photoprint.photoclub.ui.activity.service.model.ServiceParams;
+import com.photoprint.photoclub.ui.adapter.ItemDecoration;
 
 import javax.inject.Inject;
 
@@ -42,6 +45,8 @@ public class ServiceActivity extends MvpActivity implements ServiceView {
     Navigator navigator;
     @Inject
     ToolbarDelegate toolbarDelegate;
+    @Inject
+    ServiceListAdapterImpl serviceListAdapter;
     //endregion
     //region views
     @BindView(R.id.recyclerView)
@@ -65,6 +70,15 @@ public class ServiceActivity extends MvpActivity implements ServiceView {
         toolbarDelegate.init();
         toolbarDelegate.setNavigationIcon(R.drawable.ic_arrow_left);
         toolbarDelegate.setNavigationOnClickListener(v -> onBackPressed());
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.addItemDecoration(new ItemDecoration(
+                getResources().getDimensionPixelOffset(R.dimen.offset_category_item_sides),
+                getResources().getDimensionPixelOffset(R.dimen.offset_category_item_sides),
+                getResources().getDimensionPixelOffset(R.dimen.offset_category_item_top),
+                getResources().getDimensionPixelOffset(R.dimen.offset_category_item_bottom)));
+        recyclerView.setAdapter(serviceListAdapter);
+        serviceListAdapter.setInteractionListener(position -> presenter.onServiceClicked(position));
 
         presenter.initialize();
     }

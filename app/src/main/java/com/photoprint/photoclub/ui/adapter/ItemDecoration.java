@@ -1,4 +1,4 @@
-package com.photoprint.photoclub.ui.activity.category.adapter;
+package com.photoprint.photoclub.ui.adapter;
 
 import android.graphics.Rect;
 import android.support.v7.widget.RecyclerView;

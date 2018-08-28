@@ -12,7 +12,7 @@ import com.photoprint.photoclub.R;
 import com.photoprint.photoclub.ui.activity.base.ActivityModule;
 import com.photoprint.photoclub.ui.activity.base.MvpActivity;
 import com.photoprint.photoclub.ui.activity.category.adapter.CategoryListAdapterImpl;
-import com.photoprint.photoclub.ui.activity.category.adapter.ItemDecoration;
+import com.photoprint.photoclub.ui.adapter.ItemDecoration;
 import com.photoprint.photoclub.ui.activity.delegate.ToolbarDelegate;
 
 import javax.inject.Inject;

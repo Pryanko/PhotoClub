@@ -25,7 +25,7 @@ public interface ServiceRepository extends BaseRepository<Service, Long> {
      * @return услуги принадлежищие к категории
      */
     @NonNull
-    List<Service> getServicesByCategoryId(int categoryId);
+    List<Service> getServicesByCategoryId(long categoryId);
 
     /**
      * Возращает услугу по id

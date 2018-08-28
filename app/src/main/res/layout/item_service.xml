@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="0dp"
+    app:cardElevation="4dp"
+    tools:ignore="SpUsage">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/serviceImage"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            app:actualImageScaleType="focusCrop"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:placeholderImage="@drawable/bg_splash_image"
+            app:viewAspectRatio="1" />
+
+        <com.photoprint.photoclub.ui.widget.CustomTextView
+            android:id="@+id/serviceName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:textSize="18dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/serviceImage"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="SpUsage"
+            tools:text="10x15" />
+
+        <com.photoprint.photoclub.ui.widget.CustomTextView
+            android:id="@+id/servicePrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/bg_price_label"
+            android:elevation="1dp"
+            android:paddingBottom="2dp"
+            android:paddingEnd="8dp"
+            android:paddingStart="8dp"
+            android:paddingTop="2dp"
+            android:textColor="@color/appYellow"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/serviceName"
+            tools:text="15 руб" />
+
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toStartOf="@+id/servicePrice"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/serviceName"
+            app:layout_constraintTop_toBottomOf="@+id/serviceName"
+            app:layout_constraintWidth_percent="0.47" />
+
+    </android.support.constraint.ConstraintLayout>
+
+</android.support.v7.widget.CardView>

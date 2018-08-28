@@ -49,7 +49,7 @@ public class ServiceRepositoryImpl extends BaseRepositoryImpl<Service, ServiceEn
 
     @NonNull
     @Override
-    public List<Service> getServicesByCategoryId(int categoryId) {
+    public List<Service> getServicesByCategoryId(long categoryId) {
         return mapper.entityListToModelList(dao().getServicesByCategoryId(categoryId));
     }
 

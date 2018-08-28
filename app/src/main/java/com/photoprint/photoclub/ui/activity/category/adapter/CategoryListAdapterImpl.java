@@ -24,7 +24,9 @@ import butterknife.ButterKnife;
  * @author Grigoriy Pryamov.
  */
 @ScreenScope
-public class CategoryListAdapterImpl extends BaseItemsRecyclerAdapter<Category, CategoryListAdapterImpl.CategoryHolder> implements CategoryListAdapter {
+public class CategoryListAdapterImpl
+        extends BaseItemsRecyclerAdapter<Category, CategoryListAdapterImpl.CategoryHolder>
+        implements CategoryListAdapter {
 
     private InteractionListener interactionListener;
 

@@ -9,7 +9,9 @@ import android.os.Parcelable;
  * @author Grigoriy Pryamov.
  */
 public class ServiceParams implements Parcelable {
-
+    /**
+     * Id категории - для зпроса к бд за услугами)
+     */
     private long categoryId;
 
     public long getCategoryId() {
