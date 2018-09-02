@@ -51,4 +51,20 @@
         <item name="colorAccent">@color/appYellow</item>
     </style>
 
+    <!--Пункт бокового меню-->
+    <style name="Widget.App.MainDrawer.MenuItem" parent="">
+        <item name="android:layout_height">48dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:layout_marginStart">4dp</item>
+        <item name="android:layout_marginEnd">4dp</item>
+        <item name="android:layout_marginTop">4dp</item>
+        <item name="android:paddingLeft">17dp</item>
+        <item name="android:paddingRight">32dp</item>
+        <item name="android:textSize" tools:ignore="SpUsage">16dp</item>
+        <item name="android:textColor">@color/appDarkGray</item>
+        <item name="android:drawablePadding">26dp</item>
+        <item name="android:background">@drawable/bg_m_drawer_item</item>
+    </style>
+
 </resources>

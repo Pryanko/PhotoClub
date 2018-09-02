@@ -12,8 +12,10 @@ import com.photoprint.photoclub.R;
 import com.photoprint.photoclub.ui.activity.base.ActivityModule;
 import com.photoprint.photoclub.ui.activity.base.MvpActivity;
 import com.photoprint.photoclub.ui.activity.category.adapter.CategoryListAdapterImpl;
-import com.photoprint.photoclub.ui.adapter.ItemDecoration;
+import com.photoprint.photoclub.ui.activity.delegate.DrawerMenuDelegate;
 import com.photoprint.photoclub.ui.activity.delegate.ToolbarDelegate;
+import com.photoprint.photoclub.ui.adapter.ItemDecoration;
+import com.photoprint.photoclub.ui.view.appmenu.model.DrawerMenuItem;
 
 import javax.inject.Inject;
 
@@ -41,6 +43,8 @@ public class CategoryActivity extends MvpActivity implements CategoryView {
     @Inject
     ToolbarDelegate toolbarDelegate;
     @Inject
+    DrawerMenuDelegate drawerMenuDelegate;
+    @Inject
     CategoryListAdapterImpl categoryListAdapter;
     //endregion
     //region view
@@ -62,10 +66,11 @@ public class CategoryActivity extends MvpActivity implements CategoryView {
         ButterKnife.bind(this);
 
         toolbarDelegate.init();
-        toolbarDelegate.setNavigationIcon(R.drawable.ic_menu);
         toolbarDelegate.setTitle(R.string.category_title);
-        toolbarDelegate.setNavigationOnClickListener(v -> logger.trace("Menu item Clicked"));
-
+//        toolbarDelegate.setNavigationOnClickListener(v -> logger.trace("Menu item Clicked"));
+        drawerMenuDelegate.init(getMvpDelegate(), DrawerMenuItem.NEW_ORDER, false);
+        drawerMenuDelegate.setDrawerStateChangeListener(newState -> logger.trace(String.valueOf(newState)));
+        drawerMenuDelegate.setNavigationOnClickListener(() -> false);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.addItemDecoration(new ItemDecoration(
                 getResources().getDimensionPixelOffset(R.dimen.offset_category_item_sides),
@@ -89,6 +94,11 @@ public class CategoryActivity extends MvpActivity implements CategoryView {
     protected void onPause() {
         navigator.onPause();
         super.onPause();
+    }
+
+    @Override
+    public void onBackPressed() {
+        drawerMenuDelegate.onBackPressed();
     }
 
     private CategoryScreenComponent getScreenComponent() {

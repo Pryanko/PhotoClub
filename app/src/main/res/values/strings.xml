@@ -12,6 +12,10 @@
     <string name="guide_next_btn">Продолжить</string>
     <string name="guide_close_btn">Закрыть</string>
 
+    <!--AppMenu-->
+    <string name="menu_drawer_new_order">Новый заказ</string>
+    <string name="menu_drawer_my_order">Мои заказы</string>
+
     <!--Временно-->
     <string-array name="paper_type">
         <item>Глянцевая</item>

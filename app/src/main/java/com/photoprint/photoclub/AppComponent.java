@@ -7,6 +7,7 @@ import com.photoprint.photoclub.ui.activity.guide.GuideScreenComponent;
 import com.photoprint.photoclub.ui.activity.run.RunScreenComponent;
 import com.photoprint.photoclub.ui.activity.service.ServiceScreenComponent;
 import com.photoprint.photoclub.ui.mvp.core.MvpProcessor;
+import com.photoprint.photoclub.ui.view.appmenu.DrawerMenuComponent;
 
 import javax.inject.Singleton;
 
@@ -24,6 +25,8 @@ public interface AppComponent {
     void inject(AppInitProvider appInitProvider);
 
     MvpProcessor mvpProcessor();
+
+    DrawerMenuComponent drawerMenuComponent();
 
     RunScreenComponent runScreenComponent();
 
