@@ -19,12 +19,11 @@ ext {
             support          : '27.1.1',
             mapStruct        : '1.2.0.Final',
             oldGlide         : '3.8.0',
-            fresco           : '1.8.1',
+            fresco           : '1.10.0',
             frescoimageviewer: '0.5.0',
             pageindicatorview: '1.0.0',
             constraint       : '1.1.2',
             dagger           : '2.16',
-            cicerone         : '3.0.0',
             butterknife      : '8.8.1',
             retriever        : '1.0.0',
             rx               : [
