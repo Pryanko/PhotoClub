@@ -53,6 +53,10 @@ public class UserEntity implements EntityWithId<Long> {
      * Номер телефона пользователя
      */
     private String mobileNumber;
+    /**
+     * Флажок, что для данного пользователя был первый запуск
+     */
+    private boolean firstRun;
 
     @Override
     public Long getId() {
@@ -136,6 +140,14 @@ public class UserEntity implements EntityWithId<Long> {
         this.mobileNumber = mobileNumber;
     }
 
+    public boolean isFirstRun() {
+        return firstRun;
+    }
+
+    public void setFirstRun(boolean firstRun) {
+        this.firstRun = firstRun;
+    }
+
     @Override
     public String toString() {
         return "UserEntity{" +
@@ -149,6 +161,7 @@ public class UserEntity implements EntityWithId<Long> {
                 ", imageUser='" + imageUser + '\'' +
                 ", address='" + address + '\'' +
                 ", mobileNumber='" + mobileNumber + '\'' +
+                ", firstRun=" + firstRun +
                 '}';
     }
 }

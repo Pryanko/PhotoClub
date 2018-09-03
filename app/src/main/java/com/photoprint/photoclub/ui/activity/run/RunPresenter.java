@@ -2,6 +2,7 @@ package com.photoprint.photoclub.ui.activity.run;
 
 import com.photoprint.logger.Logger;
 import com.photoprint.logger.LoggerFactory;
+import com.photoprint.photoclub.data.user.UserProfile;
 import com.photoprint.photoclub.helper.runtimepermission.AppSchedulers;
 import com.photoprint.photoclub.ui.activity.guide.model.GuideParams;
 import com.photoprint.photoclub.ui.activity.run.interactor.RunInitializer;
@@ -19,15 +20,20 @@ public class RunPresenter extends BaseMvpViewStatePresenter<RunView, RunViewStat
 
     private static final Logger logger = LoggerFactory.getLogger(RunPresenter.class);
 
+    private final UserProfile userProfile;
     private final RunInitializer runInitializer;
     private final Navigator navigator;
     private Disposable initDisposable = Disposables.disposed();
+    private Disposable navigateDisposable = Disposables.disposed();
+    private Disposable userUpdateDisposable = Disposables.disposed();
 
     @Inject
     RunPresenter(RunViewState viewState,
+                 UserProfile userProfile,
                  RunInitializer runInitializer,
                  Navigator navigator) {
         super(viewState);
+        this.userProfile = userProfile;
         this.runInitializer = runInitializer;
         this.navigator = navigator;
     }
@@ -56,14 +62,30 @@ public class RunPresenter extends BaseMvpViewStatePresenter<RunView, RunViewStat
 
     public void onNextBtnClicked() {
         logger.trace("onNextBtnClicked");
-        GuideParams guideParams = new GuideParams();
-        guideParams.setNavigateFromMenu(false);
-        navigator.navigateToGuideActivity(guideParams);
+        navigateDisposable = userProfile.isFirstRunApp()
+                .subscribeOn(AppSchedulers.db())
+                .observeOn(AppSchedulers.ui())
+                .subscribe(isFirstRunApp -> {
+                    if (isFirstRunApp) {
+                        userUpdateDisposable = userProfile.firstRunProduced()
+                                .subscribeOn(AppSchedulers.db())
+                                .observeOn(AppSchedulers.ui())
+                                .subscribe(() -> {
+                                    GuideParams guideParams = new GuideParams();
+                                    guideParams.setNavigateFromMenu(false);
+                                    navigator.navigateToGuideActivity(guideParams);
+                                });
+                    } else {
+                        navigator.navigateToCategoryActivity();
+                    }
+                });
     }
 
     @Override
     public void destroy() {
         initDisposable.dispose();
+        navigateDisposable.dispose();
+        userUpdateDisposable.dispose();
         super.destroy();
     }
 }

@@ -24,6 +24,11 @@ public interface AuthTokenStorage {
     void save(@Nullable String token);
 
     /**
+     * проверяет наличие токена
+     */
+    boolean presenceOfToken();
+
+    /**
      * Очищает хранилище
      */
     void clear();

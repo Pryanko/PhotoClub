@@ -51,7 +51,10 @@ public class RunActivity extends MvpActivity implements RunView {
         setContentView(R.layout.activity_run);
         ButterKnife.bind(this);
 
-        nextButton.setOnClickListener(v -> presenter.onNextBtnClicked());
+        nextButton.setOnClickListener(v -> {
+            presenter.onNextBtnClicked();
+            nextButton.setEnabled(false);
+        });
 
         presenter.initialize();
     }

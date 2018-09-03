@@ -46,7 +46,10 @@ public class AuthManager {
 
     public Completable register() {
         //При первом запуске, либо токен первичной регистрации был сброшен (не записан) -> получаем новый
-        if (authTokenStorage.load() == null) {
+        if (authTokenStorage.presenceOfToken()) {
+            logger.trace("primary registration is not required");
+            return Completable.complete();
+        } else {
             logger.trace("start register");
             return authApiWorker
                     .register()
@@ -69,9 +72,6 @@ public class AuthManager {
                                     }
                             ))
                     .subscribeOn(AppSchedulers.network());
-        } else {
-            logger.trace("primary registration is not required");
-            return Completable.complete();
         }
     }
 

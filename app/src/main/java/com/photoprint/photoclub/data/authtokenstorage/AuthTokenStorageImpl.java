@@ -32,6 +32,11 @@ public class AuthTokenStorageImpl implements AuthTokenStorage {
     }
 
     @Override
+    public boolean presenceOfToken() {
+        return load() != null;
+    }
+
+    @Override
     public void clear() {
         appPrefs.removeAuthToken();
     }
