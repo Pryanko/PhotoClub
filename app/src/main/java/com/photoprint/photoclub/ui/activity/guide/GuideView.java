@@ -19,4 +19,6 @@ public interface GuideView extends MvpView {
     void setNextButtonVisible(boolean visible);
 
     void setBackPageButtonEnabled(boolean enabled);
+
+    void setCloseButtonVisible(boolean visible);
 }

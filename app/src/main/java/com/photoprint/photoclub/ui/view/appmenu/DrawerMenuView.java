@@ -36,6 +36,8 @@ public class DrawerMenuView extends FrameLayout implements DrawerMenuMvpView {
     TextView menuItemNewOrder;
     @BindView(R.id.menuItemMyOrder)
     TextView menuItemMyOrder;
+    @BindView(R.id.menuItemInstruction)
+    TextView menuItemInstruction;
     //endregion
     private InteractionListener interactionListener;
 
@@ -63,6 +65,9 @@ public class DrawerMenuView extends FrameLayout implements DrawerMenuMvpView {
         menuItemNewOrder.setOnClickListener(v -> interactionListener.onNewOrderClicked());
 
         menuItemMyOrder.setOnClickListener(v -> interactionListener.onMyOrderClicked());
+
+        menuItemInstruction.setOnClickListener(v -> interactionListener.onInstructionClicked()
+        );
 
         mvpDelegate = new MvpDelegate(component.mvpProcessor(), this);
     }
@@ -122,5 +127,7 @@ public class DrawerMenuView extends FrameLayout implements DrawerMenuMvpView {
         void onNewOrderClicked();
 
         void onMyOrderClicked();
+
+        void onInstructionClicked();
     }
 }

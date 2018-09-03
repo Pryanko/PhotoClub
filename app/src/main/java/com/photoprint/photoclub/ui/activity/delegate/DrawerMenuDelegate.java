@@ -12,6 +12,7 @@ import com.photoprint.logger.LoggerFactory;
 import com.photoprint.photoclub.R;
 import com.photoprint.photoclub.di.ActivityScope;
 import com.photoprint.photoclub.ui.activity.ActivityNavigator;
+import com.photoprint.photoclub.ui.activity.guide.model.GuideParams;
 import com.photoprint.photoclub.ui.mvp.MvpDelegate;
 import com.photoprint.photoclub.ui.view.appmenu.DrawerMenuView;
 import com.photoprint.photoclub.ui.view.appmenu.model.DrawerMenuItem;
@@ -178,6 +179,17 @@ public class DrawerMenuDelegate {
         public void onMyOrderClicked() {
             if (currentItem != DrawerMenuItem.MY_ORDER) {
                 logger.trace("onMyOrderClicked");
+            }
+            drawerLayout.closeDrawers();
+        }
+
+        @Override
+        public void onInstructionClicked() {
+            if (currentItem != DrawerMenuItem.INSTRUCTION) {
+                GuideParams guideParams = new GuideParams();
+                guideParams.setNavigateFromMenu(true);
+                navigateRunnable = () -> activityNavigator.navigateToGuideActivity(activity, guideParams);
+                logger.trace("onInstructionClicked");
             }
             drawerLayout.closeDrawers();
         }

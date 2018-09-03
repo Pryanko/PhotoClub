@@ -6,6 +6,7 @@ import android.content.Intent;
 import com.photoprint.photoclub.R;
 import com.photoprint.photoclub.ui.activity.category.CategoryActivity;
 import com.photoprint.photoclub.ui.activity.guide.GuideActivity;
+import com.photoprint.photoclub.ui.activity.guide.model.GuideParams;
 import com.photoprint.photoclub.ui.activity.service.ServiceActivity;
 import com.photoprint.photoclub.ui.activity.service.model.ServiceParams;
 
@@ -35,8 +36,8 @@ public class ActivityNavigator {
         animForward(activity);
     }
 
-    public void navigateToGuideActivity(Activity activity) {
-        Intent intent = GuideActivity.getCallingIntent(activity);
+    public void navigateToGuideActivity(Activity activity, GuideParams guideParams) {
+        Intent intent = GuideActivity.getCallingIntent(activity, guideParams);
         activity.startActivity(intent);
         animForward(activity);
     }

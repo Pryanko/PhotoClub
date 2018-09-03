@@ -5,6 +5,7 @@ import com.photoprint.logger.LoggerFactory;
 import com.photoprint.photoclub.helper.runtimepermission.AppSchedulers;
 import com.photoprint.photoclub.model.Guide;
 import com.photoprint.photoclub.ui.activity.guide.interactor.GuideLoader;
+import com.photoprint.photoclub.ui.activity.guide.model.GuideParams;
 import com.photoprint.photoclub.ui.mvp.presenter.BaseMvpViewStatePresenter;
 
 import java.util.Collections;
@@ -25,15 +26,18 @@ public class GuidePresenter extends BaseMvpViewStatePresenter<GuideView, GuideVi
     private List<Guide> guides = Collections.emptyList();
     private int pagePosition = 0;
 
+    private final GuideParams guideParams;
     private final GuideLoader guideLoader;
     private final Navigator navigator;
     private Disposable loadDisposable = Disposables.disposed();
 
     @Inject
     GuidePresenter(GuideViewState viewState,
+                   GuideParams guideParams,
                    GuideLoader guideLoader,
                    Navigator navigator) {
         super(viewState);
+        this.guideParams = guideParams;
         this.guideLoader = guideLoader;
         this.navigator = navigator;
     }
@@ -85,7 +89,7 @@ public class GuidePresenter extends BaseMvpViewStatePresenter<GuideView, GuideVi
 
     public void onCloseBtnClicked() {
         logger.trace("onCloseBtnClicked");
-
+        navigator.navigateBack();
     }
 
     public void setCurrentPagePosition(int currentPagePosition) {
@@ -95,11 +99,24 @@ public class GuidePresenter extends BaseMvpViewStatePresenter<GuideView, GuideVi
     }
 
     private void changeButtonsVisible() {
-        if (pagePosition == guides.size() - 1) {
-            view.setNextButtonVisible(true);
+        //В параметрах для гайда передаём булеву, определяющая с какого экрана перешел пользователь
+        if (guideParams.isNavigateFromMenu()) {
+            if (isEndPagePosition()) {
+                view.setCloseButtonVisible(true);
+            } else {
+                view.setCloseButtonVisible(false);
+            }
         } else {
-            view.setNextButtonVisible(false);
+            if (isEndPagePosition()) {
+                view.setNextButtonVisible(true);
+            } else {
+                view.setNextButtonVisible(false);
+            }
         }
+    }
+
+    private boolean isEndPagePosition() {
+        return pagePosition == guides.size() - 1;
     }
 
     private void changeBackPageButtonEnabled() {

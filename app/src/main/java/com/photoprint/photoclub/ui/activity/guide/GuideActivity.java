@@ -16,6 +16,7 @@ import com.photoprint.photoclub.model.Guide;
 import com.photoprint.photoclub.ui.activity.base.ActivityModule;
 import com.photoprint.photoclub.ui.activity.base.MvpActivity;
 import com.photoprint.photoclub.ui.activity.guide.adapter.GuideAdapterImpl;
+import com.photoprint.photoclub.ui.activity.guide.model.GuideParams;
 import com.rd.PageIndicatorView;
 import com.rd.animation.type.AnimationType;
 
@@ -33,8 +34,13 @@ public class GuideActivity extends MvpActivity implements GuideView {
 
     private static final Logger logger = LoggerFactory.getLogger(GuideActivity.class);
 
-    public static Intent getCallingIntent(Context context) {
-        return new Intent(context, GuideActivity.class);
+    //region extras
+    private static final String EXTRA_GUIDE_PARAMS = "EXTRA_GUIDE_PARAMS";
+
+    public static Intent getCallingIntent(Context context, GuideParams guideParams) {
+        Intent intent = new Intent(context, GuideActivity.class);
+        intent.putExtra(EXTRA_GUIDE_PARAMS, guideParams);
+        return intent;
     }
 
     //region di
@@ -65,6 +71,7 @@ public class GuideActivity extends MvpActivity implements GuideView {
         screenComponent = getScreenComponent();
         component = screenComponent.guideComponentBuilder()
                 .activityModule(new ActivityModule(this))
+                .guideParams(getIntent().getParcelableExtra(EXTRA_GUIDE_PARAMS))
                 .build();
         component.inject(this);
         super.onCreate(savedInstanceState);
@@ -125,13 +132,7 @@ public class GuideActivity extends MvpActivity implements GuideView {
 
     @Override
     public void setNextButtonVisible(boolean visible) {
-        if (visible) {
-            nextPageButton.setVisibility(View.GONE);
-            nextButton.setVisibility(View.VISIBLE);
-        } else {
-            nextPageButton.setVisibility(View.VISIBLE);
-            nextButton.setVisibility(View.GONE);
-        }
+        actionButtonVisible(nextButton, visible);
     }
 
     @Override
@@ -139,6 +140,16 @@ public class GuideActivity extends MvpActivity implements GuideView {
         backPageButton.setEnabled(enabled);
         backPageButton.setTextColor(enabled ? getResources().getColor(R.color.appYellow)
                 : getResources().getColor(R.color.appLightGray));
+    }
+
+    @Override
+    public void setCloseButtonVisible(boolean visible) {
+        actionButtonVisible(closeButton, visible);
+    }
+
+    private void actionButtonVisible(Button actionButton, boolean visible) {
+        nextPageButton.setVisibility(visible ? View.GONE : View.VISIBLE);
+        actionButton.setVisibility(visible ? View.VISIBLE : View.GONE);
     }
 
     private ViewPager.OnPageChangeListener onPageChangeListener = new ViewPager.OnPageChangeListener() {

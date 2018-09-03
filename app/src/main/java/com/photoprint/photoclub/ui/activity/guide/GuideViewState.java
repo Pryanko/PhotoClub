@@ -19,6 +19,7 @@ public class GuideViewState extends BaseMvpViewState<GuideView> implements Guide
     private int pagePosition;
     private boolean nextButtonVisible;
     private boolean backPageButtonEnabled;
+    private boolean closeButtonVisible;
 
     @Inject
     GuideViewState() {
@@ -30,6 +31,7 @@ public class GuideViewState extends BaseMvpViewState<GuideView> implements Guide
         view.setCurrentPage(pagePosition);
         view.setNextButtonVisible(nextButtonVisible);
         view.setBackPageButtonEnabled(backPageButtonEnabled);
+        view.setCloseButtonVisible(closeButtonVisible);
     }
 
     @Override
@@ -59,5 +61,11 @@ public class GuideViewState extends BaseMvpViewState<GuideView> implements Guide
     public void setBackPageButtonEnabled(boolean enabled) {
         this.backPageButtonEnabled = enabled;
         forEachView(view -> view.setBackPageButtonEnabled(this.backPageButtonEnabled));
+    }
+
+    @Override
+    public void setCloseButtonVisible(boolean visible) {
+        this.closeButtonVisible = visible;
+        forEachView(view -> view.setCloseButtonVisible(closeButtonVisible));
     }
 }

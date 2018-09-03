@@ -2,7 +2,9 @@ package com.photoprint.photoclub.ui.activity.guide;
 
 import com.photoprint.photoclub.di.ActivityScope;
 import com.photoprint.photoclub.ui.activity.base.ActivityModule;
+import com.photoprint.photoclub.ui.activity.guide.model.GuideParams;
 
+import dagger.BindsInstance;
 import dagger.Subcomponent;
 
 /**
@@ -19,6 +21,9 @@ public interface GuideComponent {
     @Subcomponent.Builder
     interface Builder {
         GuideComponent.Builder activityModule(ActivityModule activityModule);
+
+        @BindsInstance
+        GuideComponent.Builder guideParams(GuideParams guideParams);
 
         GuideComponent build();
     }

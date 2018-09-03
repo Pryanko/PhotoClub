@@ -11,7 +11,7 @@
         android:id="@+id/logoImage"
         android:layout_width="0dp"
         android:layout_height="100dp"
-        android:background="@color/appWhite"
+        android:background="@drawable/bg_menu_gradient"
         android:elevation="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -39,6 +39,12 @@
             style="@style/Widget.App.MainDrawer.MenuItem"
             android:drawableStart="@drawable/ic_my_order"
             android:text="@string/menu_drawer_my_order" />
+
+        <com.photoprint.photoclub.ui.widget.CustomTextView
+            android:id="@+id/menuItemInstruction"
+            style="@style/Widget.App.MainDrawer.MenuItem"
+            android:drawableStart="@drawable/ic_instruction"
+            android:text="@string/menu_drawer_instruction" />
 
     </LinearLayout>
 

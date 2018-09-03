@@ -3,6 +3,7 @@ package com.photoprint.photoclub.ui.activity.run;
 import com.photoprint.logger.Logger;
 import com.photoprint.logger.LoggerFactory;
 import com.photoprint.photoclub.helper.runtimepermission.AppSchedulers;
+import com.photoprint.photoclub.ui.activity.guide.model.GuideParams;
 import com.photoprint.photoclub.ui.activity.run.interactor.RunInitializer;
 import com.photoprint.photoclub.ui.mvp.presenter.BaseMvpViewStatePresenter;
 
@@ -55,7 +56,9 @@ public class RunPresenter extends BaseMvpViewStatePresenter<RunView, RunViewStat
 
     public void onNextBtnClicked() {
         logger.trace("onNextBtnClicked");
-        navigator.navigateToGuideActivity();
+        GuideParams guideParams = new GuideParams();
+        guideParams.setNavigateFromMenu(false);
+        navigator.navigateToGuideActivity(guideParams);
     }
 
     @Override

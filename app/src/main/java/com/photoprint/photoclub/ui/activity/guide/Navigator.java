@@ -30,4 +30,8 @@ public class Navigator extends BaseNavigator<GuideActivity> {
     public void navigateToCategoryActivity() {
         activityNavigator.navigateToCategoryActivity(activity);
     }
+
+    public void navigateBack() {
+        activityNavigator.navigateBack(activity);
+    }
 }

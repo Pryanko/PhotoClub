@@ -15,6 +15,7 @@
     <!--AppMenu-->
     <string name="menu_drawer_new_order">Новый заказ</string>
     <string name="menu_drawer_my_order">Мои заказы</string>
+    <string name="menu_drawer_instruction">Руководство</string>
 
     <!--Временно-->
     <string-array name="paper_type">
