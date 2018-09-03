@@ -30,6 +30,7 @@ public class ActivityNavigator {
 
     public void navigateToCategoryActivity(Activity activity) {
         Intent intent = CategoryActivity.getCallingIntent(activity);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         activity.startActivity(intent);
         animForward(activity);
     }

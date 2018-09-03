@@ -53,7 +53,7 @@ public class AppSynchronizer {
             return categorySynchronizer.sync()
                     .concatWith(guideSynchronizer.sync())
                     .concatWith(serviceSynchronizer.sync())
-                    .doOnComplete(() -> saveSynchronizationTime(appSystemMetrics.getCurrentDeviceTime()));
+                    .doOnComplete(() -> updateSynchronizationTime(appSystemMetrics.getCurrentDeviceTime()));
         } else {
             logger.trace("Synchronization is not required");
             return Completable.complete();
@@ -64,7 +64,7 @@ public class AppSynchronizer {
         return appSystemMetrics.getCurrentDeviceTime() - getSynchronizationTime() > APP_DATA_ACTUALITY_TIME;
     }
 
-    private void saveSynchronizationTime(long time) {
+    private void updateSynchronizationTime(long time) {
         appPrefs.setDataSyncTime(time);
     }
 

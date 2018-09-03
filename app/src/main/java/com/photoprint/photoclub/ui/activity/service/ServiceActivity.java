@@ -12,6 +12,7 @@ import com.photoprint.photoclub.R;
 import com.photoprint.photoclub.ui.activity.base.ActivityModule;
 import com.photoprint.photoclub.ui.activity.base.MvpActivity;
 import com.photoprint.photoclub.ui.activity.category.CategoryActivity;
+import com.photoprint.photoclub.ui.activity.delegate.DrawerMenuDelegate;
 import com.photoprint.photoclub.ui.activity.delegate.ToolbarDelegate;
 import com.photoprint.photoclub.ui.activity.service.adapter.ServiceListAdapterImpl;
 import com.photoprint.photoclub.ui.activity.service.model.ServiceParams;
@@ -46,6 +47,8 @@ public class ServiceActivity extends MvpActivity implements ServiceView {
     @Inject
     ToolbarDelegate toolbarDelegate;
     @Inject
+    DrawerMenuDelegate drawerMenuDelegate;
+    @Inject
     ServiceListAdapterImpl serviceListAdapter;
     //endregion
     //region views
@@ -68,8 +71,11 @@ public class ServiceActivity extends MvpActivity implements ServiceView {
         ButterKnife.bind(this);
 
         toolbarDelegate.init();
-        toolbarDelegate.setNavigationIcon(R.drawable.ic_arrow_left);
-        toolbarDelegate.setNavigationOnClickListener(v -> onBackPressed());
+        drawerMenuDelegate.init(getMvpDelegate(), null, true);
+        drawerMenuDelegate.setNavigationOnClickListener(() -> {
+            onBackPressed();
+            return true;
+        });
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.addItemDecoration(new ItemDecoration(

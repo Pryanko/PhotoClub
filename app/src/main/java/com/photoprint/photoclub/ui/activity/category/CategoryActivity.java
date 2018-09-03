@@ -70,7 +70,6 @@ public class CategoryActivity extends MvpActivity implements CategoryView {
 //        toolbarDelegate.setNavigationOnClickListener(v -> logger.trace("Menu item Clicked"));
         drawerMenuDelegate.init(getMvpDelegate(), DrawerMenuItem.NEW_ORDER, false);
         drawerMenuDelegate.setDrawerStateChangeListener(newState -> logger.trace(String.valueOf(newState)));
-        drawerMenuDelegate.setNavigationOnClickListener(() -> false);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.addItemDecoration(new ItemDecoration(
                 getResources().getDimensionPixelOffset(R.dimen.offset_category_item_sides),
@@ -98,7 +97,9 @@ public class CategoryActivity extends MvpActivity implements CategoryView {
 
     @Override
     public void onBackPressed() {
-        drawerMenuDelegate.onBackPressed();
+        if (!drawerMenuDelegate.onBackPressed()) {
+            super.onBackPressed();
+        }
     }
 
     private CategoryScreenComponent getScreenComponent() {

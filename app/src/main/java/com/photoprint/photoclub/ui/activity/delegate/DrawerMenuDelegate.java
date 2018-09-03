@@ -177,7 +177,6 @@ public class DrawerMenuDelegate {
         @Override
         public void onMyOrderClicked() {
             if (currentItem != DrawerMenuItem.MY_ORDER) {
-                navigateRunnable = () -> activityNavigator.navigateToCategoryActivity(activity);
                 logger.trace("onMyOrderClicked");
             }
             drawerLayout.closeDrawers();
