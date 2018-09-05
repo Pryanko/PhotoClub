@@ -4,6 +4,7 @@ import com.photoprint.photoclub.di.ScreenScope;
 import com.photoprint.photoclub.ui.activity.ActivityNavigator;
 import com.photoprint.photoclub.ui.activity.base.BaseNavigator;
 import com.photoprint.photoclub.ui.activity.service.model.ServiceParams;
+import com.photoprint.photoclub.ui.activity.servicesettings.model.ServiceSettingsParams;
 
 import javax.inject.Inject;
 
@@ -20,6 +21,10 @@ public class Navigator extends BaseNavigator<CategoryActivity> {
 
     public void navigateToServiceActivity(ServiceParams serviceParams) {
         activityNavigator.navigateToServiceActivity(activity, serviceParams);
+    }
+
+    public void navigateToServiceSettingsActivity(ServiceSettingsParams serviceSettingsParams) {
+        activityNavigator.navigateToServiceSettingsActivity(activity, serviceSettingsParams);
     }
 
     public void navigateBack() {

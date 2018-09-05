@@ -1,14 +1,15 @@
-package com.photoprint.photoclub.ui.activity.service.model;
+package com.photoprint.photoclub.ui.activity.servicesettings.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
 /**
- * Входные параметры для экрана выбора услуг
+ * Входные параметры для экрана настройки услуги
  *
  * @author Grigoriy Pryamov.
  */
-public class ServiceParams implements Parcelable {
+public class ServiceSettingsParams implements Parcelable {
+
     /**
      * Id категории - для зпроса к бд за услугами)
      */
@@ -32,22 +33,22 @@ public class ServiceParams implements Parcelable {
         dest.writeLong(this.categoryId);
     }
 
-    public ServiceParams() {
+    public ServiceSettingsParams() {
     }
 
-    protected ServiceParams(Parcel in) {
+    protected ServiceSettingsParams(Parcel in) {
         this.categoryId = in.readLong();
     }
 
-    public static final Parcelable.Creator<ServiceParams> CREATOR = new Parcelable.Creator<ServiceParams>() {
+    public static final Parcelable.Creator<ServiceSettingsParams> CREATOR = new Parcelable.Creator<ServiceSettingsParams>() {
         @Override
-        public ServiceParams createFromParcel(Parcel source) {
-            return new ServiceParams(source);
+        public ServiceSettingsParams createFromParcel(Parcel source) {
+            return new ServiceSettingsParams(source);
         }
 
         @Override
-        public ServiceParams[] newArray(int size) {
-            return new ServiceParams[size];
+        public ServiceSettingsParams[] newArray(int size) {
+            return new ServiceSettingsParams[size];
         }
     };
 }

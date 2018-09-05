@@ -11,7 +11,6 @@ import com.photoprint.logger.LoggerFactory;
 import com.photoprint.photoclub.R;
 import com.photoprint.photoclub.ui.activity.base.ActivityModule;
 import com.photoprint.photoclub.ui.activity.base.MvpActivity;
-import com.photoprint.photoclub.ui.activity.category.CategoryActivity;
 import com.photoprint.photoclub.ui.activity.delegate.DrawerMenuDelegate;
 import com.photoprint.photoclub.ui.activity.delegate.ToolbarDelegate;
 import com.photoprint.photoclub.ui.activity.service.adapter.ServiceListAdapterImpl;
@@ -28,7 +27,7 @@ import butterknife.ButterKnife;
  */
 public class ServiceActivity extends MvpActivity implements ServiceView {
 
-    private static final Logger logger = LoggerFactory.getLogger(CategoryActivity.class);
+    private static final Logger logger = LoggerFactory.getLogger(ServiceActivity.class);
 
     //region extras
     private static final String EXTRA_SERVICE_PARAMS = "EXTRA_SERVICE_PARAMS";

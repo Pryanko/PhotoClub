@@ -9,6 +9,8 @@ import com.photoprint.photoclub.ui.activity.guide.GuideActivity;
 import com.photoprint.photoclub.ui.activity.guide.model.GuideParams;
 import com.photoprint.photoclub.ui.activity.service.ServiceActivity;
 import com.photoprint.photoclub.ui.activity.service.model.ServiceParams;
+import com.photoprint.photoclub.ui.activity.servicesettings.ServiceSettingsActivity;
+import com.photoprint.photoclub.ui.activity.servicesettings.model.ServiceSettingsParams;
 
 import javax.inject.Inject;
 
@@ -25,6 +27,12 @@ public class ActivityNavigator {
 
     public void navigateToServiceActivity(Activity activity, ServiceParams serviceParams) {
         Intent intent = ServiceActivity.getCallingIntent(activity, serviceParams);
+        activity.startActivity(intent);
+        animForward(activity);
+    }
+
+    public void navigateToServiceSettingsActivity(Activity activity, ServiceSettingsParams serviceSettingsParams) {
+        Intent intent = ServiceSettingsActivity.getCallingIntent(activity, serviceSettingsParams);
         activity.startActivity(intent);
         animForward(activity);
     }
