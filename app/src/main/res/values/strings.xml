@@ -4,7 +4,7 @@
     <string name="run_next_btn">Продолжить</string>
 
     <!--CategoryActivity-->
-    <string name="category_title">Категории</string>
+    <string name="category_title">Photo Club</string>
 
     <!--GuideActivity-->
     <string name="guide_back_btn">Назад</string>

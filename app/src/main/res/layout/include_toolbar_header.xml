@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -14,6 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginTop="15dp"
+        android:layout_toStartOf="@+id/frameLayout"
         android:ellipsize="end"
         android:gravity="center_vertical"
         android:singleLine="true"
@@ -24,7 +25,9 @@
         style="@style/TextAppearance.Widget.App.Toolbar.Subtitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/customTitle"
         android:layout_marginBottom="14dp"
+        android:layout_toStartOf="@+id/frameLayout"
         android:ellipsize="end"
         android:gravity="center_vertical"
         android:singleLine="true"
@@ -32,4 +35,37 @@
         tools:text="Подзаголовок"
         tools:visibility="visible" />
 
-</LinearLayout>
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="18dp">
+
+
+        <ImageButton
+            android:id="@+id/basketButton"
+            style="@style/Base.Widget.AppCompat.Button.Borderless"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:src="@drawable/ic_shopping_basket"
+            tools:ignore="ContentDescription" />
+
+        <com.photoprint.photoclub.ui.widget.CustomTextView
+            android:id="@+id/basketCount"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="4dp"
+            android:layout_marginStart="4dp"
+            android:background="@drawable/bg_basket_count"
+            android:gravity="center"
+            android:textSize="10dp"
+            android:textStyle="bold"
+            tools:ignore="SpUsage"
+            tools:text="11" />
+
+    </FrameLayout>
+
+</RelativeLayout>

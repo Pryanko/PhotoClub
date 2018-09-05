@@ -14,8 +14,11 @@
                         <option name="values">
                           <map>
                             <entry key="assetSourceType" value="FILE" />
-                            <entry key="outputName" value="ic_instruction" />
-                            <entry key="sourceFile" value="C:\Users\Pryanko\Desktop\PhotoClubCions\graphic-tablet.svg" />
+                            <entry key="height" value="28" />
+                            <entry key="outputName" value="ic_shopping_purse_icon" />
+                            <entry key="overrideSize" value="true" />
+                            <entry key="sourceFile" value="C:\Users\Pryanko\Desktop\PhotoClubCions\shopping-purse-icon.svg" />
+                            <entry key="width" value="28" />
                           </map>
                         </option>
                       </PersistentState>
