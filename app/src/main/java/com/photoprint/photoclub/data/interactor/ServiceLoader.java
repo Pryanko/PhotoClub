@@ -1,4 +1,4 @@
-package com.photoprint.photoclub.ui.activity.service.interactor;
+package com.photoprint.photoclub.data.interactor;
 
 import android.support.annotation.NonNull;
 

@@ -3,7 +3,9 @@ package com.photoprint.photoclub.ui.activity.servicesettings;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.TextView;
 
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.photoprint.logger.Logger;
 import com.photoprint.logger.LoggerFactory;
 import com.photoprint.photoclub.R;
@@ -15,6 +17,7 @@ import com.photoprint.photoclub.ui.activity.servicesettings.model.ServiceSetting
 
 import javax.inject.Inject;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
@@ -45,6 +48,12 @@ public class ServiceSettingsActivity extends MvpActivity implements ServiceSetti
     @Inject
     DrawerMenuDelegate drawerMenuDelegate;
     //endregion
+    @BindView(R.id.imageView)
+    SimpleDraweeView imageView;
+    @BindView(R.id.serviceName)
+    TextView serviceName;
+    @BindView(R.id.servicePrice)
+    TextView servicePrice;
     //region views
 
     //endregion
@@ -102,5 +111,20 @@ public class ServiceSettingsActivity extends MvpActivity implements ServiceSetti
     @Override
     public Object onRetainCustomNonConfigurationInstance() {
         return screenComponent;
+    }
+
+    @Override
+    public void setImage(String image) {
+        imageView.setImageURI(image);
+    }
+
+    @Override
+    public void setServiceName(String serviceName) {
+        this.serviceName.setText(serviceName);
+    }
+
+    @Override
+    public void setServicePrice(String price) {
+        this.servicePrice.setText(price);
     }
 }

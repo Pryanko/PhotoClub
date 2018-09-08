@@ -6,7 +6,7 @@ import com.photoprint.photoclub.helper.runtimepermission.AppSchedulers;
 import com.photoprint.photoclub.model.Service;
 import com.photoprint.photoclub.ui.activity.category.CategoryPresenter;
 import com.photoprint.photoclub.ui.activity.service.adapter.ServiceListAdapter;
-import com.photoprint.photoclub.ui.activity.service.interactor.ServiceLoader;
+import com.photoprint.photoclub.data.interactor.ServiceLoader;
 import com.photoprint.photoclub.ui.activity.service.model.ServiceParams;
 import com.photoprint.photoclub.ui.mvp.presenter.BaseMvpViewStatePresenter;
 
