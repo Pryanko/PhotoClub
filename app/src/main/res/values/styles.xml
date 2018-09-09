@@ -25,6 +25,24 @@
         <item name="colorAccent">@color/appGray</item>
     </style>
 
+    <!--CardStyle-->
+    <style name="Widget.App.SingleCardView" parent="Base.CardView">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="cardCornerRadius">0dp</item>
+        <item name="cardMaxElevation">3dp</item>
+        <item name="cardElevation">2dp</item>
+        <item name="android:layout_marginStart">8dp</item>
+        <item name="android:layout_marginTop">4dp</item>
+        <item name="android:layout_marginEnd">8dp</item>
+    </style>
+
+    <!--AppSwitchStyle-->
+    <style name="Widget.App.SingleSwitch" parent="Theme.AppCompat.Light">
+        <item name="colorControlNormal">@color/appLightGray</item>
+        <item name="colorControlActivated">@color/appYellow</item>
+    </style>
+
     <style name="Widget.App.ProgressBar.RunActivity" parent="AppTheme">
         <item name="colorAccent">@color/appYellow</item>
     </style>

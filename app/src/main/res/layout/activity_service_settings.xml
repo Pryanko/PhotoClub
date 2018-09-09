@@ -13,13 +13,8 @@
         <include layout="@layout/include_toolbar" />
 
         <android.support.v7.widget.CardView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="4dp"
-            android:elevation="4dp"
-            app:cardCornerRadius="0dp"
+            android:id="@+id/cardView"
+            style="@style/Widget.App.SingleCardView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toolbar"
@@ -27,12 +22,19 @@
 
             <RelativeLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/toolbar"
+                tools:ignore="MissingConstraints,UnknownIdInLayout">
 
                 <com.facebook.drawee.view.SimpleDraweeView
                     android:id="@+id/imageView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginEnd="2dp"
+                    android:layout_marginStart="2dp"
+                    android:layout_marginTop="2dp"
                     app:actualImageScaleType="focusCrop"
                     app:viewAspectRatio="2" />
 
@@ -71,6 +73,127 @@
             </RelativeLayout>
 
         </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/cardView2"
+            style="@style/Widget.App.SingleCardView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardView">
+
+            <com.photoprint.photoclub.ui.widget.CustomTextView
+                android:id="@+id/formatInfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="4dp"
+                android:text="@string/choose_format" />
+
+            <android.support.v7.widget.AppCompatSpinner
+                android:id="@+id/formatSpinner"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="22dp">
+
+            </android.support.v7.widget.AppCompatSpinner>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/cardView3"
+            style="@style/Widget.App.SingleCardView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardView2">
+
+            <com.photoprint.photoclub.ui.widget.CustomTextView
+                android:id="@+id/typeInfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="4dp"
+                android:text="@string/choose_type" />
+
+            <android.support.v7.widget.AppCompatSpinner
+                android:id="@+id/typeSpinner"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="22dp">
+
+            </android.support.v7.widget.AppCompatSpinner>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/cardView4"
+            style="@style/Widget.App.SingleCardView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardView3">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <com.photoprint.photoclub.ui.widget.CustomTextView
+                    android:id="@+id/optionLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/apply_option"
+                    android:textSize="16dp"
+                    tools:ignore="RelativeOverlap,SpUsage" />
+
+                <Switch
+                    android:id="@+id/optionSwitch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginBottom="4dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginTop="4dp"
+                    android:gravity="center_vertical"
+                    android:theme="@style/Widget.App.SingleSwitch" />
+
+                <com.photoprint.photoclub.ui.widget.CustomTextView
+                    android:id="@+id/optionInfo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/optionSwitch"
+                    android:layout_marginBottom="4dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="4dp"
+                    android:text="@string/info_option"
+                    android:textColor="@color/appDarkGray"
+                    android:textSize="11dp"
+                    tools:ignore="RelativeOverlap,SpUsage" />
+
+            </RelativeLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <com.photoprint.photoclub.ui.widget.CustomButton
+            android:id="@+id/nextButton"
+            android:layout_width="match_parent"
+            android:layout_height="36dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="24dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/bg_yellow_btn"
+            android:elevation="4dp"
+            android:text="@string/service_next_btn"
+            android:textAllCaps="true"
+            android:textSize="14dp"
+            android:theme="@style/Widget.App.Button.Yellow"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardView4"
+            tools:ignore="SpUsage" />
 
     </android.support.constraint.ConstraintLayout>
 

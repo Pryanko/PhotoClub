@@ -56,9 +56,13 @@ public class ServiceSettingsPresenter extends BaseMvpViewStatePresenter<ServiceS
                         if (ListUtils.notEmpty(result.getServices())) {
                             createServiceNameList(result.getServices());
                             Service firstService = serviceArray.valueAt(0);
-                            view.setImage(firstService.getImage480());
-                            view.setServiceName(firstService.getName());
-                            view.setServicePrice(firstService.getPrice());
+                            changeViewApply(firstService);
+                            view.setServiceNameList(serviceNames);
+
+                            List<String> serviceTypeList = new ArrayList<>();
+                            serviceTypeList.add("Глянцевая");
+                            serviceTypeList.add("Маттовая");
+                            view.setServiceTypeList(serviceTypeList);
                         }
                     }
                 });
@@ -67,7 +71,7 @@ public class ServiceSettingsPresenter extends BaseMvpViewStatePresenter<ServiceS
     private void createServiceNameList(List<Service> services) {
         for (Service service : services) {
             Preconditions.checkNotNull(service);
-            serviceNames.add(service.getCategoryName());
+            serviceNames.add(service.getName());
             addServiceToList(service);
         }
     }
@@ -84,5 +88,28 @@ public class ServiceSettingsPresenter extends BaseMvpViewStatePresenter<ServiceS
     public void destroy() {
         loadDisposable.dispose();
         super.destroy();
+    }
+
+    public void onFormatItemClicked(int position) {
+        Service service = serviceArray.valueAt(position);
+        changeViewApply(service);
+    }
+
+    public void onTypeItemClicked(int position) {
+        logger.trace("onTypeItemClicked: " + position);
+    }
+
+    private void changeViewApply(Service service) {
+        view.setImage(service.getImage480());
+        view.setServiceName(service.getName());
+        view.setServicePrice(service.getPrice());
+    }
+
+    public void onOptionSwitchClicked(boolean isChecked) {
+        logger.trace("onOptionSwitchClicked " + isChecked);
+    }
+
+    public void onNextButtonClicked() {
+        logger.trace("onNextButtonClicked");
     }
 }
