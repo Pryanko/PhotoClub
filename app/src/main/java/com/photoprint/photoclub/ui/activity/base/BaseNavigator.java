@@ -10,7 +10,7 @@ import com.photoprint.photoclub.ui.mvp.view.MvpView;
  */
 public abstract class BaseNavigator<A extends MvpView> {
 
-    protected A activity;
+    protected A baseActivity;
     protected final ActivityNavigator activityNavigator;
 
     protected BaseNavigator(ActivityNavigator activityNavigator) {
@@ -22,4 +22,26 @@ public abstract class BaseNavigator<A extends MvpView> {
 
     public abstract void onPause();
 
+    /**
+     * Выполняет операцию c проверкой активити на null
+     *
+     * @param action Операция для выполнения
+     */
+    protected void forSafeAction(Consumer action) {
+        if (baseActivity != null) {
+            action.apply();
+        }
+    }
+
+    /**
+     * Операция, выполняемая для перехода.
+     *
+     */
+    public interface Consumer {
+
+        /**
+         * Выполняет операцию для локального навигатора.
+         */
+        void apply();
+    }
 }

@@ -2,12 +2,13 @@ package com.photoprint.photoclub.ui.activity.service;
 
 import com.photoprint.logger.Logger;
 import com.photoprint.logger.LoggerFactory;
+import com.photoprint.photoclub.data.interactor.ServiceLoader;
 import com.photoprint.photoclub.helper.runtimepermission.AppSchedulers;
 import com.photoprint.photoclub.model.Service;
 import com.photoprint.photoclub.ui.activity.category.CategoryPresenter;
 import com.photoprint.photoclub.ui.activity.service.adapter.ServiceListAdapter;
-import com.photoprint.photoclub.data.interactor.ServiceLoader;
 import com.photoprint.photoclub.ui.activity.service.model.ServiceParams;
+import com.photoprint.photoclub.ui.activity.serviceinfo.model.ServiceInfoParams;
 import com.photoprint.photoclub.ui.mvp.presenter.BaseMvpViewStatePresenter;
 
 import java.util.Collections;
@@ -68,13 +69,17 @@ public class ServicePresenter extends BaseMvpViewStatePresenter<ServiceView, Ser
         navigator.navigateBack();
     }
 
+    public void onServiceClicked(int position) {
+        logger.trace("onServiceClicked: " + position);
+        Service service = services.get(position);
+        ServiceInfoParams serviceInfoParams = new ServiceInfoParams();
+        serviceInfoParams.setServiceId(service.getId());
+        navigator.navigateToServiceInfoActivity(serviceInfoParams);
+    }
+
     @Override
     public void destroy() {
         loadDisposable.dispose();
         super.destroy();
-    }
-
-    public void onServiceClicked(int position) {
-        logger.trace("onServiceClicked: " + position);
     }
 }

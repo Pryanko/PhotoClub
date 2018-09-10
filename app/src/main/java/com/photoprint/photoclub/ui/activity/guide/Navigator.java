@@ -19,19 +19,19 @@ public class Navigator extends BaseNavigator<GuideActivity> {
 
     @Override
     public void onResume(GuideActivity activity) {
-        this.activity = activity;
+        this.baseActivity = activity;
     }
 
     @Override
     public void onPause() {
-        activity = null;
+        baseActivity = null;
     }
 
     public void navigateToCategoryActivity() {
-        activityNavigator.navigateToCategoryActivity(activity);
+        forSafeAction(() -> activityNavigator.navigateToCategoryActivity(baseActivity));
     }
 
     public void navigateBack() {
-        activityNavigator.navigateBack(activity);
+        forSafeAction(() -> activityNavigator.navigateBack(baseActivity));
     }
 }

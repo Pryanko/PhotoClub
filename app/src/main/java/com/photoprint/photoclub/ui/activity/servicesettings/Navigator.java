@@ -18,16 +18,16 @@ public class Navigator extends BaseNavigator<ServiceSettingsActivity> {
     }
 
     public void navigateBack() {
-        activityNavigator.navigateBack(activity);
+        forSafeAction(() -> activityNavigator.navigateBack(baseActivity));
     }
 
     @Override
     public void onResume(ServiceSettingsActivity activity) {
-        this.activity = activity;
+        this.baseActivity = activity;
     }
 
     @Override
     public void onPause() {
-        this.activity = null;
+        this.baseActivity = null;
     }
 }

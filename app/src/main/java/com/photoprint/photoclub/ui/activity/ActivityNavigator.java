@@ -9,6 +9,8 @@ import com.photoprint.photoclub.ui.activity.guide.GuideActivity;
 import com.photoprint.photoclub.ui.activity.guide.model.GuideParams;
 import com.photoprint.photoclub.ui.activity.service.ServiceActivity;
 import com.photoprint.photoclub.ui.activity.service.model.ServiceParams;
+import com.photoprint.photoclub.ui.activity.serviceinfo.ServiceInfoActivity;
+import com.photoprint.photoclub.ui.activity.serviceinfo.model.ServiceInfoParams;
 import com.photoprint.photoclub.ui.activity.servicesettings.ServiceSettingsActivity;
 import com.photoprint.photoclub.ui.activity.servicesettings.model.ServiceSettingsParams;
 
@@ -33,6 +35,12 @@ public class ActivityNavigator {
 
     public void navigateToServiceSettingsActivity(Activity activity, ServiceSettingsParams serviceSettingsParams) {
         Intent intent = ServiceSettingsActivity.getCallingIntent(activity, serviceSettingsParams);
+        activity.startActivity(intent);
+        animForward(activity);
+    }
+
+    public void navigateToServiceInfoActivity(Activity activity, ServiceInfoParams serviceInfoParams) {
+        Intent intent = ServiceInfoActivity.getCallingIntent(activity, serviceInfoParams);
         activity.startActivity(intent);
         animForward(activity);
     }
@@ -62,6 +70,5 @@ public class ActivityNavigator {
     private void animBack(Activity activity) {
         activity.overridePendingTransition(R.anim.zero_animation, R.anim.slide_to_right);
     }
-
 
 }

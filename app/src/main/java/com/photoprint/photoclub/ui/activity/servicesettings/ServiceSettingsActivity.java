@@ -57,6 +57,7 @@ public class ServiceSettingsActivity extends MvpActivity implements ServiceSetti
     @Inject
     DrawerMenuDelegate drawerMenuDelegate;
     //endregion
+    //region views
     @BindView(R.id.imageView)
     SimpleDraweeView imageView;
     @BindView(R.id.serviceName)
@@ -71,10 +72,7 @@ public class ServiceSettingsActivity extends MvpActivity implements ServiceSetti
     Switch optionSwitch;
     @BindView(R.id.nextButton)
     Button nextButton;
-    //region views
-
     //endregion
-    private ArrayAdapter<String> spinnerAdapter;
     private ServiceSettingsPresenter presenter;
 
     @Override
@@ -105,15 +103,6 @@ public class ServiceSettingsActivity extends MvpActivity implements ServiceSetti
         presenter.initialize();
     }
 
-    public ServiceSettingsScreenComponent getScreenComponent() {
-        Object saved = getLastCustomNonConfigurationInstance();
-        if (saved == null) {
-            return appComponent().ServiceSettingsScreenComponent();
-        } else {
-            return (ServiceSettingsScreenComponent) saved;
-        }
-    }
-
     @Override
     protected void onResume() {
         navigator.onResume(this);
@@ -129,6 +118,15 @@ public class ServiceSettingsActivity extends MvpActivity implements ServiceSetti
     @Override
     public void onBackPressed() {
         presenter.onBackBtnClicked();
+    }
+
+    public ServiceSettingsScreenComponent getScreenComponent() {
+        Object saved = getLastCustomNonConfigurationInstance();
+        if (saved == null) {
+            return appComponent().ServiceSettingsScreenComponent();
+        } else {
+            return (ServiceSettingsScreenComponent) saved;
+        }
     }
 
     @Override
@@ -162,7 +160,7 @@ public class ServiceSettingsActivity extends MvpActivity implements ServiceSetti
     }
 
     private void createSpinnerAdapter(List<String> itemsList, AppCompatSpinner spinner) {
-        spinnerAdapter = new ArrayAdapter<>(this, R.layout.service_spinner_item);
+        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(this, R.layout.service_spinner_item);
         spinnerAdapter.addAll(itemsList);
         spinner.setAdapter(spinnerAdapter);
     }

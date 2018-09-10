@@ -20,22 +20,22 @@ public class Navigator extends BaseNavigator<CategoryActivity> {
     }
 
     public void navigateToServiceActivity(ServiceParams serviceParams) {
-        activityNavigator.navigateToServiceActivity(activity, serviceParams);
+        forSafeAction(() -> activityNavigator.navigateToServiceActivity(baseActivity, serviceParams));
     }
 
     public void navigateToServiceSettingsActivity(ServiceSettingsParams serviceSettingsParams) {
-        activityNavigator.navigateToServiceSettingsActivity(activity, serviceSettingsParams);
+        forSafeAction(() -> activityNavigator.navigateToServiceSettingsActivity(baseActivity, serviceSettingsParams));
     }
 
     public void navigateBack() {
-        activityNavigator.navigateBack(activity);
+        forSafeAction(() -> activityNavigator.navigateBack(baseActivity));
     }
 
     public void onResume(CategoryActivity activity) {
-        this.activity = activity;
+        this.baseActivity = activity;
     }
 
     public void onPause() {
-        this.activity = null;
+        this.baseActivity = null;
     }
 }

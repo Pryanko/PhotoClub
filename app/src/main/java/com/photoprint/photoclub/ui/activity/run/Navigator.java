@@ -19,20 +19,20 @@ public class Navigator extends BaseNavigator<RunActivity> {
     }
 
     public void navigateToGuideActivity(GuideParams guideParams) {
-        activityNavigator.navigateToGuideActivity(activity, guideParams);
+        forSafeAction(() -> activityNavigator.navigateToGuideActivity(baseActivity, guideParams));
     }
 
     public void navigateToCategoryActivity() {
-        activityNavigator.navigateToCategoryActivity(activity);
+        forSafeAction(() -> activityNavigator.navigateToCategoryActivity(baseActivity));
     }
 
     @Override
     public void onResume(RunActivity runActivity) {
-        this.activity = runActivity;
+        this.baseActivity = runActivity;
     }
 
     @Override
     public void onPause() {
-        this.activity = null;
+        this.baseActivity = null;
     }
 }
