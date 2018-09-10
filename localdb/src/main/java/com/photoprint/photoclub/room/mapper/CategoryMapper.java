@@ -9,6 +9,6 @@ import org.mapstruct.Mapper;
 /**
  * @author Grigoriy Pryamov.
  */
-@Mapper
+@Mapper(uses = {CategoryTypeMapper.class})
 public interface CategoryMapper extends BaseMapper<Category, CategoryEntity> {
 }

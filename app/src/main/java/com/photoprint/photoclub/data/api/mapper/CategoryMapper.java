@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * @author Grigoriy Pryamov.
  */
-@Mapper
+@Mapper(uses = {CategoryTypeMapper.class})
 public interface CategoryMapper {
 
     CategoryMapper INSTANCE = Mappers.getMapper(CategoryMapper.class);

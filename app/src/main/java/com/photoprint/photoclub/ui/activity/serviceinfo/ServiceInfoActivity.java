@@ -12,7 +12,6 @@ import com.photoprint.photoclub.ui.activity.base.MvpActivity;
 import com.photoprint.photoclub.ui.activity.delegate.DrawerMenuDelegate;
 import com.photoprint.photoclub.ui.activity.delegate.ToolbarDelegate;
 import com.photoprint.photoclub.ui.activity.serviceinfo.model.ServiceInfoParams;
-import com.photoprint.photoclub.ui.activity.servicesettings.ServiceSettingsActivity;
 
 import javax.inject.Inject;
 
@@ -31,7 +30,7 @@ public class ServiceInfoActivity extends MvpActivity implements ServiceInfoView 
 
     //region extra
     public static Intent getCallingIntent(Context context, ServiceInfoParams serviceInfoParams) {
-        Intent intent = new Intent(context, ServiceSettingsActivity.class);
+        Intent intent = new Intent(context, ServiceInfoActivity.class);
         intent.putExtra(EXTRA_SERVICE_INFO_PARAMS, serviceInfoParams);
         return intent;
     }

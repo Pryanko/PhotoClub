@@ -3,6 +3,7 @@ package com.photoprint.photoclub.model;
 import android.arch.persistence.room.PrimaryKey;
 
 import com.photoprint.photoclub.model.base.ModelWithId;
+import com.photoprint.photoclub.model.enums.CategoryType;
 
 /**
  * @author Grigoriy Pryamov.
@@ -25,7 +26,7 @@ public class Category implements ModelWithId<Long> {
     /**
      * Тип категории
      */
-    private String type;
+    private CategoryType type;
     /**
      * Image категории для экранов с маленьким разрешением
      */
@@ -62,11 +63,11 @@ public class Category implements ModelWithId<Long> {
         this.description = description;
     }
 
-    public String getType() {
+    public CategoryType getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(CategoryType type) {
         this.type = type;
     }
 

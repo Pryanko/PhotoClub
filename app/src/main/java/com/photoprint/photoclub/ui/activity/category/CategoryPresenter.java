@@ -1,11 +1,15 @@
 package com.photoprint.photoclub.ui.activity.category;
 
+import com.example.utils.Preconditions;
 import com.photoprint.logger.Logger;
 import com.photoprint.logger.LoggerFactory;
 import com.photoprint.photoclub.helper.runtimepermission.AppSchedulers;
+import com.photoprint.photoclub.helper.transition.ScreenSeparator;
+import com.photoprint.photoclub.helper.transition.TypeTransition;
 import com.photoprint.photoclub.model.Category;
 import com.photoprint.photoclub.ui.activity.category.adapter.CategoryListAdapter;
 import com.photoprint.photoclub.ui.activity.category.interactor.CategoryLoader;
+import com.photoprint.photoclub.ui.activity.service.model.ServiceParams;
 import com.photoprint.photoclub.ui.activity.servicesettings.model.ServiceSettingsParams;
 import com.photoprint.photoclub.ui.mvp.presenter.BaseMvpViewStatePresenter;
 
@@ -26,22 +30,23 @@ public class CategoryPresenter extends BaseMvpViewStatePresenter<CategoryView, C
 
     private List<Category> categories = Collections.emptyList();
 
+    private final Navigator navigator;
+    private final ScreenSeparator separator;
     private final CategoryLoader categoryLoader;
     private final CategoryListAdapter categoryListAdapter;
-    private final Navigator navigator;
     private Disposable loadDisposable = Disposables.disposed();
 
     @Inject
     CategoryPresenter(CategoryViewState viewState,
                       CategoryLoader categoryLoader,
                       CategoryListAdapter categoryListAdapter,
-                      Navigator navigator) {
+                      Navigator navigator, ScreenSeparator separator) {
         super(viewState);
         this.categoryLoader = categoryLoader;
         this.categoryListAdapter = categoryListAdapter;
         this.navigator = navigator;
+        this.separator = separator;
     }
-
 
     @Override
     protected void onInitialize() {
@@ -68,11 +73,24 @@ public class CategoryPresenter extends BaseMvpViewStatePresenter<CategoryView, C
     public void onCategoryClicked(int position) {
         logger.trace("onCategoryClicked - position:" + position);
         Category category = categories.get(position);
-//        ServiceParams serviceParams = new ServiceParams();
-//        serviceParams.setCategoryId(category.getId());
-//        navigator.navigateToServiceActivity(serviceParams);
-        ServiceSettingsParams serviceSettingsParams = new ServiceSettingsParams();
-        serviceSettingsParams.setCategoryId(category.getId());
-        navigator.navigateToServiceSettingsActivity(serviceSettingsParams);
+        Preconditions.checkNotNull(category);
+        navigateToNextScreen(separator.getTransitionForCategory(category.getType()), category);
+    }
+
+    private void navigateToNextScreen(TypeTransition typeTransition, Category category) {
+        switch (typeTransition) {
+            case SERVICE: {
+                ServiceParams serviceParams = new ServiceParams();
+                serviceParams.setCategoryId(category.getId());
+                navigator.navigateToServiceActivity(serviceParams);
+                break;
+            }
+            case SETTINGS: {
+                ServiceSettingsParams serviceSettingsParams = new ServiceSettingsParams();
+                serviceSettingsParams.setCategoryId(category.getId());
+                navigator.navigateToServiceSettingsActivity(serviceSettingsParams);
+                break;
+            }
+        }
     }
 }

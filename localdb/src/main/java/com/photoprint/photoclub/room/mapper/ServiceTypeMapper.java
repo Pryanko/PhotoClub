@@ -11,16 +11,10 @@ import org.mapstruct.Mapper;
 public abstract class ServiceTypeMapper {
 
     public ServiceType entityToModel(Integer entity) {
-        if (entity == null) {
-            return null;
-        }
-        return ServiceType.valueOf(entity);
+        return entity == null ? null : ServiceType.valueOf(entity);
     }
 
     public Integer modelToEntity(ServiceType model) {
-        if (model == null) {
-            return null;
-        }
-        return model.getCode();
+        return model == null ? null : model.getCode();
     }
 }
