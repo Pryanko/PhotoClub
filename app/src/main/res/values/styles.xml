@@ -13,6 +13,7 @@
         <item name="colorPrimary">@color/appWhite</item>
         <item name="colorPrimaryDark">@color/appYellow</item>
         <item name="colorAccent">@color/appGray</item>
+        <item name="android:statusBarColor">@color/appYellow</item>
         <item name="toolbarStyle">@style/Widget.App.Toolbar</item>
         <item name="android:fontFamily" tools:ignore="NewApi">@font/roboto_regular</item>
     </style>

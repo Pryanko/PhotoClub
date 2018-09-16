@@ -2,6 +2,7 @@ package com.photoprint.photoclub.ui.activity.serviceinfo;
 
 import com.photoprint.photoclub.di.ActivityScope;
 import com.photoprint.photoclub.ui.activity.base.ActivityModule;
+import com.photoprint.photoclub.ui.activity.serviceinfo.fragment.serviceinfo.ServiceInfoFragmentComponent;
 import com.photoprint.photoclub.ui.activity.serviceinfo.model.ServiceInfoParams;
 
 import dagger.BindsInstance;
@@ -17,6 +18,8 @@ public interface ServiceInfoComponent {
     void inject(ServiceInfoActivity serviceInfoActivity);
 
     ServiceInfoPresenter serviceInfoPresenter();
+
+    ServiceInfoFragmentComponent serviceInfoFragmentComponent();
 
     @Subcomponent.Builder
     interface Builder {

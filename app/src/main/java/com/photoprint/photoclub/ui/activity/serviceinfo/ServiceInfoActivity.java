@@ -11,11 +11,10 @@ import com.photoprint.photoclub.ui.activity.base.ActivityModule;
 import com.photoprint.photoclub.ui.activity.base.MvpActivity;
 import com.photoprint.photoclub.ui.activity.delegate.DrawerMenuDelegate;
 import com.photoprint.photoclub.ui.activity.delegate.ToolbarDelegate;
+import com.photoprint.photoclub.ui.activity.serviceinfo.fragment.serviceinfo.ServiceInfoFragment;
 import com.photoprint.photoclub.ui.activity.serviceinfo.model.ServiceInfoParams;
 
 import javax.inject.Inject;
-
-import butterknife.ButterKnife;
 
 /**
  * Экран с информаций об услуге
@@ -26,9 +25,14 @@ public class ServiceInfoActivity extends MvpActivity implements ServiceInfoView 
 
     private static final Logger logger = LoggerFactory.getLogger(ServiceInfoActivity.class);
 
-    private static final String EXTRA_SERVICE_INFO_PARAMS = "EXTRA_SERVICE_INFO_PARAMS";
+    //region Fragment tags
+    private static String F_TAG_SERVICE_INFO = "F_TAG_SERVICE_INFO";
+    private static String F_TAG_MAQUETTE_LIST = "F_TAG_REMAINING_STOPS";
+    //endregion
 
     //region extra
+    private static final String EXTRA_SERVICE_INFO_PARAMS = "EXTRA_SERVICE_INFO_PARAMS";
+
     public static Intent getCallingIntent(Context context, ServiceInfoParams serviceInfoParams) {
         Intent intent = new Intent(context, ServiceInfoActivity.class);
         intent.putExtra(EXTRA_SERVICE_INFO_PARAMS, serviceInfoParams);
@@ -46,7 +50,7 @@ public class ServiceInfoActivity extends MvpActivity implements ServiceInfoView 
     DrawerMenuDelegate drawerMenuDelegate;
     //endregion
     //region views
-
+    private ServiceInfoFragment serviceInfoFragment;
     //endregion
     private ServiceInfoPresenter presenter;
 
@@ -61,7 +65,6 @@ public class ServiceInfoActivity extends MvpActivity implements ServiceInfoView 
         super.onCreate(savedInstanceState);
         presenter = getMvpDelegate().getPresenter(component::serviceInfoPresenter, ServiceInfoPresenter.class);
         setContentView(R.layout.activity_service_info);
-        ButterKnife.bind(this);
 
         toolbarDelegate.init();
         drawerMenuDelegate.init(getMvpDelegate(), null, true);
@@ -69,6 +72,9 @@ public class ServiceInfoActivity extends MvpActivity implements ServiceInfoView 
             onBackPressed();
             return true;
         });
+
+        presenter.initialize();
+        setupServiceInfoFragment();
     }
 
     @Override
@@ -86,6 +92,20 @@ public class ServiceInfoActivity extends MvpActivity implements ServiceInfoView 
     @Override
     public void onBackPressed() {
         presenter.onBackBtnClicked();
+    }
+
+    private void setupServiceInfoFragment() {
+        serviceInfoFragment = (ServiceInfoFragment) getFragmentManager().findFragmentByTag(F_TAG_SERVICE_INFO);
+        if (serviceInfoFragment == null) {
+            serviceInfoFragment = ServiceInfoFragment.newInstance();
+            getFragmentManager().beginTransaction()
+                    .add(R.id.fragmentContainer, serviceInfoFragment, F_TAG_SERVICE_INFO)
+                    .commit();
+        }
+    }
+
+    public ServiceInfoComponent getComponent() {
+        return component;
     }
 
     public ServiceInfoScreenComponent getScreenComponent() {

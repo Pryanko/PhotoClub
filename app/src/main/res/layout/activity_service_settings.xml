@@ -87,7 +87,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="4dp"
-                android:text="@string/choose_format" />
+                android:text="@string/select_format" />
 
             <android.support.v7.widget.AppCompatSpinner
                 android:id="@+id/formatSpinner"
@@ -113,7 +113,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="4dp"
-                android:text="@string/choose_type" />
+                android:text="@string/select_type" />
 
             <android.support.v7.widget.AppCompatSpinner
                 android:id="@+id/typeSpinner"

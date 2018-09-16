@@ -13,11 +13,15 @@
     <string name="guide_close_btn">Закрыть</string>
 
     <!--SettingsServiceActivity-->
-    <string name="choose_format">Выберите формат для печати:</string>
-    <string name="choose_type">Выберите тип бумаги:</string>
+    <string name="select_format">Выберите формат для печати:</string>
+    <string name="select_type">Выберите тип бумаги:</string>
     <string name="apply_option">С полями</string>
     <string name="info_option">При включении опции, во время печати кадрировать будет оператор. </string>
     <string name="service_next_btn">В галерею</string>
+
+    <!--ServiceInfoActivity-->
+    <string name="select_layout">Выберите макет для изготовления</string>
+    <string name="non_select_layout">Макет не выбран</string>
 
     <!--AppMenu-->
     <string name="menu_drawer_new_order">Новый заказ</string>
