@@ -1,5 +1,6 @@
 package com.photoprint.photoclub.ui.activity.serviceinfo;
 
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import com.photoprint.photoclub.ui.activity.base.ActivityModule;
 import com.photoprint.photoclub.ui.activity.base.MvpActivity;
 import com.photoprint.photoclub.ui.activity.delegate.DrawerMenuDelegate;
 import com.photoprint.photoclub.ui.activity.delegate.ToolbarDelegate;
+import com.photoprint.photoclub.ui.activity.serviceinfo.fragment.maquettelist.MaquetteListFragment;
 import com.photoprint.photoclub.ui.activity.serviceinfo.fragment.serviceinfo.ServiceInfoFragment;
 import com.photoprint.photoclub.ui.activity.serviceinfo.model.ServiceInfoParams;
 
@@ -51,6 +53,7 @@ public class ServiceInfoActivity extends MvpActivity implements ServiceInfoView 
     //endregion
     //region views
     private ServiceInfoFragment serviceInfoFragment;
+    private MaquetteListFragment maquetteListFragment;
     //endregion
     private ServiceInfoPresenter presenter;
 
@@ -75,6 +78,7 @@ public class ServiceInfoActivity extends MvpActivity implements ServiceInfoView 
 
         presenter.initialize();
         setupServiceInfoFragment();
+        setupMaquetteListFragment();
     }
 
     @Override
@@ -100,6 +104,19 @@ public class ServiceInfoActivity extends MvpActivity implements ServiceInfoView 
             serviceInfoFragment = ServiceInfoFragment.newInstance();
             getFragmentManager().beginTransaction()
                     .add(R.id.fragmentContainer, serviceInfoFragment, F_TAG_SERVICE_INFO)
+                    .hide(serviceInfoFragment)
+                    .commit();
+        }
+        serviceInfoFragment.setOnClickSelectMaquetteBtnListener(() -> presenter.onClickSelectMaquetteBtn());
+    }
+
+    private void setupMaquetteListFragment() {
+        maquetteListFragment = (MaquetteListFragment) getFragmentManager().findFragmentByTag(F_TAG_MAQUETTE_LIST);
+        if (maquetteListFragment == null) {
+            maquetteListFragment = MaquetteListFragment.newInstance();
+            getFragmentManager().beginTransaction()
+                    .add(R.id.fragmentContainer, maquetteListFragment, F_TAG_MAQUETTE_LIST)
+                    .hide(maquetteListFragment)
                     .commit();
         }
     }
@@ -120,5 +137,33 @@ public class ServiceInfoActivity extends MvpActivity implements ServiceInfoView 
     @Override
     public Object onRetainCustomNonConfigurationInstance() {
         return screenComponent;
+    }
+
+    @Override
+    public void setMaquetteFragmentVisible(boolean fragmentVisible) {
+        if (getFragmentManager() != null) {
+            getFragmentManager().beginTransaction()
+                    .hide(fragmentVisible ? serviceInfoFragment : maquetteListFragment)
+                    .show(fragmentVisible ? maquetteListFragment : serviceInfoFragment)
+                    .commit();
+        }
+    }
+
+    @Override
+    public void showMaquetteList() {
+        getFragmentManager().beginTransaction()
+                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                .hide(serviceInfoFragment)
+                .show(maquetteListFragment)
+                .commitAllowingStateLoss();
+    }
+
+    @Override
+    public void hideMaquetteList() {
+        getFragmentManager().beginTransaction()
+                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
+                .hide(maquetteListFragment)
+                .show(serviceInfoFragment)
+                .commitAllowingStateLoss();
     }
 }

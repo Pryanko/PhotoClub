@@ -37,7 +37,7 @@
             android:layout_height="match_parent">
 
             <com.photoprint.photoclub.ui.widget.CustomTextView
-                android:id="@+id/selectLayout"
+                android:id="@+id/selectMaquette"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="68dp"
@@ -49,6 +49,7 @@
                 tools:text="@string/select_layout" />
 
             <ImageButton
+                android:id="@+id/addMaquetteBtn"
                 style="@style/Base.Widget.AppCompat.Button.Borderless"
                 android:layout_width="34dp"
                 android:layout_height="34dp"
@@ -66,10 +67,10 @@
                 tools:ignore="ContentDescription" />
 
             <com.photoprint.photoclub.ui.widget.CustomTextView
-                android:id="@+id/valueLayout"
+                android:id="@+id/valueMaquette"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/selectLayout"
+                android:layout_below="@+id/selectMaquette"
                 android:layout_marginBottom="4dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginStart="16dp"

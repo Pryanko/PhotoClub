@@ -2,6 +2,7 @@ package com.photoprint.photoclub.ui.activity.serviceinfo;
 
 import com.photoprint.photoclub.di.ActivityScope;
 import com.photoprint.photoclub.ui.activity.base.ActivityModule;
+import com.photoprint.photoclub.ui.activity.serviceinfo.fragment.maquettelist.MaquetteListComponent;
 import com.photoprint.photoclub.ui.activity.serviceinfo.fragment.serviceinfo.ServiceInfoFragmentComponent;
 import com.photoprint.photoclub.ui.activity.serviceinfo.model.ServiceInfoParams;
 
@@ -20,6 +21,8 @@ public interface ServiceInfoComponent {
     ServiceInfoPresenter serviceInfoPresenter();
 
     ServiceInfoFragmentComponent serviceInfoFragmentComponent();
+
+    MaquetteListComponent maquetteListComponent();
 
     @Subcomponent.Builder
     interface Builder {

@@ -14,6 +14,10 @@ public class ServiceInfoPresenter extends BaseMvpViewStatePresenter<ServiceInfoV
     private static final Logger logger = LoggerFactory.getLogger(ServiceInfoPresenter.class);
 
     private final Navigator navigator;
+    /**
+     * Флажок, отображается ли в данный момент фрагмент с выбором макетов
+     */
+    private boolean maquetteListVisible = false;
 
     @Inject
     ServiceInfoPresenter(ServiceInfoViewState viewState,
@@ -28,6 +32,17 @@ public class ServiceInfoPresenter extends BaseMvpViewStatePresenter<ServiceInfoV
     }
 
     public void onBackBtnClicked() {
-        navigator.navigateBack();
+        if (maquetteListVisible) {
+            maquetteListVisible = false;
+            view.hideMaquetteList();
+        } else {
+            navigator.navigateBack();
+        }
+    }
+
+    public void onClickSelectMaquetteBtn() {
+        logger.trace("onClickSelectMaquetteBtn");
+        maquetteListVisible = true;
+        view.showMaquetteList();
     }
 }

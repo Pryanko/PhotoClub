@@ -9,17 +9,36 @@ import javax.inject.Inject;
  */
 public class ServiceInfoViewState extends BaseMvpViewState<ServiceInfoView> implements ServiceInfoView {
 
+    private boolean maquetteListVisible;
+
     @Inject
     ServiceInfoViewState() {
     }
 
     @Override
     protected void onViewAttached(ServiceInfoView view) {
-
+        view.setMaquetteFragmentVisible(maquetteListVisible);
     }
 
     @Override
     protected void onViewDetached(ServiceInfoView view) {
 
+    }
+
+    @Override
+    public void setMaquetteFragmentVisible(boolean fragmentVisible) {
+
+    }
+
+    @Override
+    public void showMaquetteList() {
+        this.maquetteListVisible = true;
+        forEachView(ServiceInfoView::showMaquetteList);
+    }
+
+    @Override
+    public void hideMaquetteList() {
+        this.maquetteListVisible = false;
+        forEachView(ServiceInfoView::hideMaquetteList);
     }
 }
