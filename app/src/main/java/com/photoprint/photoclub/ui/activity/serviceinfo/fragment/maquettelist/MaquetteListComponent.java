@@ -8,7 +8,7 @@ import dagger.Subcomponent;
  * @author Grigoriy Pryamov.
  */
 @FragmentScope
-@Subcomponent
+@Subcomponent(modules = MaquetteListModule.class)
 public interface MaquetteListComponent {
 
     void inject(MaquetteListFragment maquetteListFragment);

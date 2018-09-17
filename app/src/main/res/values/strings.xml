@@ -22,6 +22,7 @@
     <!--ServiceInfoActivity-->
     <string name="select_layout">Выберите макет для изготовления</string>
     <string name="non_select_layout">Макет не выбран</string>
+    <string name="your_select_maquette">Вами выбран макет: %1$s</string>
 
     <!--AppMenu-->
     <string name="menu_drawer_new_order">Новый заказ</string>

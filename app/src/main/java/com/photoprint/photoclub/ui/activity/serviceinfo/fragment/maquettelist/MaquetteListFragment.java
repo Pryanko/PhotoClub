@@ -2,6 +2,7 @@ package com.photoprint.photoclub.ui.activity.serviceinfo.fragment.maquettelist;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +12,11 @@ import com.photoprint.logger.Logger;
 import com.photoprint.logger.LoggerFactory;
 import com.photoprint.photoclub.R;
 import com.photoprint.photoclub.ui.activity.serviceinfo.ServiceInfoActivity;
+import com.photoprint.photoclub.ui.activity.serviceinfo.fragment.maquettelist.adapter.MaquetteListAdapterImpl;
+import com.photoprint.photoclub.ui.adapter.ItemDecoration;
 import com.photoprint.photoclub.ui.fragment.base.MvpFragment;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -29,6 +34,8 @@ public class MaquetteListFragment extends MvpFragment implements MaquetteListVie
 
     //region Di
     MaquetteListComponent component;
+    @Inject
+    MaquetteListAdapterImpl maquetteListAdapter;
     //endregion
 
     //region views
@@ -44,7 +51,6 @@ public class MaquetteListFragment extends MvpFragment implements MaquetteListVie
         super.onCreate(savedInstanceState);
         presenter = getMvpDelegate().getPresenter(component::maquetteListPresenter, MaquetteListPresenter.class);
         presenter.initialize();
-
     }
 
     @Nullable
@@ -52,6 +58,19 @@ public class MaquetteListFragment extends MvpFragment implements MaquetteListVie
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_maquette_list, container, false);
         ButterKnife.bind(this, view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerView.addItemDecoration(new ItemDecoration(
+                getResources().getDimensionPixelOffset(R.dimen.offset_category_item_sides),
+                getResources().getDimensionPixelOffset(R.dimen.offset_category_item_sides),
+                getResources().getDimensionPixelOffset(R.dimen.offset_category_item_top),
+                getResources().getDimensionPixelOffset(R.dimen.offset_category_item_bottom)));
+        recyclerView.setAdapter(maquetteListAdapter);
         return view;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        recyclerView.setAdapter(null);
     }
 }

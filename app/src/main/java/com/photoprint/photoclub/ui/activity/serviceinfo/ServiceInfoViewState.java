@@ -10,6 +10,7 @@ import javax.inject.Inject;
 public class ServiceInfoViewState extends BaseMvpViewState<ServiceInfoView> implements ServiceInfoView {
 
     private boolean maquetteListVisible;
+    private String maquetteName;
 
     @Inject
     ServiceInfoViewState() {
@@ -18,6 +19,9 @@ public class ServiceInfoViewState extends BaseMvpViewState<ServiceInfoView> impl
     @Override
     protected void onViewAttached(ServiceInfoView view) {
         view.setMaquetteFragmentVisible(maquetteListVisible);
+        if (maquetteName != null) {
+            view.setMaquetteName(maquetteName);
+        }
     }
 
     @Override
@@ -40,5 +44,11 @@ public class ServiceInfoViewState extends BaseMvpViewState<ServiceInfoView> impl
     public void hideMaquetteList() {
         this.maquetteListVisible = false;
         forEachView(ServiceInfoView::hideMaquetteList);
+    }
+
+    @Override
+    public void setMaquetteName(String name) {
+        this.maquetteName = name;
+        forEachView(view -> view.setMaquetteName(this.maquetteName));
     }
 }

@@ -1,7 +1,5 @@
 package com.photoprint.photoclub.model;
 
-import android.arch.persistence.room.PrimaryKey;
-
 import com.photoprint.photoclub.model.base.ModelWithId;
 import com.photoprint.photoclub.model.enums.CategoryType;
 
@@ -13,7 +11,6 @@ public class Category implements ModelWithId<Long> {
     /**
      * Id категории
      */
-    @PrimaryKey
     private long id;
     /**
      * Наименование категории

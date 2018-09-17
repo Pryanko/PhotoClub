@@ -13,6 +13,7 @@ import com.photoprint.photoclub.ui.activity.base.MvpActivity;
 import com.photoprint.photoclub.ui.activity.delegate.DrawerMenuDelegate;
 import com.photoprint.photoclub.ui.activity.delegate.ToolbarDelegate;
 import com.photoprint.photoclub.ui.activity.serviceinfo.fragment.maquettelist.MaquetteListFragment;
+import com.photoprint.photoclub.ui.activity.serviceinfo.fragment.maquettelist.adapter.MaquetteListAdapterImpl;
 import com.photoprint.photoclub.ui.activity.serviceinfo.fragment.serviceinfo.ServiceInfoFragment;
 import com.photoprint.photoclub.ui.activity.serviceinfo.model.ServiceInfoParams;
 
@@ -50,6 +51,8 @@ public class ServiceInfoActivity extends MvpActivity implements ServiceInfoView 
     ToolbarDelegate toolbarDelegate;
     @Inject
     DrawerMenuDelegate drawerMenuDelegate;
+    @Inject
+    MaquetteListAdapterImpl maquetteListAdapter;
     //endregion
     //region views
     private ServiceInfoFragment serviceInfoFragment;
@@ -79,6 +82,7 @@ public class ServiceInfoActivity extends MvpActivity implements ServiceInfoView 
         presenter.initialize();
         setupServiceInfoFragment();
         setupMaquetteListFragment();
+        maquetteListAdapter.setInteractionListener(maquette -> presenter.onMaquetteItemClicked(maquette));
     }
 
     @Override
@@ -165,5 +169,10 @@ public class ServiceInfoActivity extends MvpActivity implements ServiceInfoView 
                 .hide(maquetteListFragment)
                 .show(serviceInfoFragment)
                 .commitAllowingStateLoss();
+    }
+
+    @Override
+    public void setMaquetteName(String name) {
+        serviceInfoFragment.setMaquetteName(name);
     }
 }

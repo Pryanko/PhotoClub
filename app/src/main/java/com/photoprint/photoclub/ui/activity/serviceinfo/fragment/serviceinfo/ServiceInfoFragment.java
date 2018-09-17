@@ -1,5 +1,6 @@
 package com.photoprint.photoclub.ui.activity.serviceinfo.fragment.serviceinfo;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -69,6 +70,12 @@ public class ServiceInfoFragment extends MvpFragment implements ServiceInfoFragm
 
     public void setOnClickSelectMaquetteBtnListener(OnClickSelectMaquetteBtnListener onClickSelectMaquetteBtnListener) {
         this.onClickSelectMaquetteBtnListener = onClickSelectMaquetteBtnListener;
+    }
+
+    @SuppressLint("StringFormatInvalid")
+    public void setMaquetteName(String maquetteName) {
+        valueMaquette.setTextColor(getResources().getColor(R.color.appDarkGray));
+        valueMaquette.setText(getResources().getString(R.string.your_select_maquette, maquetteName));
     }
 
     /**

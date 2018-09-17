@@ -2,6 +2,7 @@ package com.photoprint.photoclub.ui.activity.serviceinfo;
 
 import com.photoprint.logger.Logger;
 import com.photoprint.logger.LoggerFactory;
+import com.photoprint.photoclub.model.Maquette;
 import com.photoprint.photoclub.ui.mvp.presenter.BaseMvpViewStatePresenter;
 
 import javax.inject.Inject;
@@ -14,6 +15,8 @@ public class ServiceInfoPresenter extends BaseMvpViewStatePresenter<ServiceInfoV
     private static final Logger logger = LoggerFactory.getLogger(ServiceInfoPresenter.class);
 
     private final Navigator navigator;
+
+    private Maquette maquette = null;
     /**
      * Флажок, отображается ли в данный момент фрагмент с выбором макетов
      */
@@ -44,5 +47,12 @@ public class ServiceInfoPresenter extends BaseMvpViewStatePresenter<ServiceInfoV
         logger.trace("onClickSelectMaquetteBtn");
         maquetteListVisible = true;
         view.showMaquetteList();
+    }
+
+    public void onMaquetteItemClicked(Maquette maquette) {
+        logger.trace("onMaquetteItemClicked");
+        this.maquette = maquette;
+        view.hideMaquetteList();
+        view.setMaquetteName(this.maquette.getName());
     }
 }
