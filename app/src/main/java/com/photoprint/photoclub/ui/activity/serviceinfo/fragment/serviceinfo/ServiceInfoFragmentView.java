@@ -6,4 +6,5 @@ import com.photoprint.photoclub.ui.mvp.view.MvpView;
  * @author Grigoriy Pryamov.
  */
 interface ServiceInfoFragmentView extends MvpView {
+    void setServiceImage(String image);
 }

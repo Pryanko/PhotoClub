@@ -78,6 +78,11 @@ public class ServiceInfoFragment extends MvpFragment implements ServiceInfoFragm
         valueMaquette.setText(getResources().getString(R.string.your_select_maquette, maquetteName));
     }
 
+    @Override
+    public void setServiceImage(String image) {
+        imageView.setImageURI(image);
+    }
+
     /**
      * Взаимодействие
      */

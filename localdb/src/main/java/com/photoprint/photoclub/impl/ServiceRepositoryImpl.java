@@ -41,22 +41,16 @@ public class ServiceRepositoryImpl extends BaseRepositoryImpl<Service, ServiceEn
         return appDatabase.serviceDao();
     }
 
-    @NonNull
+    @Nullable
     @Override
-    public List<Service> getServices() {
-        return mapper.entityListToModelList(dao().getServices());
+    public Service getServiceById(long serviceId) {
+        return mapper.entityToModel(dao().getServiceById(serviceId));
     }
 
     @NonNull
     @Override
     public List<Service> getServicesByCategoryId(long categoryId) {
         return mapper.entityListToModelList(dao().getServicesByCategoryId(categoryId));
-    }
-
-    @Nullable
-    @Override
-    public Service getServiceById(int serviceId) {
-        return mapper.entityToModel(dao().getServiceById(serviceId));
     }
 
     @Override

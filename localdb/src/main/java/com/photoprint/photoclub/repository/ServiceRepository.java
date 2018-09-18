@@ -13,10 +13,13 @@ import java.util.List;
  */
 public interface ServiceRepository extends BaseRepository<Service, Long> {
     /**
-     * Возврщащет список всех услуг
+     * Возращает услугу по id
+     *
+     * @param serviceId Id услуги
+     * @return услугу по id
      */
-    @NonNull
-    List<Service> getServices();
+    @Nullable
+    Service getServiceById(long serviceId);
 
     /**
      * Возращает список услуг для категории
@@ -26,15 +29,6 @@ public interface ServiceRepository extends BaseRepository<Service, Long> {
      */
     @NonNull
     List<Service> getServicesByCategoryId(long categoryId);
-
-    /**
-     * Возращает услугу по id
-     *
-     * @param serviceId Id услуги
-     * @return услугу по id
-     */
-    @Nullable
-    Service getServiceById(int serviceId);
 
     /**
      * Метод удаляющий все категории
