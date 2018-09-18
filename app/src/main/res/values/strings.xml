@@ -17,12 +17,13 @@
     <string name="select_type">Выберите тип бумаги:</string>
     <string name="apply_option">С полями</string>
     <string name="info_option">При включении опции, во время печати кадрировать будет оператор. </string>
-    <string name="service_next_btn">В галерею</string>
+    <string name="settings_in_gallery_btn">В галерею</string>
 
     <!--ServiceInfoActivity-->
     <string name="select_layout">Выберите макет для изготовления</string>
     <string name="non_select_layout">Макет не выбран</string>
     <string name="your_select_maquette">Вами выбран макет: %1$s</string>
+    <string name="info_in_gallery_btn">В галерею</string>
 
     <!--AppMenu-->
     <string name="menu_drawer_new_order">Новый заказ</string>

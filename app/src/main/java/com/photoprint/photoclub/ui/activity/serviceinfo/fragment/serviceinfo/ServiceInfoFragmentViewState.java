@@ -10,6 +10,8 @@ import javax.inject.Inject;
 class ServiceInfoFragmentViewState extends BaseMvpViewState<ServiceInfoFragmentView> implements ServiceInfoFragmentView {
 
     private String serviceImage;
+    private String description;
+    private boolean selectMaquetteError;
 
     @Inject
     ServiceInfoFragmentViewState() {
@@ -17,7 +19,9 @@ class ServiceInfoFragmentViewState extends BaseMvpViewState<ServiceInfoFragmentV
 
     @Override
     protected void onViewAttached(ServiceInfoFragmentView view) {
-        view.setServiceImage(this.serviceImage);
+        view.setServiceImage(serviceImage);
+        view.setServiceDescription(description);
+        view.selectMaquetteErrorEnabled(selectMaquetteError);
     }
 
     @Override
@@ -29,5 +33,17 @@ class ServiceInfoFragmentViewState extends BaseMvpViewState<ServiceInfoFragmentV
     public void setServiceImage(String image) {
         this.serviceImage = image;
         forEachView(view -> view.setServiceImage(this.serviceImage));
+    }
+
+    @Override
+    public void setServiceDescription(String description) {
+        this.description = description;
+        forEachView(view -> view.setServiceDescription(this.description));
+    }
+
+    @Override
+    public void selectMaquetteErrorEnabled(boolean error) {
+        this.selectMaquetteError = error;
+        forEachView(view -> view.selectMaquetteErrorEnabled(this.selectMaquetteError));
     }
 }

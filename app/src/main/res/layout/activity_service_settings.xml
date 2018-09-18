@@ -186,7 +186,7 @@
             android:layout_marginTop="12dp"
             android:background="@drawable/bg_yellow_btn"
             android:elevation="4dp"
-            android:text="@string/service_next_btn"
+            android:text="@string/settings_in_gallery_btn"
             android:textAllCaps="true"
             android:textSize="14dp"
             android:theme="@style/Widget.App.Button.Yellow"

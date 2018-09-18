@@ -26,6 +26,12 @@ public class ServiceInfoFragmentPresenter extends BaseMvpViewStatePresenter<Serv
 
     private Disposable loadDisposable = Disposables.disposed();
 
+    /**
+     * Выбранный пользователем макет для итема услуги
+     */
+    // TODO: 18.09.2018 затащить полную модель маккета
+    private String maquetteName = null;
+
     @Inject
     ServiceInfoFragmentPresenter(ServiceInfoFragmentViewState viewState,
                                  Navigator navigator,
@@ -45,14 +51,26 @@ public class ServiceInfoFragmentPresenter extends BaseMvpViewStatePresenter<Serv
                 .subscribe(result -> {
                     if (result.isSuccessful()) {
                         view.setServiceImage(result.getService().getImage480());
-
+                        view.setServiceDescription(result.getService().getDescription());
                     }
-                });
+                }, logger::error);
     }
 
     @Override
     public void destroy() {
         loadDisposable.dispose();
         super.destroy();
+    }
+
+    public void onNextBtnClicked() {
+        logger.trace("onNextBtnClicked");
+        if (maquetteName == null) {
+            view.selectMaquetteErrorEnabled(true);
+        }
+    }
+
+    public void maquetteSelected(String maquetteName) {
+        this.maquetteName = maquetteName;
+        view.selectMaquetteErrorEnabled(false);
     }
 }

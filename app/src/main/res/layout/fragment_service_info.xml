@@ -45,7 +45,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="4dp"
                 android:text="@string/select_layout"
-                android:textSize="16dp"
+                android:textSize="14dp"
                 tools:ignore="SpUsage"
                 tools:text="@string/select_layout" />
 
@@ -69,13 +69,14 @@
 
             <com.photoprint.photoclub.ui.widget.CustomTextView
                 android:id="@+id/valueMaquette"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_height="22dp"
                 android:layout_below="@+id/selectMaquette"
-                android:layout_marginBottom="4dp"
+                android:layout_marginBottom="6dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="6dp"
+                android:layout_marginTop="4dp"
+                android:gravity="bottom"
                 android:text="@string/non_select_layout"
                 android:textColor="@color/appLightGray"
                 android:textSize="14dp"
@@ -92,6 +93,68 @@
         android:layout_below="@+id/cardView2"
         tools:ignore="MissingConstraints,UnknownIdInLayout">
 
+        <com.photoprint.photoclub.ui.widget.CustomTextView
+            android:id="@+id/serviceItemSize"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="6dp"
+            android:drawablePadding="8dp"
+            android:drawableStart="@drawable/ic_ruler"
+            android:gravity="center_vertical"
+            android:text="48(L)"
+            android:textSize="14dp"
+            tools:ignore="SpUsage"
+            tools:text="48(L)" />
+
+        <com.photoprint.photoclub.ui.widget.CustomTextView
+            android:id="@+id/serviceAdditional"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="48dp"
+            android:drawablePadding="8dp"
+            android:drawableStart="@drawable/ic_like"
+            android:gravity="center_vertical"
+            android:text="Цвет, доставка, особенность"
+            android:textSize="14dp"
+            tools:ignore="SpUsage"
+            tools:text="Цвет, доставка, особенность" />
+
+        <com.photoprint.photoclub.ui.widget.CustomTextView
+            android:id="@+id/serviceDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="90dp"
+            android:gravity="center_vertical"
+            android:text="Цвет, доставка, особенность"
+            android:textSize="14dp"
+            tools:ignore="SpUsage"
+            tools:text="Цвет, доставка, особенность" />
+
     </android.support.v7.widget.CardView>
+
+    <com.photoprint.photoclub.ui.widget.CustomButton
+        android:id="@+id/nextButton"
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:layout_below="@+id/cardView3"
+        android:layout_marginEnd="24dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/bg_yellow_btn"
+        android:elevation="4dp"
+        android:text="@string/info_in_gallery_btn"
+        android:textAllCaps="true"
+        android:textSize="14dp"
+        android:theme="@style/Widget.App.Button.Yellow"
+        tools:ignore="SpUsage" />
 
 </RelativeLayout>

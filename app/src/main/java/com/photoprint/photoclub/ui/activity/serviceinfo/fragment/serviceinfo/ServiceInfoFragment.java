@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -39,8 +40,12 @@ public class ServiceInfoFragment extends MvpFragment implements ServiceInfoFragm
     SimpleDraweeView imageView;
     @BindView(R.id.valueMaquette)
     TextView valueMaquette;
+    @BindView(R.id.serviceDescription)
+    TextView serviceDescription;
     @BindView(R.id.addMaquetteBtn)
     ImageButton addMaquetteBtn;
+    @BindView(R.id.nextButton)
+    Button nextButton;
     //endregion
 
     private OnClickSelectMaquetteBtnListener onClickSelectMaquetteBtnListener;
@@ -65,6 +70,7 @@ public class ServiceInfoFragment extends MvpFragment implements ServiceInfoFragm
                 onClickSelectMaquetteBtnListener.onClickSelectMaquetteBtn();
             }
         });
+        nextButton.setOnClickListener(v -> presenter.onNextBtnClicked());
         return view;
     }
 
@@ -76,11 +82,30 @@ public class ServiceInfoFragment extends MvpFragment implements ServiceInfoFragm
     public void setMaquetteName(String maquetteName) {
         valueMaquette.setTextColor(getResources().getColor(R.color.appDarkGray));
         valueMaquette.setText(getResources().getString(R.string.your_select_maquette, maquetteName));
+        presenter.maquetteSelected(maquetteName);
     }
 
     @Override
     public void setServiceImage(String image) {
         imageView.setImageURI(image);
+    }
+
+    @Override
+    public void setServiceDescription(String description) {
+        serviceDescription.setText(description);
+    }
+
+    @Override
+    public void selectMaquetteErrorEnabled(boolean error) {
+        if (error) {
+            valueMaquette.setCompoundDrawablePadding(12);
+            valueMaquette.setCompoundDrawablesWithIntrinsicBounds(null, null,
+                    getResources().getDrawable(R.drawable.ic_alert), null);
+            valueMaquette.setTextColor(getResources().getColor(R.color.appPink));
+        } else {
+            valueMaquette.setCompoundDrawablesWithIntrinsicBounds(null, null,
+                    null, null);
+        }
     }
 
     /**

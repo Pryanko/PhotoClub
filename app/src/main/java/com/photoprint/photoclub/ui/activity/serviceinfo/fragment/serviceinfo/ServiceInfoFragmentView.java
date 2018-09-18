@@ -7,4 +7,8 @@ import com.photoprint.photoclub.ui.mvp.view.MvpView;
  */
 interface ServiceInfoFragmentView extends MvpView {
     void setServiceImage(String image);
+
+    void setServiceDescription(String description);
+
+    void selectMaquetteErrorEnabled(boolean error);
 }
