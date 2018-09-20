@@ -19,6 +19,7 @@ public class ServiceSettingsViewState extends BaseMvpViewState<ServiceSettingsVi
     private String price;
     private List<String> serviceNameList = Collections.emptyList();
     private List<String> serviceTypeList = Collections.emptyList();
+    private boolean loading;
 
     @Inject
     ServiceSettingsViewState() {
@@ -31,6 +32,7 @@ public class ServiceSettingsViewState extends BaseMvpViewState<ServiceSettingsVi
         view.setServicePrice(price);
         view.setServiceNameList(serviceNameList);
         view.setServiceTypeList(serviceTypeList);
+        view.showLoading(loading);
     }
 
     @Override
@@ -66,5 +68,11 @@ public class ServiceSettingsViewState extends BaseMvpViewState<ServiceSettingsVi
     public void setServiceTypeList(@NonNull List<String> serviceTypeList) {
         this.serviceTypeList = serviceTypeList;
         forEachView(view -> view.setServiceTypeList(serviceTypeList));
+    }
+
+    @Override
+    public void showLoading(boolean loading) {
+        this.loading = loading;
+        forEachView(view -> view.showLoading(this.loading));
     }
 }

@@ -109,7 +109,12 @@ public class ServiceSettingsPresenter extends BaseMvpViewStatePresenter<ServiceS
         logger.trace("onOptionSwitchClicked " + isChecked);
     }
 
-    public void onNextButtonClicked() {
-        logger.trace("onNextButtonClicked");
+    public void onInGalleryButtonClicked() {
+        logger.trace("onInGalleryButtonClicked");
+        view.showLoading(true);
+    }
+
+    public void onHideLoading() {
+        view.showLoading(false);
     }
 }

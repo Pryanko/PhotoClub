@@ -20,4 +20,6 @@ interface ServiceSettingsView extends MvpView {
     void setServiceNameList(@NonNull List<String> serviceNameList);
 
     void setServiceTypeList(@NonNull List<String> serviceTypeList);
+
+    void showLoading(boolean loading);
 }

@@ -21,6 +21,7 @@ import com.photoprint.photoclub.ui.activity.base.MvpActivity;
 import com.photoprint.photoclub.ui.activity.delegate.DrawerMenuDelegate;
 import com.photoprint.photoclub.ui.activity.delegate.ToolbarDelegate;
 import com.photoprint.photoclub.ui.activity.servicesettings.model.ServiceSettingsParams;
+import com.photoprint.photoclub.ui.dialog.loading.LoadingDialog;
 
 import java.util.List;
 
@@ -73,6 +74,7 @@ public class ServiceSettingsActivity extends MvpActivity implements ServiceSetti
     @BindView(R.id.nextButton)
     Button nextButton;
     //endregion
+    private LoadingDialog loadingDialog;
     private ServiceSettingsPresenter presenter;
 
     @Override
@@ -98,7 +100,7 @@ public class ServiceSettingsActivity extends MvpActivity implements ServiceSetti
         formatSpinner.setOnItemSelectedListener(formatSelectedListener);
         typeSpinner.setOnItemSelectedListener(typeSelectedListener);
         optionSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> presenter.onOptionSwitchClicked(isChecked));
-        nextButton.setOnClickListener(v -> presenter.onNextButtonClicked());
+        nextButton.setOnClickListener(v -> presenter.onInGalleryButtonClicked());
 
         presenter.initialize();
     }
@@ -130,6 +132,17 @@ public class ServiceSettingsActivity extends MvpActivity implements ServiceSetti
     }
 
     @Override
+    public void onDestroy() {
+        if (loadingDialog != null) {
+            // Активити уничтожатеся с отображенным диалогом
+            // Ненужно сообщать презентеру, что диалог уничтожен
+            loadingDialog.setOnDismissListener(null);
+            loadingDialog.dismiss();
+        }
+        super.onDestroy();
+    }
+
+    @Override
     public Object onRetainCustomNonConfigurationInstance() {
         return screenComponent;
     }
@@ -157,6 +170,22 @@ public class ServiceSettingsActivity extends MvpActivity implements ServiceSetti
     @Override
     public void setServiceTypeList(@NonNull List<String> serviceTypeList) {
         createSpinnerAdapter(serviceTypeList, typeSpinner);
+    }
+
+    @Override
+    public void showLoading(boolean loading) {
+        if (loading) {
+            if (loadingDialog == null) {
+                loadingDialog = new LoadingDialog(this);
+                loadingDialog.setOnDismissListener(dialog -> presenter.onHideLoading());
+                loadingDialog.show();
+            }
+        } else {
+            if (loadingDialog != null) {
+                loadingDialog.dismiss();
+                loadingDialog = null;
+            }
+        }
     }
 
     private void createSpinnerAdapter(List<String> itemsList, AppCompatSpinner spinner) {
