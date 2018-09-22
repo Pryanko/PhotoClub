@@ -12,10 +12,12 @@ import android.arch.persistence.room.RoomDatabase;
 import com.photoprint.localdb.BuildConfig;
 import com.photoprint.photoclub.room.dao.CategoryDao;
 import com.photoprint.photoclub.room.dao.GuideDao;
+import com.photoprint.photoclub.room.dao.LocalImageDao;
 import com.photoprint.photoclub.room.dao.ServiceDao;
 import com.photoprint.photoclub.room.dao.UserDao;
 import com.photoprint.photoclub.room.entity.CategoryEntity;
 import com.photoprint.photoclub.room.entity.GuideEntity;
+import com.photoprint.photoclub.room.entity.LocalImageEntity;
 import com.photoprint.photoclub.room.entity.ServiceEntity;
 import com.photoprint.photoclub.room.entity.UserEntity;
 
@@ -24,8 +26,8 @@ import com.photoprint.photoclub.room.entity.UserEntity;
                 UserEntity.class,
                 CategoryEntity.class,
                 GuideEntity.class,
-                ServiceEntity.class
-
+                ServiceEntity.class,
+                LocalImageEntity.class
         })
 public abstract class AppDatabase extends RoomDatabase {
 
@@ -36,4 +38,6 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract GuideDao guideDao();
 
     public abstract ServiceDao serviceDao();
+
+    public abstract LocalImageDao localImageDao();
 }

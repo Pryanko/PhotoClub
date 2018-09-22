@@ -4,6 +4,8 @@ import com.photoprint.photoclub.room.mapper.CategoryMapper;
 import com.photoprint.photoclub.room.mapper.CategoryMapperImpl;
 import com.photoprint.photoclub.room.mapper.GuideMapper;
 import com.photoprint.photoclub.room.mapper.GuideMapperImpl;
+import com.photoprint.photoclub.room.mapper.LocalImageMapper;
+import com.photoprint.photoclub.room.mapper.LocalImageMapperImpl;
 import com.photoprint.photoclub.room.mapper.ServiceMapper;
 import com.photoprint.photoclub.room.mapper.ServiceMapperImpl;
 import com.photoprint.photoclub.room.mapper.UserMapper;
@@ -43,5 +45,11 @@ public class MapperModule {
     @Reusable
     ServiceMapper serviceMapper() {
         return new ServiceMapperImpl();
+    }
+
+    @Provides
+    @Reusable
+    LocalImageMapper localImageMapper() {
+        return new LocalImageMapperImpl();
     }
 }
