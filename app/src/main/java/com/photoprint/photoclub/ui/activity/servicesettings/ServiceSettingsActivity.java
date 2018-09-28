@@ -18,6 +18,7 @@ import com.photoprint.logger.LoggerFactory;
 import com.photoprint.photoclub.R;
 import com.photoprint.photoclub.ui.activity.base.ActivityModule;
 import com.photoprint.photoclub.ui.activity.base.MvpActivity;
+import com.photoprint.photoclub.ui.activity.base.delegate.RtPermissionDelegate;
 import com.photoprint.photoclub.ui.activity.delegate.DrawerMenuDelegate;
 import com.photoprint.photoclub.ui.activity.delegate.ToolbarDelegate;
 import com.photoprint.photoclub.ui.activity.servicesettings.model.ServiceSettingsParams;
@@ -57,6 +58,8 @@ public class ServiceSettingsActivity extends MvpActivity implements ServiceSetti
     ToolbarDelegate toolbarDelegate;
     @Inject
     DrawerMenuDelegate drawerMenuDelegate;
+    @Inject
+    RtPermissionDelegate rtPermissionDelegate;
     //endregion
     //region views
     @BindView(R.id.imageView)
@@ -100,7 +103,11 @@ public class ServiceSettingsActivity extends MvpActivity implements ServiceSetti
         formatSpinner.setOnItemSelectedListener(formatSelectedListener);
         typeSpinner.setOnItemSelectedListener(typeSelectedListener);
         optionSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> presenter.onOptionSwitchClicked(isChecked));
-        nextButton.setOnClickListener(v -> presenter.onInGalleryButtonClicked());
+        rtPermissionDelegate.setCallback(granted -> presenter.onPermissionRequestFinished(granted));
+        rtPermissionDelegate.onCreate(savedInstanceState);
+        nextButton.setOnClickListener(v -> {
+            presenter.onInGalleryButtonClicked();
+        });
 
         presenter.initialize();
     }
@@ -109,12 +116,26 @@ public class ServiceSettingsActivity extends MvpActivity implements ServiceSetti
     protected void onResume() {
         navigator.onResume(this);
         super.onResume();
+        rtPermissionDelegate.onResume();
     }
 
     @Override
     protected void onPause() {
         navigator.onPause();
+        rtPermissionDelegate.onPause();
         super.onPause();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        rtPermissionDelegate.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        rtPermissionDelegate.onSaveInstanceState(outState);
     }
 
     @Override
@@ -140,6 +161,7 @@ public class ServiceSettingsActivity extends MvpActivity implements ServiceSetti
             loadingDialog.dismiss();
         }
         super.onDestroy();
+        rtPermissionDelegate.onDestroy();
     }
 
     @Override

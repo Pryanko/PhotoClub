@@ -2,6 +2,8 @@ package com.photoprint.photoclub.ui.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
+import android.provider.Settings;
 
 import com.photoprint.photoclub.R;
 import com.photoprint.photoclub.ui.activity.category.CategoryActivity;
@@ -71,4 +73,8 @@ public class ActivityNavigator {
         activity.overridePendingTransition(R.anim.zero_animation, R.anim.slide_to_right);
     }
 
+    public void navigateToAppSettings(Activity activity) {
+        Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:" + activity.getPackageName()));
+        activity.startActivity(intent);
+    }
 }

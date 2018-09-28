@@ -30,6 +30,14 @@
     <string name="menu_drawer_my_order">Мои заказы</string>
     <string name="menu_drawer_instruction">Руководство</string>
 
+    <!--BaseRtPermissionsDelegate-->
+    <string name="common_rt_permissions_rationale_light_continue">Продолжить</string>
+    <string name="common_rt_permissions_rationale_light_cancel">Отмена</string>
+    <string name="common_rt_permissions_rationale_hard_continue">Настройки</string>
+    <string name="common_rt_permissions_rationale_hard_cancel">Отмена</string>
+    <string name="storage_permission_rationale_light">Необходимо разрешение на упраление памяти устройства</string>
+    <string name="storage_permission_rationale_light_hard">Приложению запрещен доступ к управлению памяти.\nДобавьте разрешение в настройках приложения</string>
+
     <!--Временно-->
     <string-array name="paper_type">
         <item>Глянцевая</item>

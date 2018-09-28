@@ -34,6 +34,10 @@ public class ServiceSettingsPresenter extends BaseMvpViewStatePresenter<ServiceS
     private final ServiceLoader serviceLoader;
     private final ServiceSettingsParams serviceSettingsParams;
     private Disposable loadDisposable = Disposables.disposed();
+    /**
+     * Разрешение на считывание данных
+     */
+    private boolean storagePermission;
 
     @Inject
     ServiceSettingsPresenter(ServiceSettingsViewState viewState,
@@ -116,5 +120,11 @@ public class ServiceSettingsPresenter extends BaseMvpViewStatePresenter<ServiceS
 
     public void onHideLoading() {
         view.showLoading(false);
+    }
+
+    public void onPermissionRequestFinished(boolean granted) {
+        logger.trace("granted " + granted);
+        this.storagePermission = granted;
+
     }
 }
