@@ -16,6 +16,8 @@ import javax.inject.Inject;
 
 
 /**
+ * Класс поставщик всех путей ко всем фотографиям на устройстве
+ *
  * @author Grigoriy Pryamov.
  */
 public class StorageManagerImpl implements StorageManager {
