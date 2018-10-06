@@ -51,6 +51,7 @@ public class StorageManagerImpl implements StorageManager {
         if (imageCursor != null) {
             for (int i = 0; i < imageCursor.getCount(); i++) {
                 int dataColumnIndex = imageCursor.getColumnIndex(MediaStore.Images.Media.DATA);
+                imageCursor.moveToPosition(i);
                 String path = PREFIX_IMAGE_PATH + imageCursor.getString(dataColumnIndex);
                 imagePaths.add(path);
                 logger.trace(path);

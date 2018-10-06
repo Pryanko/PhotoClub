@@ -30,7 +30,7 @@ public class ServiceInfoActivity extends MvpActivity implements ServiceInfoView 
 
     //region Fragment tags
     private static String F_TAG_SERVICE_INFO = "F_TAG_SERVICE_INFO";
-    private static String F_TAG_MAQUETTE_LIST = "F_TAG_REMAINING_STOPS";
+    private static String F_TAG_MAQUETTE_LIST = "F_TAG_MAQUETTE_LIST";
     //endregion
 
     //region extra
@@ -112,6 +112,7 @@ public class ServiceInfoActivity extends MvpActivity implements ServiceInfoView 
                     .commit();
         }
         serviceInfoFragment.setOnClickSelectMaquetteBtnListener(() -> presenter.onClickSelectMaquetteBtn());
+        serviceInfoFragment.setOnClickNextButtonListener(() -> presenter.onNextBtnClicked());
     }
 
     private void setupMaquetteListFragment() {
@@ -174,5 +175,10 @@ public class ServiceInfoActivity extends MvpActivity implements ServiceInfoView 
     @Override
     public void setMaquetteName(String name) {
         serviceInfoFragment.setMaquetteName(name);
+    }
+
+    @Override
+    public void setLoading(boolean loading) {
+        logger.trace(String.valueOf(loading));
     }
 }

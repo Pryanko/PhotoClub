@@ -49,6 +49,7 @@ public class ServiceInfoFragment extends MvpFragment implements ServiceInfoFragm
     //endregion
 
     private OnClickSelectMaquetteBtnListener onClickSelectMaquetteBtnListener;
+    private OnClickNextButtonListener onClickNextButtonListener;
     private ServiceInfoFragmentPresenter presenter;
 
     @Override
@@ -70,8 +71,17 @@ public class ServiceInfoFragment extends MvpFragment implements ServiceInfoFragm
                 onClickSelectMaquetteBtnListener.onClickSelectMaquetteBtn();
             }
         });
-        nextButton.setOnClickListener(v -> presenter.onNextBtnClicked());
+        nextButton.setOnClickListener(v -> {
+            presenter.onNextBtnClicked();
+            if (onClickNextButtonListener != null) {
+                onClickNextButtonListener.onClickNextBtn();
+            }
+        });
         return view;
+    }
+
+    public void setOnClickNextButtonListener(OnClickNextButtonListener onClickNextButtonListener) {
+        this.onClickNextButtonListener = onClickNextButtonListener;
     }
 
     public void setOnClickSelectMaquetteBtnListener(OnClickSelectMaquetteBtnListener onClickSelectMaquetteBtnListener) {
@@ -114,6 +124,11 @@ public class ServiceInfoFragment extends MvpFragment implements ServiceInfoFragm
     public interface OnClickSelectMaquetteBtnListener {
 
         void onClickSelectMaquetteBtn();
+    }
+
+    public interface OnClickNextButtonListener {
+
+        void onClickNextBtn();
     }
 }
 

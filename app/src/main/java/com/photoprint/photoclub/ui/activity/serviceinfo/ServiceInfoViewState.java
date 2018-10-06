@@ -11,6 +11,7 @@ public class ServiceInfoViewState extends BaseMvpViewState<ServiceInfoView> impl
 
     private boolean maquetteListVisible;
     private String maquetteName;
+    private boolean loading;
 
     @Inject
     ServiceInfoViewState() {
@@ -22,6 +23,7 @@ public class ServiceInfoViewState extends BaseMvpViewState<ServiceInfoView> impl
         if (maquetteName != null) {
             view.setMaquetteName(maquetteName);
         }
+        view.setLoading(loading);
     }
 
     @Override
@@ -50,5 +52,11 @@ public class ServiceInfoViewState extends BaseMvpViewState<ServiceInfoView> impl
     public void setMaquetteName(String name) {
         this.maquetteName = name;
         forEachView(view -> view.setMaquetteName(this.maquetteName));
+    }
+
+    @Override
+    public void setLoading(boolean loading) {
+        this.loading = loading;
+        forEachView(view -> view.setLoading(this.loading));
     }
 }

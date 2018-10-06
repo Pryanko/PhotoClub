@@ -14,4 +14,6 @@ interface ServiceInfoView extends MvpView {
     void hideMaquetteList();
 
     void setMaquetteName(String name);
+
+    void setLoading(boolean loading);
 }
