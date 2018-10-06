@@ -5,6 +5,8 @@ import android.content.Context;
 import com.photoprint.network.ApiConfig;
 import com.photoprint.photoclub.data.authtokenstorage.AuthTokenStorage;
 import com.photoprint.photoclub.data.authtokenstorage.AuthTokenStorageImpl;
+import com.photoprint.photoclub.data.storage.StorageManager;
+import com.photoprint.photoclub.data.storage.StorageManagerImpl;
 import com.photoprint.photoclub.helper.system.AppSystemMetrics;
 import com.photoprint.photoclub.helper.system.AppSystemMetricsImpl;
 
@@ -46,4 +48,10 @@ class AppModule {
     AppSystemMetrics appSystemMetrics(AppSystemMetricsImpl appSystemMetrics) {
         return appSystemMetrics;
     }
+
+    @Provides
+    StorageManager getStorageManager(StorageManagerImpl storageManager) {
+        return storageManager;
+    }
+
 }
