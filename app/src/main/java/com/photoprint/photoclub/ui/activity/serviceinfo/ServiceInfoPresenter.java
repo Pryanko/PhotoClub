@@ -2,6 +2,7 @@ package com.photoprint.photoclub.ui.activity.serviceinfo;
 
 import com.photoprint.logger.Logger;
 import com.photoprint.logger.LoggerFactory;
+import com.photoprint.network.api.ApiWorker;
 import com.photoprint.photoclub.base.DbTransaction;
 import com.photoprint.photoclub.data.interactor.LocalImagesProvider;
 import com.photoprint.photoclub.helper.runtimepermission.AppSchedulers;
@@ -22,6 +23,7 @@ public class ServiceInfoPresenter extends BaseMvpViewStatePresenter<ServiceInfoV
     private static final Logger logger = LoggerFactory.getLogger(ServiceInfoPresenter.class);
 
     private final Navigator navigator;
+    private final ApiWorker apiWorker;
     private final DbTransaction dbTransaction;
     private final LocalImagesProvider localImagesProvider;
     private final LocalImageRepository localImageRepository;
@@ -37,11 +39,13 @@ public class ServiceInfoPresenter extends BaseMvpViewStatePresenter<ServiceInfoV
     @Inject
     ServiceInfoPresenter(ServiceInfoViewState viewState,
                          Navigator navigator,
+                         ApiWorker apiWorker,
                          LocalImagesProvider localImagesProvider,
                          LocalImageRepository localImageRepository,
                          DbTransaction dbTransaction) {
         super(viewState);
         this.navigator = navigator;
+        this.apiWorker = apiWorker;
         this.localImagesProvider = localImagesProvider;
         this.localImageRepository = localImageRepository;
         this.dbTransaction = dbTransaction;
@@ -52,7 +56,7 @@ public class ServiceInfoPresenter extends BaseMvpViewStatePresenter<ServiceInfoV
         logger.trace("onInitialize");
     }
 
-    public void onBackBtnClicked() {
+    void onBackBtnClicked() {
         if (maquetteListVisible) {
             maquetteListVisible = false;
             view.hideMaquetteList();
@@ -61,26 +65,29 @@ public class ServiceInfoPresenter extends BaseMvpViewStatePresenter<ServiceInfoV
         }
     }
 
-    public void onClickSelectMaquetteBtn() {
+    void onClickSelectMaquetteBtn() {
         logger.trace("onClickSelectMaquetteBtn");
         maquetteListVisible = true;
         view.showMaquetteList();
     }
 
-    public void onMaquetteItemClicked(Maquette maquette) {
+    void onMaquetteItemClicked(Maquette maquette) {
         logger.trace("onMaquetteItemClicked");
         this.maquette = maquette;
         view.hideMaquetteList();
         view.setMaquetteName(this.maquette.getName());
     }
 
-    public void onNextBtnClicked() {
+    void onNextBtnClicked() {
         loadDisposable = localImagesProvider.getLocalImagesRx()
+                .doOnSubscribe(disposable -> view.setLoading(true))
                 .doOnSuccess(localImages -> dbTransaction.callInTx(() -> localImageRepository.insert(localImages)))
+//                .flatMap(localImages -> apiWorker.createOrder())
+//                .observeOn(AppSchedulers.network())
+//                .doOnSuccess(singleDataResponse -> logger.trace(singleDataResponse.get().getData().getOrderId().toString()))
+                .toCompletable()
                 .subscribeOn(AppSchedulers.db())
                 .observeOn(AppSchedulers.ui())
-                .doOnSubscribe(disposable -> view.setLoading(true))
-                .toCompletable()
                 .subscribe(() -> view.setLoading(false), logger::error);
     }
 
