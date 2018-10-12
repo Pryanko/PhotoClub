@@ -5,8 +5,10 @@ import com.photoprint.logger.LoggerFactory;
 import com.photoprint.network.Response;
 import com.photoprint.network.ResponseConverter;
 import com.photoprint.network.api.model.base.Data;
+import com.photoprint.network.api.model.base.SingleData;
 import com.photoprint.network.api.model.category.Category;
 import com.photoprint.network.api.model.manual.Guide;
+import com.photoprint.network.api.model.order.Order;
 import com.photoprint.network.api.model.services.Service;
 import com.photoprint.network.auth.DefaultAuthApiWorker;
 
@@ -32,14 +34,20 @@ public class DefaultApiWorker implements ApiWorker {
     }
 
     @Override
-    public Single<Response<Data<Category>>> getCategory() {
-        return api.getCategory()
+    public Single<Response<Data<Category>>> getCategories() {
+        return api.getCategories()
                 .map(ResponseConverter::convert);
     }
 
     @Override
-    public Single<Response<Data<Service>>> getService() {
-        return api.getService()
+    public Single<Response<Data<Service>>> getServices() {
+        return api.getServices()
+                .map(ResponseConverter::convert);
+    }
+
+    @Override
+    public Single<Response<SingleData<Order>>> createOrder() {
+        return api.createOrder()
                 .map(ResponseConverter::convert);
     }
 }

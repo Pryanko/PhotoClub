@@ -1,8 +1,10 @@
 package com.photoprint.network.api;
 
 import com.photoprint.network.api.model.base.Data;
+import com.photoprint.network.api.model.base.SingleData;
 import com.photoprint.network.api.model.category.Category;
 import com.photoprint.network.api.model.manual.Guide;
+import com.photoprint.network.api.model.order.Order;
 import com.photoprint.network.api.model.services.Service;
 
 import io.reactivex.Single;
@@ -29,13 +31,19 @@ public interface Api {
      * @return категории услуг
      */
     @GET("category")
-    Single<Response<Data<Category>>> getCategory();
+    Single<Response<Data<Category>>> getCategories();
 
     /**
      * Метод получающий услуги
      */
     @GET("service")
-    Single<Response<Data<Service>>> getService();
+    Single<Response<Data<Service>>> getServices();
+
+    /**
+     * Метод создающий заказ для пользователя на сервере
+     */
+    @GET("order-create")
+    Single<Response<SingleData<Order>>> createOrder();
 
 //    /**
 //     * Метод для получения описания услуги

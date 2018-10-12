@@ -43,7 +43,7 @@ public class ServiceSynchronizer extends BaseSynchronizer<Service> {
     @Override
     protected Single<Response<Data<Service>>> getApiSource() {
         logger.trace("Service sync: Start");
-        return apiWorker.getService();
+        return apiWorker.getServices();
     }
 
     @Override

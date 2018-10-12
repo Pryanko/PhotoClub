@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 /**
- * Базовая обёртка над ответом сервера (предусмотренно сервером)
+ * Базовая обёртка над ответом сервера (предусмотренно сервером) для списков
  *
  * @author Grigoriy Pryamov.
  */
