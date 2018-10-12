@@ -2,6 +2,7 @@ package com.photoprint.photoclub.data.interactor;
 
 import com.photoprint.logger.Logger;
 import com.photoprint.logger.LoggerFactory;
+import com.photoprint.photoclub.data.model.ImageInfo;
 import com.photoprint.photoclub.data.storage.StorageManager;
 import com.photoprint.photoclub.model.LocalImage;
 
@@ -31,7 +32,7 @@ public class LocalImagesProvider {
     private final StorageManager storageManager;
 
     @Inject
-    public LocalImagesProvider(StorageManager storageManager) {
+    LocalImagesProvider(StorageManager storageManager) {
         this.storageManager = storageManager;
     }
 
@@ -42,9 +43,13 @@ public class LocalImagesProvider {
             for (String path : imagePaths) {
                 LocalImage localImage = new LocalImage();
                 localImage.setFullPath(path);
-                String folder = getFolderImage(path);
+                ImageInfo imageInfo = getImageInfo(path);
+                String folder = imageInfo.getFolder();
+                String name = imageInfo.getName();
                 localImage.setParentFolder(folder);
+                localImage.setName(name);
                 logger.trace(folder);
+                logger.trace(name);
                 localImage.setCountPrint(DEFAULT_COUNT_PRINT_IMAGE);
                 localImages.add(localImage);
             }
@@ -52,17 +57,31 @@ public class LocalImagesProvider {
         });
     }
 
+    /**
+     * Метод возращает папку и имя файла
+     *
+     * @param path путь к фотографии
+     */
     @NonNull
-    private String getFolderImage(String path) {
+    private ImageInfo getImageInfo(String path) {
+        ImageInfo imageInfo = new ImageInfo();
         List<String> folderList = Arrays.asList(path.split("/"));
         String folder = folderList.get(6);
         if (folder.equals(DEFAULT_NAME_SYSTEM_PATH)) {
             folder = folderList.get(7);
         }
-        if (folder != null) {
-            return folder;
-        } else {
-            return DEFAULT_NAME_SYSTEM_PATH;
+        if (folder == null || checkForPoint(folder)) {
+            folder = DEFAULT_NAME_SYSTEM_PATH;
         }
+        imageInfo.setFolder(folder.toUpperCase());
+        imageInfo.setName(folderList.get(folderList.size() - 1));
+        return imageInfo;
+    }
+
+    /**
+     * Метод проверяющий, что в папке нет точки, что бы исключить подмену имени папки на имя файла
+     */
+    private boolean checkForPoint(@NonNull String folder) {
+        return folder.contains(".");
     }
 }

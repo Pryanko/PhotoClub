@@ -20,6 +20,10 @@ public class LocalImageEntity implements EntityWithId<Long> {
      */
     private String parentFolder;
     /**
+     * Имя изображения
+     */
+    private String name;
+    /**
      * Полный путь до изображения
      */
     private String fullPath;
@@ -52,6 +56,14 @@ public class LocalImageEntity implements EntityWithId<Long> {
 
     public void setParentFolder(String parentFolder) {
         this.parentFolder = parentFolder;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getFullPath() {
