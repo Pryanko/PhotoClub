@@ -2,9 +2,11 @@ package com.photoprint.photoclub.ui.activity.serviceinfo;
 
 import com.photoprint.logger.Logger;
 import com.photoprint.logger.LoggerFactory;
+import com.photoprint.photoclub.base.DbTransaction;
 import com.photoprint.photoclub.data.interactor.LocalImagesProvider;
 import com.photoprint.photoclub.helper.runtimepermission.AppSchedulers;
 import com.photoprint.photoclub.model.Maquette;
+import com.photoprint.photoclub.repository.LocalImageRepository;
 import com.photoprint.photoclub.ui.mvp.presenter.BaseMvpViewStatePresenter;
 
 import javax.inject.Inject;
@@ -20,7 +22,10 @@ public class ServiceInfoPresenter extends BaseMvpViewStatePresenter<ServiceInfoV
     private static final Logger logger = LoggerFactory.getLogger(ServiceInfoPresenter.class);
 
     private final Navigator navigator;
+    private final DbTransaction dbTransaction;
     private final LocalImagesProvider localImagesProvider;
+    private final LocalImageRepository localImageRepository;
+
     private Disposable loadDisposable = Disposables.disposed();
 
     private Maquette maquette = null;
@@ -32,10 +37,14 @@ public class ServiceInfoPresenter extends BaseMvpViewStatePresenter<ServiceInfoV
     @Inject
     ServiceInfoPresenter(ServiceInfoViewState viewState,
                          Navigator navigator,
-                         LocalImagesProvider localImagesProvider) {
+                         LocalImagesProvider localImagesProvider,
+                         LocalImageRepository localImageRepository,
+                         DbTransaction dbTransaction) {
         super(viewState);
         this.navigator = navigator;
         this.localImagesProvider = localImagesProvider;
+        this.localImageRepository = localImageRepository;
+        this.dbTransaction = dbTransaction;
     }
 
     @Override
@@ -67,6 +76,7 @@ public class ServiceInfoPresenter extends BaseMvpViewStatePresenter<ServiceInfoV
 
     public void onNextBtnClicked() {
         loadDisposable = localImagesProvider.getLocalImagesRx()
+                .doOnSuccess(localImages -> dbTransaction.callInTx(() -> localImageRepository.insert(localImages)))
                 .subscribeOn(AppSchedulers.db())
                 .observeOn(AppSchedulers.ui())
                 .doOnSubscribe(disposable -> view.setLoading(true))

@@ -179,6 +179,6 @@ public class ServiceInfoActivity extends MvpActivity implements ServiceInfoView 
 
     @Override
     public void setLoading(boolean loading) {
-        logger.trace(String.valueOf(loading));
+        logger.trace("Loading " + String.valueOf(loading));
     }
 }
