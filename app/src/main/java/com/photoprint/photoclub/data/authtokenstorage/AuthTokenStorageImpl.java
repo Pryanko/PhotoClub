@@ -1,7 +1,9 @@
 package com.photoprint.photoclub.data.authtokenstorage;
 
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
+import com.photoprint.network.auth.AuthTokenStorage;
 import com.photoprint.photoclub.data.apppreferences.AppPrefs;
 
 import javax.inject.Inject;
@@ -20,7 +22,7 @@ public class AuthTokenStorageImpl implements AuthTokenStorage {
         this.appPrefs = appPrefs;
     }
 
-    @Nullable
+    @NonNull
     @Override
     public String load() {
         return appPrefs.getAuthToken();
@@ -33,7 +35,7 @@ public class AuthTokenStorageImpl implements AuthTokenStorage {
 
     @Override
     public boolean presenceOfToken() {
-        return load() != null;
+        return !load().equals(AppPrefs.Entities.DEFAULT_TOKEN);
     }
 
     @Override

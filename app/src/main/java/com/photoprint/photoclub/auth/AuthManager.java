@@ -7,7 +7,7 @@ import com.photoprint.network.auth.AuthApiWorker;
 import com.photoprint.network.auth.model.login.DataToken;
 import com.photoprint.network.auth.model.login.DeviceToken;
 import com.photoprint.photoclub.base.DbTransaction;
-import com.photoprint.photoclub.data.authtokenstorage.AuthTokenStorage;
+import com.photoprint.network.auth.AuthTokenStorage;
 import com.photoprint.photoclub.helper.runtimepermission.AppSchedulers;
 import com.photoprint.photoclub.model.User;
 import com.photoprint.photoclub.repository.UserRepository;

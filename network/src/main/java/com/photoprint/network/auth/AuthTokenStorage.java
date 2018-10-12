@@ -1,5 +1,6 @@
-package com.photoprint.photoclub.data.authtokenstorage;
+package com.photoprint.network.auth;
 
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 /**
@@ -13,7 +14,7 @@ public interface AuthTokenStorage {
      *
      * @return сохранённый в хранилище токен
      */
-    @Nullable
+    @NonNull
     String load();
 
     /**

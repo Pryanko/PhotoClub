@@ -16,9 +16,19 @@ import io.reactivex.annotations.Nullable;
 @Singleton
 public class AppPrefs {
 
-    private static class Entities {
+    public static class Entities {
+        /**
+         * Ключ для prefs
+         */
         private static final String AUTH_TOKEN = "AUTH_TOKEN";
+        /**
+         * Время синхронизации
+         */
         private static final String DATA_SYNC_TIME = "DATA_SYNC_TIME";
+        /**
+         * Дефолтное значение токена
+         */
+        public static final String DEFAULT_TOKEN = "NOT_REGISTERED";
     }
 
     /**
@@ -34,7 +44,7 @@ public class AppPrefs {
     }
 
     public String getAuthToken() {
-        return prefs.getString(Entities.AUTH_TOKEN, null);
+        return prefs.getString(Entities.AUTH_TOKEN, Entities.DEFAULT_TOKEN);
     }
 
     public void setAuthToken(@Nullable String authToken) {

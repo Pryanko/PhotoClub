@@ -3,7 +3,7 @@ package com.photoprint.photoclub;
 import android.content.Context;
 
 import com.photoprint.network.ApiConfig;
-import com.photoprint.photoclub.data.authtokenstorage.AuthTokenStorage;
+import com.photoprint.network.auth.AuthTokenStorage;
 import com.photoprint.photoclub.data.authtokenstorage.AuthTokenStorageImpl;
 import com.photoprint.photoclub.data.storage.StorageManager;
 import com.photoprint.photoclub.data.storage.StorageManagerImpl;
