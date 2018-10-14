@@ -3,11 +3,13 @@ package com.photoprint.photoclub.di.module;
 import com.photoprint.photoclub.impl.CategoryRepositoryImpl;
 import com.photoprint.photoclub.impl.GuideRepositoryImpl;
 import com.photoprint.photoclub.impl.LocalImageRepositoryImpl;
+import com.photoprint.photoclub.impl.OrderRepositoryImpl;
 import com.photoprint.photoclub.impl.ServiceRepositoryImpl;
 import com.photoprint.photoclub.impl.UserRepositoryImpl;
 import com.photoprint.photoclub.repository.CategoryRepository;
 import com.photoprint.photoclub.repository.GuideRepository;
 import com.photoprint.photoclub.repository.LocalImageRepository;
+import com.photoprint.photoclub.repository.OrderRepository;
 import com.photoprint.photoclub.repository.ServiceRepository;
 import com.photoprint.photoclub.repository.UserRepository;
 
@@ -35,4 +37,7 @@ public abstract class RepositoryModule {
 
     @Binds
     abstract LocalImageRepository localImageRepository(LocalImageRepositoryImpl localImageRepository);
+
+    @Binds
+    abstract OrderRepository orderRepository(OrderRepositoryImpl orderRepository);
 }

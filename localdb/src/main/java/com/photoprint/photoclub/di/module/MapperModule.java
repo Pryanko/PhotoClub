@@ -6,6 +6,8 @@ import com.photoprint.photoclub.room.mapper.GuideMapper;
 import com.photoprint.photoclub.room.mapper.GuideMapperImpl;
 import com.photoprint.photoclub.room.mapper.LocalImageMapper;
 import com.photoprint.photoclub.room.mapper.LocalImageMapperImpl;
+import com.photoprint.photoclub.room.mapper.OrderMapper;
+import com.photoprint.photoclub.room.mapper.OrderMapperImpl;
 import com.photoprint.photoclub.room.mapper.ServiceMapper;
 import com.photoprint.photoclub.room.mapper.ServiceMapperImpl;
 import com.photoprint.photoclub.room.mapper.UserMapper;
@@ -52,4 +54,11 @@ public class MapperModule {
     LocalImageMapper localImageMapper() {
         return new LocalImageMapperImpl();
     }
+
+    @Provides
+    @Reusable
+    OrderMapper orderMapper() {
+        return new OrderMapperImpl();
+    }
+
 }
