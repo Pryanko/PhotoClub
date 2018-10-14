@@ -14,12 +14,15 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import dagger.Reusable;
+
 
 /**
  * Класс поставщик всех путей ко всем фотографиям на устройстве
  *
  * @author Grigoriy Pryamov.
  */
+@Reusable
 public class StorageManagerImpl implements StorageManager {
 
     private static final Logger logger = LoggerFactory.getLogger(StorageManager.class);

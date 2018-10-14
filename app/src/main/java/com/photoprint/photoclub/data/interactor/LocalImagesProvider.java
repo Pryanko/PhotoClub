@@ -11,7 +11,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.inject.Singleton;
 
 import io.reactivex.Single;
 import io.reactivex.annotations.NonNull;
@@ -21,7 +20,6 @@ import io.reactivex.annotations.NonNull;
  *
  * @author Grigoriy Pryamov.
  */
-@Singleton
 public class LocalImagesProvider {
 
     private static final Logger logger = LoggerFactory.getLogger(LocalImagesProvider.class);
@@ -63,18 +61,26 @@ public class LocalImagesProvider {
      * @param path путь к фотографии
      */
     @NonNull
-    private ImageInfo getImageInfo(String path) {
+    ImageInfo getImageInfo(String path) {
         ImageInfo imageInfo = new ImageInfo();
         List<String> folderList = Arrays.asList(path.split("/"));
-        String folder = folderList.get(6);
-        if (folder.equals(DEFAULT_NAME_SYSTEM_PATH)) {
-            folder = folderList.get(7);
+        int sizeList = folderList.size();
+        String folder;
+        if (sizeList >= 6) {
+            folder = folderList.get(6);
+        } else {
+            folder = DEFAULT_NAME_SYSTEM_PATH;
         }
-        if (folder == null || checkForPoint(folder)) {
+        if (folder.equals(DEFAULT_NAME_SYSTEM_PATH)) {
+            if (sizeList >= 7) {
+                folder = folderList.get(7);
+            }
+        }
+        if (checkForPoint(folder)) {
             folder = DEFAULT_NAME_SYSTEM_PATH;
         }
         imageInfo.setFolder(folder.toUpperCase());
-        imageInfo.setName(folderList.get(folderList.size() - 1));
+        imageInfo.setName(folderList.get(sizeList - 1));
         return imageInfo;
     }
 
