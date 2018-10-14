@@ -16,4 +16,7 @@ public interface LocalImageDao extends BaseDao<LocalImageEntity> {
 
     @Query("SELECT * FROM LocalImage WHERE parentFolder = :folder")
     List<LocalImageEntity> getImagesByFolder(String folder);
+
+    @Query("DELETE FROM LocalImage")
+    void deleteAll();
 }

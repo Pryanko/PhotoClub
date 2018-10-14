@@ -1,5 +1,7 @@
 package com.photoprint.photoclub.impl;
 
+import android.support.annotation.NonNull;
+
 import com.photoprint.photoclub.base.AppDatabase;
 import com.photoprint.photoclub.impl.base.BaseRepositoryImpl;
 import com.photoprint.photoclub.model.Order;
@@ -10,6 +12,7 @@ import com.photoprint.photoclub.room.mapper.OrderMapper;
 
 import java.util.List;
 
+import javax.inject.Inject;
 import javax.inject.Singleton;
 
 /**
@@ -20,7 +23,8 @@ public class OrderRepositoryImpl extends BaseRepositoryImpl<Order, OrderEntity, 
 
     private final OrderMapper mapper;
 
-    protected OrderRepositoryImpl(AppDatabase appDatabase,
+    @Inject
+    OrderRepositoryImpl(AppDatabase appDatabase,
                                   OrderMapper mapper) {
         super(appDatabase);
         this.mapper = mapper;
@@ -37,12 +41,19 @@ public class OrderRepositoryImpl extends BaseRepositoryImpl<Order, OrderEntity, 
     }
 
     @Override
+    @NonNull
     public List<Order> getOrders() {
         return mapper.entityListToModelList(dao().getOrders());
     }
 
     @Override
+    @NonNull
     public Long getCountOrders() {
         return dao().getCountOrders();
+    }
+
+    @Override
+    public boolean containsActiveOrder() {
+        return dao().containsActiveOrder() > 0;
     }
 }

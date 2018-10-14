@@ -23,5 +23,11 @@ public interface OrderDao extends BaseDao<OrderEntity> {
      * Метод возвращающий кол-во локальных заказов
      */
     @Query("SELECT COUNT(*) FROM localorder")
-    Long getCountOrders();
+    long getCountOrders();
+
+    /**
+     * Метод проверяющий в БД - существуют ли активные заказы
+     */
+    @Query("SELECT COUNT(*) FROM localorder WHERE active = 1")
+    long containsActiveOrder();
 }

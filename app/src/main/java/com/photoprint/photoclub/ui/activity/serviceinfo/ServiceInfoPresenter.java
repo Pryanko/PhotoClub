@@ -2,16 +2,18 @@ package com.photoprint.photoclub.ui.activity.serviceinfo;
 
 import com.photoprint.logger.Logger;
 import com.photoprint.logger.LoggerFactory;
-import com.photoprint.network.api.ApiWorker;
 import com.photoprint.photoclub.base.DbTransaction;
 import com.photoprint.photoclub.data.interactor.LocalImagesProvider;
+import com.photoprint.photoclub.data.interactor.OrderManager;
 import com.photoprint.photoclub.helper.runtimepermission.AppSchedulers;
 import com.photoprint.photoclub.model.Maquette;
 import com.photoprint.photoclub.repository.LocalImageRepository;
+import com.photoprint.photoclub.ui.activity.serviceinfo.model.ServiceInfoParams;
 import com.photoprint.photoclub.ui.mvp.presenter.BaseMvpViewStatePresenter;
 
 import javax.inject.Inject;
 
+import io.reactivex.Maybe;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.disposables.Disposables;
 
@@ -23,8 +25,9 @@ public class ServiceInfoPresenter extends BaseMvpViewStatePresenter<ServiceInfoV
     private static final Logger logger = LoggerFactory.getLogger(ServiceInfoPresenter.class);
 
     private final Navigator navigator;
-    private final ApiWorker apiWorker;
+    private final OrderManager orderManager;
     private final DbTransaction dbTransaction;
+    private final ServiceInfoParams serviceInfoParams;
     private final LocalImagesProvider localImagesProvider;
     private final LocalImageRepository localImageRepository;
 
@@ -39,16 +42,18 @@ public class ServiceInfoPresenter extends BaseMvpViewStatePresenter<ServiceInfoV
     @Inject
     ServiceInfoPresenter(ServiceInfoViewState viewState,
                          Navigator navigator,
-                         ApiWorker apiWorker,
+                         OrderManager orderManager,
                          LocalImagesProvider localImagesProvider,
                          LocalImageRepository localImageRepository,
-                         DbTransaction dbTransaction) {
+                         DbTransaction dbTransaction,
+                         ServiceInfoParams serviceInfoParams) {
         super(viewState);
         this.navigator = navigator;
-        this.apiWorker = apiWorker;
+        this.orderManager = orderManager;
         this.localImagesProvider = localImagesProvider;
         this.localImageRepository = localImageRepository;
         this.dbTransaction = dbTransaction;
+        this.serviceInfoParams = serviceInfoParams;
     }
 
     @Override
@@ -80,13 +85,25 @@ public class ServiceInfoPresenter extends BaseMvpViewStatePresenter<ServiceInfoV
     }
 
     void onNextBtnClicked() {
-        loadDisposable = localImagesProvider.getLocalImagesRx()
+        loadDisposable = Maybe
+                .create(emitter -> {
+                    if (orderManager.containsActiveOrder()) {
+                        logger.trace("Active order exists");
+                        emitter.onComplete();
+                    } else {
+                        logger.trace("Active order does not exist");
+                        emitter.onSuccess(true);
+                    }
+                })
                 .doOnSubscribe(disposable -> view.setLoading(true))
-                .doOnSuccess(localImages -> dbTransaction.callInTx(() -> localImageRepository.insert(localImages)))
-//                .flatMap(localImages -> apiWorker.createOrder())
-//                .observeOn(AppSchedulers.network())
-//                .doOnSuccess(singleDataResponse -> logger.trace(singleDataResponse.get().getData().getOrderId().toString()))
-                .toCompletable()
+                .flatMapObservable(aBoolean -> localImagesProvider.getLocalImagesRx())
+                .doOnNext(localImages -> dbTransaction.callInTx(() -> {
+                    localImageRepository.deleteAll();
+                    localImageRepository.insert(localImages);
+                    logger.trace("Count local images: " + localImages.size());
+                }))
+                .flatMapCompletable(localImages -> orderManager.create(serviceInfoParams.getServiceId()))
+                .observeOn(AppSchedulers.network())
                 .subscribeOn(AppSchedulers.db())
                 .observeOn(AppSchedulers.ui())
                 .subscribe(() -> view.setLoading(false), logger::error);

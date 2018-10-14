@@ -12,7 +12,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import io.reactivex.Single;
+import io.reactivex.Observable;
 import io.reactivex.annotations.NonNull;
 
 /**
@@ -34,8 +34,8 @@ public class LocalImagesProvider {
         this.storageManager = storageManager;
     }
 
-    public Single<List<LocalImage>> getLocalImagesRx() {
-        return Single.fromCallable(() -> {
+    public Observable<List<LocalImage>> getLocalImagesRx() {
+        return Observable.fromCallable(() -> {
             List<LocalImage> localImages = new ArrayList<>();
             List<String> imagePaths = storageManager.getLocalImagePaths();
             for (String path : imagePaths) {

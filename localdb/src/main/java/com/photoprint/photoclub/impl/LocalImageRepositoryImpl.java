@@ -46,4 +46,9 @@ public class LocalImageRepositoryImpl extends BaseRepositoryImpl<LocalImage, Loc
     public List<LocalImage> getImagesByFolder(String folder) {
         return mapper.entityListToModelList(dao().getImagesByFolder(folder));
     }
+
+    @Override
+    public void deleteAll() {
+        dao().deleteAll();
+    }
 }

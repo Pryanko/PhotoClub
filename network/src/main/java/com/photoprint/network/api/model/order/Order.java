@@ -8,9 +8,9 @@ import com.google.gson.annotations.SerializedName;
 public class Order {
 
     @SerializedName("order_id")
-    private Integer orderId;
+    private long orderId;
 
-    public Integer getOrderId() {
+    public long getOrderId() {
         return orderId;
     }
 
