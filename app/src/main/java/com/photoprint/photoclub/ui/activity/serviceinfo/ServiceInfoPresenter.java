@@ -75,6 +75,7 @@ public class ServiceInfoPresenter extends BaseMvpViewStatePresenter<ServiceInfoV
         logger.trace("onMaquetteItemClicked");
         this.maquette = maquette;
         view.hideMaquetteList();
+        maquetteListVisible = false;
         view.setMaquetteName(this.maquette.getName());
     }
 
