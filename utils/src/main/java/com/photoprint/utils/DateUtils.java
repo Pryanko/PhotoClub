@@ -1,4 +1,4 @@
-package com.example.utils;
+package com.photoprint.utils;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

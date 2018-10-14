@@ -2,7 +2,7 @@ package com.photoprint.photoclub.data.synchronization;
 
 import android.support.annotation.NonNull;
 
-import com.example.utils.ListUtils;
+import com.photoprint.utils.ListUtils;
 import com.photoprint.logger.Logger;
 import com.photoprint.logger.LoggerFactory;
 import com.photoprint.network.Response;

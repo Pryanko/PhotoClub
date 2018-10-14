@@ -1,6 +1,6 @@
 package com.photoprint.photoclub.helper.runtimepermission;
 
-import com.example.utils.Executors;
+import com.photoprint.utils.Executors;
 
 import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;

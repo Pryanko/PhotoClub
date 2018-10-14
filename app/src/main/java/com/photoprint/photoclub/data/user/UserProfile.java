@@ -2,7 +2,7 @@ package com.photoprint.photoclub.data.user;
 
 import android.support.annotation.Nullable;
 
-import com.example.utils.Preconditions;
+import com.photoprint.utils.Preconditions;
 import com.photoprint.photoclub.base.DbTransaction;
 import com.photoprint.photoclub.model.User;
 import com.photoprint.photoclub.repository.UserRepository;

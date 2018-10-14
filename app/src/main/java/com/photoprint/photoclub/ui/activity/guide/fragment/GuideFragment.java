@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.utils.Preconditions;
+import com.photoprint.utils.Preconditions;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.photoprint.photoclub.R;
 import com.photoprint.photoclub.model.Guide;

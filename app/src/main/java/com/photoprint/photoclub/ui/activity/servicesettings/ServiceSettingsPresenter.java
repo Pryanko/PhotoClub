@@ -2,8 +2,8 @@ package com.photoprint.photoclub.ui.activity.servicesettings;
 
 import android.util.LongSparseArray;
 
-import com.example.utils.ListUtils;
-import com.example.utils.Preconditions;
+import com.photoprint.utils.ListUtils;
+import com.photoprint.utils.Preconditions;
 import com.photoprint.logger.Logger;
 import com.photoprint.logger.LoggerFactory;
 import com.photoprint.photoclub.data.interactor.ServiceLoader;

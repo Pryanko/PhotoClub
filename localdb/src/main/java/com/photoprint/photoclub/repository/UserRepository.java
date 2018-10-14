@@ -3,7 +3,7 @@ package com.photoprint.photoclub.repository;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import com.example.utils.Ref;
+import com.photoprint.utils.Ref;
 import com.photoprint.photoclub.model.User;
 import com.photoprint.photoclub.repository.base.BaseRepository;
 

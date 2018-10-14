@@ -1,4 +1,4 @@
-package com.example.utils;
+package com.photoprint.utils;
 
 import com.photoprint.logger.Logger;
 import com.photoprint.logger.LoggerFactory;
