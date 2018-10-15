@@ -56,6 +56,10 @@
             android:name=".ui.activity.serviceinfo.ServiceInfoActivity"
             android:screenOrientation="${defaultOrientation}" />
 
+        <activity
+            android:name=".ui.activity.gallery.GalleryActivity"
+            android:screenOrientation="${defaultOrientation}" />
+
     </application>
 
 </manifest>

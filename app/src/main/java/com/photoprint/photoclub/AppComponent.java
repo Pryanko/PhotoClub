@@ -3,6 +3,7 @@ package com.photoprint.photoclub;
 import com.photoprint.network.NetworkModule;
 import com.photoprint.photoclub.di.module.LocalDatabaseModule;
 import com.photoprint.photoclub.ui.activity.category.CategoryScreenComponent;
+import com.photoprint.photoclub.ui.activity.gallery.GalleryScreenComponent;
 import com.photoprint.photoclub.ui.activity.guide.GuideScreenComponent;
 import com.photoprint.photoclub.ui.activity.run.RunScreenComponent;
 import com.photoprint.photoclub.ui.activity.service.ServiceScreenComponent;
@@ -38,7 +39,9 @@ public interface AppComponent {
 
     ServiceScreenComponent serviceScreenComponent();
 
-    ServiceSettingsScreenComponent ServiceSettingsScreenComponent();
+    ServiceSettingsScreenComponent serviceSettingsScreenComponent();
 
-    ServiceInfoScreenComponent ServiceInfoScreenComponent();
+    ServiceInfoScreenComponent serviceInfoScreenComponent();
+
+    GalleryScreenComponent galleryScreenComponent();
 }

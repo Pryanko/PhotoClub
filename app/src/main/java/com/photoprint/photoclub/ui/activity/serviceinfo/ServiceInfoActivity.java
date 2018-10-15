@@ -133,7 +133,7 @@ public class ServiceInfoActivity extends MvpActivity implements ServiceInfoView 
     public ServiceInfoScreenComponent getScreenComponent() {
         Object saved = getLastCustomNonConfigurationInstance();
         if (saved == null) {
-            return appComponent().ServiceInfoScreenComponent();
+            return appComponent().serviceInfoScreenComponent();
         } else {
             return (ServiceInfoScreenComponent) saved;
         }

@@ -146,7 +146,7 @@ public class ServiceSettingsActivity extends MvpActivity implements ServiceSetti
     public ServiceSettingsScreenComponent getScreenComponent() {
         Object saved = getLastCustomNonConfigurationInstance();
         if (saved == null) {
-            return appComponent().ServiceSettingsScreenComponent();
+            return appComponent().serviceSettingsScreenComponent();
         } else {
             return (ServiceSettingsScreenComponent) saved;
         }
