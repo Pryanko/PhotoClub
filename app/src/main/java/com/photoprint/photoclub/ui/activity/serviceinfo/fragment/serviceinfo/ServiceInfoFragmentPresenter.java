@@ -62,14 +62,14 @@ public class ServiceInfoFragmentPresenter extends BaseMvpViewStatePresenter<Serv
         super.destroy();
     }
 
-    public void onNextBtnClicked() {
+    void onNextBtnClicked() {
         logger.trace("onNextBtnClicked");
         if (maquetteName == null) {
             view.selectMaquetteErrorEnabled(true);
         }
     }
 
-    public void maquetteSelected(String maquetteName) {
+    void maquetteSelected(String maquetteName) {
         this.maquetteName = maquetteName;
         view.selectMaquetteErrorEnabled(false);
     }

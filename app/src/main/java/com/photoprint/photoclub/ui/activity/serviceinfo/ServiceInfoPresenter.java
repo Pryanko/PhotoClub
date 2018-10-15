@@ -35,6 +35,10 @@ public class ServiceInfoPresenter extends BaseMvpViewStatePresenter<ServiceInfoV
 
     private Maquette maquette = null;
     /**
+     * Флажок, выбран ли макет
+     */
+    private boolean isMaquetteActive;
+    /**
      * Флажок, отображается ли в данный момент фрагмент с выбором макетов
      */
     private boolean maquetteListVisible = false;
@@ -81,35 +85,40 @@ public class ServiceInfoPresenter extends BaseMvpViewStatePresenter<ServiceInfoV
         this.maquette = maquette;
         view.hideMaquetteList();
         maquetteListVisible = false;
+        isMaquetteActive = true;
         view.setMaquetteName(this.maquette.getName());
     }
 
     void onNextBtnClicked() {
-        loadDisposable = Maybe
-                .create(emitter -> {
-                    if (orderManager.containsActiveOrder()) {
-                        logger.trace("Active order exists");
-                        emitter.onComplete();
-                    } else {
-                        logger.trace("Active order does not exist");
-                        emitter.onSuccess(true);
-                    }
-                })
-                .doOnSubscribe(disposable -> view.setLoading(true))
-                .flatMapObservable(aBoolean -> localImagesProvider.getLocalImagesRx())
-                .doOnNext(localImages -> dbTransaction.callInTx(() -> {
-                    localImageRepository.deleteAll();
-                    localImageRepository.insert(localImages);
-                    logger.trace("Count local images: " + localImages.size());
-                }))
-                .flatMapCompletable(localImages -> orderManager.create(serviceInfoParams.getServiceId()))
-                .observeOn(AppSchedulers.network())
-                .subscribeOn(AppSchedulers.db())
-                .observeOn(AppSchedulers.ui())
-                .subscribe(() -> {
-                    view.setLoading(false);
-                    navigator.navigateToGalleryActivity();
-                }, logger::error);
+        if (isMaquetteActive) {
+            loadDisposable = Maybe
+                    .create(emitter -> {
+                        if (orderManager.containsActiveOrder()) {
+                            logger.trace("Active order exists");
+                            emitter.onComplete();
+                        } else {
+                            logger.trace("Active order does not exist");
+                            emitter.onSuccess(true);
+                        }
+                    })
+                    .doOnSubscribe(disposable -> view.setLoading(true))
+                    .flatMapObservable(aBoolean -> localImagesProvider.getLocalImagesRx())
+                    .doOnNext(localImages -> dbTransaction.callInTx(() -> {
+                        localImageRepository.deleteAll();
+                        localImageRepository.insert(localImages);
+                        logger.trace("Count local images: " + localImages.size());
+                    }))
+                    .flatMapCompletable(localImages -> orderManager.create(serviceInfoParams.getServiceId()))
+                    .observeOn(AppSchedulers.network())
+                    .subscribeOn(AppSchedulers.db())
+                    .observeOn(AppSchedulers.ui())
+                    .subscribe(() -> {
+                        view.setLoading(false);
+                        navigator.navigateToGalleryActivity();
+                    }, logger::error);
+        } else {
+
+        }
     }
 
     @Override
