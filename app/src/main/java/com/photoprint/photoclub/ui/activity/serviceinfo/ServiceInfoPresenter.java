@@ -106,7 +106,10 @@ public class ServiceInfoPresenter extends BaseMvpViewStatePresenter<ServiceInfoV
                 .observeOn(AppSchedulers.network())
                 .subscribeOn(AppSchedulers.db())
                 .observeOn(AppSchedulers.ui())
-                .subscribe(() -> view.setLoading(false), logger::error);
+                .subscribe(() -> {
+                    view.setLoading(false);
+                    navigator.navigateToGalleryActivity();
+                }, logger::error);
     }
 
     @Override

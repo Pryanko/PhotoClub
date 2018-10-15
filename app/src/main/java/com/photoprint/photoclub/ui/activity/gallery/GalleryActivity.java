@@ -9,9 +9,11 @@ import com.photoprint.logger.LoggerFactory;
 import com.photoprint.photoclub.R;
 import com.photoprint.photoclub.ui.activity.base.ActivityModule;
 import com.photoprint.photoclub.ui.activity.base.MvpActivity;
-import com.photoprint.photoclub.ui.activity.category.CategoryActivity;
+import com.photoprint.photoclub.ui.activity.delegate.ToolbarDelegate;
 
 import javax.inject.Inject;
+
+import butterknife.ButterKnife;
 
 /**
  * Галлерея
@@ -23,7 +25,7 @@ public class GalleryActivity extends MvpActivity implements GalleryView {
     private static final Logger logger = LoggerFactory.getLogger(GalleryActivity.class);
 
     public static Intent getCallingIntent(Context context) {
-        return new Intent(context, CategoryActivity.class);
+        return new Intent(context, GalleryActivity.class);
     }
 
     //region di
@@ -31,9 +33,11 @@ public class GalleryActivity extends MvpActivity implements GalleryView {
     GalleryComponent component;
     @Inject
     Navigator navigator;
+    @Inject
+    ToolbarDelegate toolbarDelegate;
 
     private GalleryPresenter presenter;
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         screenComponent = getScreenComponent();
@@ -42,9 +46,13 @@ public class GalleryActivity extends MvpActivity implements GalleryView {
                 .build();
         component.inject(this);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_gallery);
         presenter = getMvpDelegate().getPresenter(component::galleryPresenter, GalleryPresenter.class);
+        setContentView(R.layout.activity_gallery);
+        ButterKnife.bind(this);
 
+        toolbarDelegate.init();
+
+        presenter.initialize();
     }
 
     @Override

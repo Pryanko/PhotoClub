@@ -21,6 +21,10 @@ public class Navigator extends BaseNavigator<ServiceInfoActivity> {
         forSafeAction(() -> activityNavigator.navigateBack(baseActivity));
     }
 
+    public void navigateToGalleryActivity() {
+        forSafeAction(() -> activityNavigator.navigateToGalleryActivity(baseActivity));
+    }
+
     @Override
     public void onResume(ServiceInfoActivity activity) {
         baseActivity = activity;
