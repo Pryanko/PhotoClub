@@ -11,6 +11,8 @@ import com.photoprint.photoclub.ui.activity.base.ActivityModule;
 import com.photoprint.photoclub.ui.activity.base.MvpActivity;
 import com.photoprint.photoclub.ui.activity.category.CategoryActivity;
 
+import javax.inject.Inject;
+
 /**
  * Галлерея
  *
@@ -27,10 +29,11 @@ public class GalleryActivity extends MvpActivity implements GalleryView {
     //region di
     GalleryScreenComponent screenComponent;
     GalleryComponent component;
+    @Inject
+    Navigator navigator;
 
     private GalleryPresenter presenter;
-
-
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         screenComponent = getScreenComponent();
@@ -39,8 +42,21 @@ public class GalleryActivity extends MvpActivity implements GalleryView {
                 .build();
         component.inject(this);
         super.onCreate(savedInstanceState);
-        presenter = getMvpDelegate().getPresenter(component::galleryPresenter, GalleryPresenter.class);
         setContentView(R.layout.activity_gallery);
+        presenter = getMvpDelegate().getPresenter(component::galleryPresenter, GalleryPresenter.class);
+
+    }
+
+    @Override
+    protected void onResume() {
+        navigator.onResume(this);
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        navigator.onPause();
+        super.onPause();
     }
 
     private GalleryScreenComponent getScreenComponent() {
