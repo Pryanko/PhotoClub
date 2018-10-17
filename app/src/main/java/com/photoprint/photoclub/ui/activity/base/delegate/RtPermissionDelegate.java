@@ -8,14 +8,21 @@ import com.photoprint.photoclub.ui.activity.ActivityNavigator;
 
 import javax.inject.Inject;
 
+import dagger.Reusable;
+
 /**
  * @author Grigoriy Pryamov.
  */
-public class RtPermissionDelegate extends BaseRtPermisionsDelegate {
+@Reusable
+public class RtPermissionDelegate extends BaseRtPermissionsDelegate {
 
     @Inject
     RtPermissionDelegate(Activity activity, ActivityNavigator activityNavigator) {
         super(activity, activityNavigator);
+    }
+
+    public void checkStoragePermissions() {
+        checkPermissions();
     }
 
     @Override

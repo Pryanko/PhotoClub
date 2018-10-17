@@ -1,6 +1,6 @@
 package com.photoprint.network.auth;
 
-import com.photoprint.network.auth.interceptor.AuthInterceptror;
+import com.photoprint.network.auth.interceptor.AuthInterceptor;
 
 import java.util.concurrent.TimeUnit;
 
@@ -27,7 +27,7 @@ public class HttpClientBuilder {
     private final AuthTokenStorage authTokenStorage;
 
     @Inject
-    public HttpClientBuilder(OkHttpClient baseOkHttpClient,
+    HttpClientBuilder(OkHttpClient baseOkHttpClient,
                              AuthTokenStorage authTokenStorage) {
         this.baseOkHttpClient = baseOkHttpClient;
         this.authTokenStorage = authTokenStorage;
@@ -38,7 +38,7 @@ public class HttpClientBuilder {
         HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         return baseOkHttpClient.newBuilder()
-                .addInterceptor(new AuthInterceptror(authTokenStorage))
+                .addInterceptor(new AuthInterceptor(authTokenStorage))
 //                .addInterceptor(new AppInfoOkHttpInterceptor(applicationInfo))
 //                .addInterceptor(new DeviceInfoOkHttpInterceptor(deviceInfo))
                 .addInterceptor(loggingInterceptor)

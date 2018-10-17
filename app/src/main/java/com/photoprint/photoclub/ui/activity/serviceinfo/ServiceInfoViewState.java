@@ -59,4 +59,9 @@ public class ServiceInfoViewState extends BaseMvpViewState<ServiceInfoView> impl
         this.loading = loading;
         forEachView(view -> view.setLoading(this.loading));
     }
+
+    @Override
+    public void showDialogForPermissions() {
+        forEachView(ServiceInfoView::showDialogForPermissions);
+    }
 }

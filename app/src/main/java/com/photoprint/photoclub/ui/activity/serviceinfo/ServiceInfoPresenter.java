@@ -31,7 +31,7 @@ public class ServiceInfoPresenter extends BaseMvpViewStatePresenter<ServiceInfoV
     private final LocalImagesProvider localImagesProvider;
     private final LocalImageRepository localImageRepository;
 
-    private Disposable loadDisposable = Disposables.disposed();
+    private Disposable createOrderDisposable = Disposables.disposed();
 
     private Maquette maquette = null;
     /**
@@ -42,6 +42,10 @@ public class ServiceInfoPresenter extends BaseMvpViewStatePresenter<ServiceInfoV
      * Флажок, отображается ли в данный момент фрагмент с выбором макетов
      */
     private boolean maquetteListVisible = false;
+    /**
+     * Разрешение на считывание данных
+     */
+    private boolean isStoragePermission;
 
     @Inject
     ServiceInfoPresenter(ServiceInfoViewState viewState,
@@ -91,39 +95,46 @@ public class ServiceInfoPresenter extends BaseMvpViewStatePresenter<ServiceInfoV
 
     void onNextBtnClicked() {
         if (isMaquetteActive) {
-            loadDisposable = Maybe
-                    .create(emitter -> {
-                        if (orderManager.containsActiveOrder()) {
-                            logger.trace("Active order exists");
-                            emitter.onComplete();
-                        } else {
-                            logger.trace("Active order does not exist");
-                            emitter.onSuccess(true);
-                        }
-                    })
-                    .doOnSubscribe(disposable -> view.setLoading(true))
-                    .flatMapObservable(aBoolean -> localImagesProvider.getLocalImagesRx())
-                    .doOnNext(localImages -> dbTransaction.callInTx(() -> {
-                        localImageRepository.deleteAll();
-                        localImageRepository.insert(localImages);
-                        logger.trace("Count local images: " + localImages.size());
-                    }))
-                    .flatMapCompletable(localImages -> orderManager.create(serviceInfoParams.getServiceId()))
-                    .observeOn(AppSchedulers.network())
-                    .subscribeOn(AppSchedulers.db())
-                    .observeOn(AppSchedulers.ui())
-                    .subscribe(() -> {
-                        view.setLoading(false);
-                        navigator.navigateToGalleryActivity();
-                    }, logger::error);
-        } else {
+            if (isStoragePermission) {
+                createOrderDisposable = Maybe
+                        .create(emitter -> {
+                            if (orderManager.containsActiveOrder()) {
+                                logger.trace("Active order exists");
+                                emitter.onComplete();
+                            } else {
+                                logger.trace("Active order does not exist");
+                                emitter.onSuccess(true);
+                            }
+                        })
+                        .flatMapObservable(aBoolean -> localImagesProvider.getLocalImagesRx())
+                        .doOnNext(localImages -> dbTransaction.callInTx(() -> {
+                            localImageRepository.deleteAll();
+                            localImageRepository.insert(localImages);
+                            logger.trace("Count local images: " + localImages.size());
+                        }))
+                        .flatMapCompletable(localImages -> orderManager.create(serviceInfoParams.getServiceId()))
+                        .observeOn(AppSchedulers.network())
+                        .subscribeOn(AppSchedulers.db())
+                        .observeOn(AppSchedulers.ui())
+                        .doOnSubscribe(disposable -> view.setLoading(true))
+                        .subscribe(() -> {
+                            view.setLoading(false);
+                            navigator.navigateToGalleryActivity();
+                        }, logger::error);
+            } else {
+                view.showDialogForPermissions();
+            }
 
         }
     }
 
+    void onPermissionRequestFinished(boolean granted) {
+        this.isStoragePermission = granted;
+    }
+
     @Override
     public void destroy() {
-        loadDisposable.dispose();
+        createOrderDisposable.dispose();
         super.destroy();
     }
 }

@@ -2,21 +2,26 @@ package com.photoprint.photoclub.ui.activity.servicesettings;
 
 import android.util.LongSparseArray;
 
-import com.photoprint.utils.ListUtils;
-import com.photoprint.utils.Preconditions;
 import com.photoprint.logger.Logger;
 import com.photoprint.logger.LoggerFactory;
+import com.photoprint.photoclub.base.DbTransaction;
+import com.photoprint.photoclub.data.interactor.LocalImagesProvider;
+import com.photoprint.photoclub.data.interactor.OrderManager;
 import com.photoprint.photoclub.data.interactor.ServiceLoader;
 import com.photoprint.photoclub.helper.runtimepermission.AppSchedulers;
 import com.photoprint.photoclub.model.Service;
+import com.photoprint.photoclub.repository.LocalImageRepository;
 import com.photoprint.photoclub.ui.activity.servicesettings.model.ServiceSettingsParams;
 import com.photoprint.photoclub.ui.mvp.presenter.BaseMvpViewStatePresenter;
+import com.photoprint.utils.ListUtils;
+import com.photoprint.utils.Preconditions;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 
+import io.reactivex.Maybe;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.disposables.Disposables;
 
@@ -31,22 +36,40 @@ public class ServiceSettingsPresenter extends BaseMvpViewStatePresenter<ServiceS
     private LongSparseArray<Service> serviceArray = new LongSparseArray<>();
 
     private final Navigator navigator;
+    private final OrderManager orderManager;
+    private final DbTransaction dbTransaction;
     private final ServiceLoader serviceLoader;
+    private final LocalImagesProvider localImagesProvider;
+    private final LocalImageRepository localImageRepository;
     private final ServiceSettingsParams serviceSettingsParams;
+
     private Disposable loadDisposable = Disposables.disposed();
+    private Disposable orderCreateDisposable = Disposables.disposed();
+    /**
+     * Сервис id для создания заказа
+     */
+    private long currentServiceId;
     /**
      * Разрешение на считывание данных
      */
-    private boolean storagePermission;
+    private boolean isStoragePermission;
 
     @Inject
     ServiceSettingsPresenter(ServiceSettingsViewState viewState,
                              Navigator navigator,
                              ServiceLoader serviceLoader,
+                             OrderManager orderManager,
+                             DbTransaction dbTransaction,
+                             LocalImagesProvider localImagesProvider,
+                             LocalImageRepository localImageRepository,
                              ServiceSettingsParams serviceSettingsParams) {
         super(viewState);
         this.navigator = navigator;
         this.serviceLoader = serviceLoader;
+        this.orderManager = orderManager;
+        this.dbTransaction = dbTransaction;
+        this.localImagesProvider = localImagesProvider;
+        this.localImageRepository = localImageRepository;
         this.serviceSettingsParams = serviceSettingsParams;
     }
 
@@ -84,47 +107,76 @@ public class ServiceSettingsPresenter extends BaseMvpViewStatePresenter<ServiceS
         serviceArray.put(service.getId(), service);
     }
 
-    public void onBackBtnClicked() {
+    void onBackBtnClicked() {
         navigator.navigateBack();
     }
 
-    @Override
-    public void destroy() {
-        loadDisposable.dispose();
-        super.destroy();
-    }
-
-    public void onFormatItemClicked(int position) {
+    void onFormatItemClicked(int position) {
         Service service = serviceArray.valueAt(position);
         changeViewApply(service);
     }
 
-    public void onTypeItemClicked(int position) {
+    void onTypeItemClicked(int position) {
         logger.trace("onTypeItemClicked: " + position);
     }
 
     private void changeViewApply(Service service) {
+        currentServiceId = service.getId();
         view.setImage(service.getImage480());
         view.setServiceName(service.getName());
         view.setServicePrice(service.getPrice());
     }
 
-    public void onOptionSwitchClicked(boolean isChecked) {
+    void onOptionSwitchClicked(boolean isChecked) {
         logger.trace("onOptionSwitchClicked " + isChecked);
     }
 
-    public void onInGalleryButtonClicked() {
-        logger.trace("onInGalleryButtonClicked");
-        view.showLoading(true);
+    public void onNextBtnClicked() {
+        logger.trace("onNextBtnClicked");
+        if (isStoragePermission) {
+            orderCreateDisposable = Maybe
+                    .create(emitter -> {
+                        if (orderManager.containsActiveOrder()) {
+                            logger.trace("Active order exists");
+                            emitter.onComplete();
+                        } else {
+                            logger.trace("Active order does not exist");
+                            emitter.onSuccess(true);
+                        }
+                    })
+                    .flatMapObservable(aBoolean -> localImagesProvider.getLocalImagesRx())
+                    .doOnNext(localImages -> dbTransaction.callInTx(() -> {
+                        localImageRepository.deleteAll();
+                        localImageRepository.insert(localImages);
+                        logger.trace("Count local images: " + localImages.size());
+                    }))
+                    .flatMapCompletable(localImages -> orderManager.create(currentServiceId))
+                    .observeOn(AppSchedulers.network())
+                    .subscribeOn(AppSchedulers.db())
+                    .observeOn(AppSchedulers.ui())
+                    .doOnSubscribe(disposable -> view.showLoading(true))
+                    .subscribe(() -> {
+                        view.showLoading(false);
+                        navigator.navigateToGalleryActivity();
+                    }, logger::error);
+        } else {
+            view.showDialogForPermissions();
+        }
     }
 
-    public void onHideLoading() {
+    void onHideLoading() {
         view.showLoading(false);
     }
 
-    public void onPermissionRequestFinished(boolean granted) {
+    void onPermissionRequestFinished(boolean granted) {
         logger.trace("granted " + granted);
-        this.storagePermission = granted;
+        this.isStoragePermission = granted;
+    }
 
+    @Override
+    public void destroy() {
+        loadDisposable.dispose();
+        orderCreateDisposable.dispose();
+        super.destroy();
     }
 }

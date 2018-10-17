@@ -22,4 +22,6 @@ interface ServiceSettingsView extends MvpView {
     void setServiceTypeList(@NonNull List<String> serviceTypeList);
 
     void showLoading(boolean loading);
+
+    void showDialogForPermissions();
 }

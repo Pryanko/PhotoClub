@@ -20,9 +20,9 @@ import com.photoprint.photoclub.ui.activity.ActivityNavigator;
  *
  * @author Grigoriy Pryamov.
  */
-public abstract class BaseRtPermisionsDelegate {
+public abstract class BaseRtPermissionsDelegate {
 
-    private static final Logger logger = LoggerFactory.getLogger(BaseRtPermisionsDelegate.class);
+    private static final Logger logger = LoggerFactory.getLogger(BaseRtPermissionsDelegate.class);
 
     //region Request codes
     private static final int RC_PERMISSION_AFTER_RATIONALE = 102;
@@ -45,7 +45,7 @@ public abstract class BaseRtPermisionsDelegate {
     private boolean requestInProgress;
     private boolean pausedForRequest;
 
-    protected BaseRtPermisionsDelegate(Activity activity, ActivityNavigator activityNavigator) {
+    protected BaseRtPermissionsDelegate(Activity activity, ActivityNavigator activityNavigator) {
         this.activity = activity;
         this.activityNavigator = activityNavigator;
     }
@@ -88,7 +88,7 @@ public abstract class BaseRtPermisionsDelegate {
         dismissRationaleLightDialog();
     }
 
-    private void checkPermissions() {
+    protected void checkPermissions() {
         logger.trace("checkPermissions");
         if (requestInProgress) {
             return;

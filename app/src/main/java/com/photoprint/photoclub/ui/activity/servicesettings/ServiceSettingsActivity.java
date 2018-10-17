@@ -105,9 +105,7 @@ public class ServiceSettingsActivity extends MvpActivity implements ServiceSetti
         optionSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> presenter.onOptionSwitchClicked(isChecked));
         rtPermissionDelegate.setCallback(granted -> presenter.onPermissionRequestFinished(granted));
         rtPermissionDelegate.onCreate(savedInstanceState);
-        nextButton.setOnClickListener(v -> {
-            presenter.onInGalleryButtonClicked();
-        });
+        nextButton.setOnClickListener(v -> presenter.onNextBtnClicked());
 
         presenter.initialize();
     }
@@ -115,8 +113,8 @@ public class ServiceSettingsActivity extends MvpActivity implements ServiceSetti
     @Override
     protected void onResume() {
         navigator.onResume(this);
-        super.onResume();
         rtPermissionDelegate.onResume();
+        super.onResume();
     }
 
     @Override
@@ -208,6 +206,11 @@ public class ServiceSettingsActivity extends MvpActivity implements ServiceSetti
                 loadingDialog = null;
             }
         }
+    }
+
+    @Override
+    public void showDialogForPermissions() {
+        rtPermissionDelegate.checkStoragePermissions();
     }
 
     private void createSpinnerAdapter(List<String> itemsList, AppCompatSpinner spinner) {

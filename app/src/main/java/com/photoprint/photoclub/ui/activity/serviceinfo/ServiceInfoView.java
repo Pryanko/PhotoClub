@@ -16,4 +16,6 @@ interface ServiceInfoView extends MvpView {
     void setMaquetteName(String name);
 
     void setLoading(boolean loading);
+
+    void showDialogForPermissions();
 }

@@ -4,12 +4,14 @@ import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 
 import com.photoprint.logger.Logger;
 import com.photoprint.logger.LoggerFactory;
 import com.photoprint.photoclub.R;
 import com.photoprint.photoclub.ui.activity.base.ActivityModule;
 import com.photoprint.photoclub.ui.activity.base.MvpActivity;
+import com.photoprint.photoclub.ui.activity.base.delegate.RtPermissionDelegate;
 import com.photoprint.photoclub.ui.activity.delegate.DrawerMenuDelegate;
 import com.photoprint.photoclub.ui.activity.delegate.ToolbarDelegate;
 import com.photoprint.photoclub.ui.activity.serviceinfo.fragment.maquettelist.MaquetteListFragment;
@@ -53,6 +55,8 @@ public class ServiceInfoActivity extends MvpActivity implements ServiceInfoView 
     DrawerMenuDelegate drawerMenuDelegate;
     @Inject
     MaquetteListAdapterImpl maquetteListAdapter;
+    @Inject
+    RtPermissionDelegate rtPermissionDelegate;
     //endregion
     //region views
     private ServiceInfoFragment serviceInfoFragment;
@@ -73,6 +77,9 @@ public class ServiceInfoActivity extends MvpActivity implements ServiceInfoView 
         setContentView(R.layout.activity_service_info);
 
         toolbarDelegate.init();
+
+        rtPermissionDelegate.setCallback(granted -> presenter.onPermissionRequestFinished(granted));
+        rtPermissionDelegate.onCreate(savedInstanceState);
         drawerMenuDelegate.init(getMvpDelegate(), null, true);
         drawerMenuDelegate.setNavigationOnClickListener(() -> {
             onBackPressed();
@@ -88,13 +95,27 @@ public class ServiceInfoActivity extends MvpActivity implements ServiceInfoView 
     @Override
     protected void onResume() {
         navigator.onResume(this);
+        rtPermissionDelegate.onResume();
         super.onResume();
     }
 
     @Override
     protected void onPause() {
         navigator.onPause();
+        rtPermissionDelegate.onPause();
         super.onPause();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        rtPermissionDelegate.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        rtPermissionDelegate.onSaveInstanceState(outState);
     }
 
     @Override
@@ -180,5 +201,10 @@ public class ServiceInfoActivity extends MvpActivity implements ServiceInfoView 
     @Override
     public void setLoading(boolean loading) {
         logger.trace("Loading " + String.valueOf(loading));
+    }
+
+    @Override
+    public void showDialogForPermissions() {
+        rtPermissionDelegate.checkStoragePermissions();
     }
 }
