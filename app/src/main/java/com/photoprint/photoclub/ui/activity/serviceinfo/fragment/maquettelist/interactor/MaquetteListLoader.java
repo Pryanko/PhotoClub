@@ -15,15 +15,17 @@ import javax.inject.Inject;
 import io.reactivex.Single;
 
 /**
+ * Загрузчик макетов
+ *
  * @author Grigoriy Pryamov.
  */
 public class MaquetteListLoader {
 
+    private static final Logger logger = LoggerFactory.getLogger(MaquetteListLoader.class);
+
     @Inject
     public MaquetteListLoader() {
     }
-
-    private static final Logger logger = LoggerFactory.getLogger(MaquetteListLoader.class);
 
     public Single<Result> getMaquettes() {
         return Single.fromCallable(this::testMaquettes)

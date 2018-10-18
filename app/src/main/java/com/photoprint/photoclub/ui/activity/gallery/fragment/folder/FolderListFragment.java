@@ -2,6 +2,7 @@ package com.photoprint.photoclub.ui.activity.gallery.fragment.folder;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,8 +13,10 @@ import com.photoprint.logger.Logger;
 import com.photoprint.logger.LoggerFactory;
 import com.photoprint.photoclub.R;
 import com.photoprint.photoclub.ui.activity.gallery.GalleryActivity;
-import com.photoprint.photoclub.ui.adapter.ItemDecoration;
+import com.photoprint.photoclub.ui.activity.gallery.fragment.folder.adapter.FolderListAdapterImpl;
 import com.photoprint.photoclub.ui.fragment.base.MvpFragment;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -31,6 +34,8 @@ public class FolderListFragment extends MvpFragment implements FolderListView {
 
     //region DI
     FolderListComponent component;
+    @Inject
+    FolderListAdapterImpl folderListAdapter;
     //endregion
     //region views
     @BindView(R.id.recyclerView)
@@ -54,12 +59,9 @@ public class FolderListFragment extends MvpFragment implements FolderListView {
         View view = inflater.inflate(R.layout.fragment_folder_list, container, false);
         ButterKnife.bind(this, view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.addItemDecoration(new ItemDecoration(
-                getResources().getDimensionPixelOffset(R.dimen.offset_category_item_sides_8dp),
-                getResources().getDimensionPixelOffset(R.dimen.offset_category_item_sides_8dp),
-                getResources().getDimensionPixelOffset(R.dimen.offset_category_item_top),
-                getResources().getDimensionPixelOffset(R.dimen.offset_category_item_bottom)));
-//        recyclerView.setAdapter();
+        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2,
+                LinearLayoutManager.VERTICAL, false));
+        recyclerView.setAdapter(folderListAdapter);
         return view;
     }
 

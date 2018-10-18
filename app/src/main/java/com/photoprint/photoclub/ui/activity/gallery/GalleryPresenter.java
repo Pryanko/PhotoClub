@@ -29,4 +29,8 @@ public class GalleryPresenter extends BaseMvpViewStatePresenter<GalleryView, Gal
     void onBackBtnClicked() {
         navigator.navigateBack();
     }
+
+    void onFolderClicked(String nameFolder) {
+        logger.trace(nameFolder);
+    }
 }

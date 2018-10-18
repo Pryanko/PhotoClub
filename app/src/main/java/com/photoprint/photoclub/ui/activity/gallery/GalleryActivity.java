@@ -11,6 +11,7 @@ import com.photoprint.photoclub.ui.activity.base.ActivityModule;
 import com.photoprint.photoclub.ui.activity.base.MvpActivity;
 import com.photoprint.photoclub.ui.activity.delegate.ToolbarDelegate;
 import com.photoprint.photoclub.ui.activity.gallery.fragment.folder.FolderListFragment;
+import com.photoprint.photoclub.ui.activity.gallery.fragment.folder.adapter.FolderListAdapterImpl;
 
 import javax.inject.Inject;
 
@@ -41,6 +42,8 @@ public class GalleryActivity extends MvpActivity implements GalleryView {
     Navigator navigator;
     @Inject
     ToolbarDelegate toolbarDelegate;
+    @Inject
+    FolderListAdapterImpl folderListAdapter;
     //endregion
     //region FRAGMENTS
     private FolderListFragment folderListFragment;
@@ -64,6 +67,8 @@ public class GalleryActivity extends MvpActivity implements GalleryView {
         toolbarDelegate.setNavigationIcon(R.drawable.ic_arrow_left);
         toolbarDelegate.setTitle(R.string.gallery_title);
         toolbarDelegate.setNavigationOnClickListener(v -> onBackPressed());
+
+        folderListAdapter.setInteractionListener(folderName -> presenter.onFolderClicked(folderName));
 
         presenter.initialize();
         setupFolderListFragment();

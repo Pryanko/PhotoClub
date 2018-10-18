@@ -40,6 +40,11 @@ ext {
         compileOnly 'javax.annotation:jsr250-api:1.0'
     }
 
+    // Glide
+    depsOldGlide = dependencyGroup {
+        implementation "com.github.bumptech.glide:glide:${versions.oldGlide}"
+    }
+
     // RxJava
     depsRxJava = dependencyGroup {
         implementation "io.reactivex.rxjava2:rxjava:${versions.rx.java}"

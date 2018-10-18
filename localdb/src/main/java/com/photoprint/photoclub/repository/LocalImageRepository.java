@@ -17,4 +17,6 @@ public interface LocalImageRepository extends BaseRepository<LocalImage, Long> {
 
     void deleteAll();
 
+    @NonNull
+    List<LocalImage> getFolders();
 }
