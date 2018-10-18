@@ -17,6 +17,10 @@ public class Navigator extends BaseNavigator<GalleryActivity> {
         super(activityNavigator);
     }
 
+    public void navigateBack() {
+        forSafeAction(() -> activityNavigator.navigateBack(baseActivity));
+    }
+
     @Override
     public void onResume(GalleryActivity activity) {
         baseActivity = activity;

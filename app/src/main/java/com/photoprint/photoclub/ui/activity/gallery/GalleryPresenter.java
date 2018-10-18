@@ -13,13 +13,20 @@ public class GalleryPresenter extends BaseMvpViewStatePresenter<GalleryView, Gal
 
     private static final Logger logger = LoggerFactory.getLogger(GalleryPresenter.class);
 
+    private final Navigator navigator;
+
     @Inject
-    public GalleryPresenter(GalleryViewState viewState) {
+    public GalleryPresenter(GalleryViewState viewState, Navigator navigator) {
         super(viewState);
+        this.navigator = navigator;
     }
 
     @Override
     protected void onInitialize() {
 
+    }
+
+    void onBackBtnClicked() {
+        navigator.navigateBack();
     }
 }

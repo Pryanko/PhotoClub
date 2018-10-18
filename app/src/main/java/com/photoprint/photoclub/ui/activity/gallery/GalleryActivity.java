@@ -51,8 +51,16 @@ public class GalleryActivity extends MvpActivity implements GalleryView {
         ButterKnife.bind(this);
 
         toolbarDelegate.init();
+        toolbarDelegate.setNavigationIcon(R.drawable.ic_arrow_left);
+        toolbarDelegate.setTitle(R.string.gallery_title);
+        toolbarDelegate.setNavigationOnClickListener(v -> onBackPressed());
 
         presenter.initialize();
+    }
+
+    @Override
+    public void onBackPressed() {
+        presenter.onBackBtnClicked();
     }
 
     @Override
@@ -80,4 +88,5 @@ public class GalleryActivity extends MvpActivity implements GalleryView {
     public Object onRetainCustomNonConfigurationInstance() {
         return screenComponent;
     }
+
 }

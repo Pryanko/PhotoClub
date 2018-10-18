@@ -25,6 +25,9 @@
     <string name="your_select_maquette">Вами выбран макет: %1$s</string>
     <string name="info_in_gallery_btn">В галерею</string>
 
+    <!--GalleryActivity-->
+    <string name="gallery_title">Галлерея</string>
+
     <!--AppMenu-->
     <string name="menu_drawer_new_order">Новый заказ</string>
     <string name="menu_drawer_my_order">Мои заказы</string>
