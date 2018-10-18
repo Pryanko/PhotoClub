@@ -44,7 +44,7 @@ public class ServiceInfoActivity extends MvpActivity implements ServiceInfoView 
         return intent;
     }
 
-    //region di
+    //region DI
     ServiceInfoScreenComponent screenComponent;
     ServiceInfoComponent component;
     @Inject
@@ -58,7 +58,7 @@ public class ServiceInfoActivity extends MvpActivity implements ServiceInfoView 
     @Inject
     RtPermissionDelegate rtPermissionDelegate;
     //endregion
-    //region views
+    //region FRAGMENTS
     private ServiceInfoFragment serviceInfoFragment;
     private MaquetteListFragment maquetteListFragment;
     //endregion

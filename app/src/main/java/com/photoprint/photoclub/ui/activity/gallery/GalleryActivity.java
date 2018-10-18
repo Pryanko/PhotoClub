@@ -10,6 +10,7 @@ import com.photoprint.photoclub.R;
 import com.photoprint.photoclub.ui.activity.base.ActivityModule;
 import com.photoprint.photoclub.ui.activity.base.MvpActivity;
 import com.photoprint.photoclub.ui.activity.delegate.ToolbarDelegate;
+import com.photoprint.photoclub.ui.activity.gallery.fragment.folder.FolderListFragment;
 
 import javax.inject.Inject;
 
@@ -24,17 +25,26 @@ public class GalleryActivity extends MvpActivity implements GalleryView {
 
     private static final Logger logger = LoggerFactory.getLogger(GalleryActivity.class);
 
+    //region Fragment tags
+    private static String F_TAG_FOLDER_LIST = "F_TAG_FOLDER_LIST";
+    private static String F_TAG_IMAGE_LIST = "F_TAG_IMAGE_LIST";
+    //endregion
+
     public static Intent getCallingIntent(Context context) {
         return new Intent(context, GalleryActivity.class);
     }
 
-    //region di
+    //region DI
     GalleryScreenComponent screenComponent;
     GalleryComponent component;
     @Inject
     Navigator navigator;
     @Inject
     ToolbarDelegate toolbarDelegate;
+    //endregion
+    //region FRAGMENTS
+    private FolderListFragment folderListFragment;
+    //endregion
 
     private GalleryPresenter presenter;
 
@@ -56,6 +66,7 @@ public class GalleryActivity extends MvpActivity implements GalleryView {
         toolbarDelegate.setNavigationOnClickListener(v -> onBackPressed());
 
         presenter.initialize();
+        setupFolderListFragment();
     }
 
     @Override
@@ -75,6 +86,10 @@ public class GalleryActivity extends MvpActivity implements GalleryView {
         super.onPause();
     }
 
+    public GalleryComponent getComponent() {
+        return component;
+    }
+
     private GalleryScreenComponent getScreenComponent() {
         Object saved = getLastCustomNonConfigurationInstance();
         if (saved == null) {
@@ -87,6 +102,17 @@ public class GalleryActivity extends MvpActivity implements GalleryView {
     @Override
     public Object onRetainCustomNonConfigurationInstance() {
         return screenComponent;
+    }
+
+    private void setupFolderListFragment() {
+        folderListFragment = (FolderListFragment) getFragmentManager().findFragmentByTag(F_TAG_FOLDER_LIST);
+        if (folderListFragment == null) {
+            folderListFragment = FolderListFragment.newIstance();
+            getFragmentManager().beginTransaction()
+                    .add(R.id.fragmentContainer, folderListFragment, F_TAG_FOLDER_LIST)
+//                    .hide(folderListFragment)
+                    .commit();
+        }
     }
 
 }

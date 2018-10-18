@@ -78,8 +78,8 @@ public class ServiceActivity extends MvpActivity implements ServiceView {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.addItemDecoration(new ItemDecoration(
-                getResources().getDimensionPixelOffset(R.dimen.offset_category_item_sides),
-                getResources().getDimensionPixelOffset(R.dimen.offset_category_item_sides),
+                getResources().getDimensionPixelOffset(R.dimen.offset_category_item_sides_12dp),
+                getResources().getDimensionPixelOffset(R.dimen.offset_category_item_sides_12dp),
                 getResources().getDimensionPixelOffset(R.dimen.offset_category_item_top),
                 getResources().getDimensionPixelOffset(R.dimen.offset_category_item_bottom)));
         recyclerView.setAdapter(serviceListAdapter);

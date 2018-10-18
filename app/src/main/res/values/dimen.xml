@@ -2,5 +2,6 @@
 <resources>
     <dimen name="offset_category_item_top">6dp</dimen>
     <dimen name="offset_category_item_bottom">8dp</dimen>
-    <dimen name="offset_category_item_sides">12dp</dimen>
+    <dimen name="offset_category_item_sides_12dp">12dp</dimen>
+    <dimen name="offset_category_item_sides_8dp">8dp</dimen>
 </resources>
