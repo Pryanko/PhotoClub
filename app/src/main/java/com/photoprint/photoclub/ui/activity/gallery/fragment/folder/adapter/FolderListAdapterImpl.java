@@ -43,7 +43,7 @@ public class FolderListAdapterImpl
     public FolderHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = layoutInflater.inflate(R.layout.item_folder, parent, false);
         GridLayoutManager.LayoutParams params = (GridLayoutManager.LayoutParams) v.getLayoutParams();
-        params.width = parent.getMeasuredWidth() / 2;
+        params.width = parent.getMeasuredWidth() / 2 - (context.getResources().getDimensionPixelOffset(R.dimen.offset_folder_item_4dp) * 2);
         v.setLayoutParams(params);
         return new FolderHolder(v);
     }

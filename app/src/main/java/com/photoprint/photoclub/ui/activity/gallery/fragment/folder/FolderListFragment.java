@@ -14,6 +14,7 @@ import com.photoprint.logger.LoggerFactory;
 import com.photoprint.photoclub.R;
 import com.photoprint.photoclub.ui.activity.gallery.GalleryActivity;
 import com.photoprint.photoclub.ui.activity.gallery.fragment.folder.adapter.FolderListAdapterImpl;
+import com.photoprint.photoclub.ui.activity.gallery.fragment.folder.adapter.GridSpaceDecoration;
 import com.photoprint.photoclub.ui.fragment.base.MvpFragment;
 
 import javax.inject.Inject;
@@ -61,6 +62,7 @@ public class FolderListFragment extends MvpFragment implements FolderListView {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2,
                 LinearLayoutManager.VERTICAL, false));
+        recyclerView.addItemDecoration(new GridSpaceDecoration(2, getResources().getDimensionPixelOffset(R.dimen.offset_folder_item_4dp), true));
         recyclerView.setAdapter(folderListAdapter);
         return view;
     }

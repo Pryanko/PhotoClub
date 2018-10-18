@@ -4,5 +4,5 @@
     <dimen name="offset_category_item_bottom">8dp</dimen>
     <dimen name="offset_category_item_sides_12dp">12dp</dimen>
     <dimen name="offset_category_item_sides_8dp">8dp</dimen>
-    <dimen name="offset_folder_item_2dp">2dp</dimen>
+    <dimen name="offset_folder_item_4dp">4dp</dimen>
 </resources>
