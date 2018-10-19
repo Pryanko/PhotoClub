@@ -81,6 +81,9 @@ public class GalleryActivity extends MvpActivity implements GalleryView {
     @Override
     public void onBackPressed() {
         presenter.onBackBtnClicked();
+        if (imageListFragment != null) {
+            imageListFragment.onBackPressed();
+        }
     }
 
     @Override
@@ -145,6 +148,18 @@ public class GalleryActivity extends MvpActivity implements GalleryView {
                     .hide(imageListVisible ? folderListFragment : imageListFragment)
                     .show(imageListVisible ? imageListFragment : folderListFragment)
                     .commit();
+        }
+    }
+
+    @Override
+    public void showImageList(String nameFolder) {
+        if (getFragmentManager() != null) {
+            getFragmentManager().beginTransaction()
+                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                    .hide(folderListFragment)
+                    .show(imageListFragment)
+                    .commit();
+            imageListFragment.setFolder(nameFolder);
         }
     }
 }

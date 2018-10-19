@@ -21,7 +21,8 @@ public class GalleryPresenter extends BaseMvpViewStatePresenter<GalleryView, Gal
     private boolean imageListVisible;
 
     @Inject
-    public GalleryPresenter(GalleryViewState viewState, Navigator navigator) {
+    public GalleryPresenter(GalleryViewState viewState,
+                            Navigator navigator) {
         super(viewState);
         this.navigator = navigator;
     }
@@ -35,7 +36,7 @@ public class GalleryPresenter extends BaseMvpViewStatePresenter<GalleryView, Gal
     void onBackBtnClicked() {
         if (imageListVisible) {
             imageListVisible = false;
-            view.setImageListVisible(imageListVisible);
+            view.setImageListVisible(false);
         } else {
             navigator.navigateBack();
         }
@@ -44,6 +45,6 @@ public class GalleryPresenter extends BaseMvpViewStatePresenter<GalleryView, Gal
     void onFolderClicked(String nameFolder) {
         logger.trace(nameFolder);
         imageListVisible = true;
-        view.setImageListVisible(imageListVisible);
+        view.showImageList(nameFolder);
     }
 }

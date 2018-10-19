@@ -7,4 +7,6 @@ import com.photoprint.photoclub.ui.mvp.view.MvpView;
  */
 interface GalleryView extends MvpView {
     void setImageListVisible(boolean imageListVisible);
+
+    void showImageList(String nameFolder);
 }

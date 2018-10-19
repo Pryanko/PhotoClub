@@ -1,4 +1,4 @@
-package com.photoprint.photoclub.ui.activity.gallery.fragment.folder.adapter;
+package com.photoprint.photoclub.ui.activity.gallery.adapter;
 
 import android.graphics.Rect;
 import android.support.v7.widget.RecyclerView;

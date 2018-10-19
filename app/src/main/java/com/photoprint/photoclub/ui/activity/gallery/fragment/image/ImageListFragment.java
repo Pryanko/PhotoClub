@@ -13,8 +13,11 @@ import com.photoprint.logger.Logger;
 import com.photoprint.logger.LoggerFactory;
 import com.photoprint.photoclub.R;
 import com.photoprint.photoclub.ui.activity.gallery.GalleryActivity;
-import com.photoprint.photoclub.ui.activity.gallery.fragment.folder.adapter.GridSpaceDecoration;
+import com.photoprint.photoclub.ui.activity.gallery.adapter.GridSpaceDecoration;
+import com.photoprint.photoclub.ui.activity.gallery.fragment.image.adapter.ImageListAdapterImpl;
 import com.photoprint.photoclub.ui.fragment.base.MvpFragment;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -34,6 +37,8 @@ public class ImageListFragment extends MvpFragment implements ImageListView {
 
     //region DI
     ImageListComponent component;
+    @Inject
+    ImageListAdapterImpl imageListAdapter;
     //endregion
     //region views
     @BindView(R.id.recyclerView)
@@ -59,13 +64,21 @@ public class ImageListFragment extends MvpFragment implements ImageListView {
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 3,
                 LinearLayoutManager.VERTICAL, false));
         recyclerView.addItemDecoration(new GridSpaceDecoration(3, getResources().getDimensionPixelOffset(R.dimen.offset_folder_item_4dp), true));
-//        recyclerView.setAdapter();
+        recyclerView.setAdapter(imageListAdapter);
         return view;
+    }
+
+    public void setFolder(String folder) {
+        presenter.applyFolder(folder);
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         recyclerView.setAdapter(null);
+    }
+
+    public void onBackPressed() {
+        presenter.onBackPressed();
     }
 }

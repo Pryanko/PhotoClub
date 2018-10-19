@@ -13,8 +13,8 @@ import com.photoprint.logger.Logger;
 import com.photoprint.logger.LoggerFactory;
 import com.photoprint.photoclub.R;
 import com.photoprint.photoclub.ui.activity.gallery.GalleryActivity;
+import com.photoprint.photoclub.ui.activity.gallery.adapter.GridSpaceDecoration;
 import com.photoprint.photoclub.ui.activity.gallery.fragment.folder.adapter.FolderListAdapterImpl;
-import com.photoprint.photoclub.ui.activity.gallery.fragment.folder.adapter.GridSpaceDecoration;
 import com.photoprint.photoclub.ui.fragment.base.MvpFragment;
 
 import javax.inject.Inject;

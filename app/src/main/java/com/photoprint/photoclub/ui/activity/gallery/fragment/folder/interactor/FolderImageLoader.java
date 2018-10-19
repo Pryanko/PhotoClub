@@ -34,6 +34,7 @@ public class FolderImageLoader {
     }
 
     public Single<Result> getFolders() {
+        logger.trace("getFolders");
         return Single.fromCallable(localImageRepository::getFolders)
                 .map(this::mapToFolder)
                 .map(folders -> new Result(UserError.NO_ERROR, folders))
