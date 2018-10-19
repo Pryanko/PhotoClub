@@ -44,7 +44,7 @@ public class ImageListAdapterImpl
     public LocalImageHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = layoutInflater.inflate(R.layout.item_image, parent, false);
         GridLayoutManager.LayoutParams params = (GridLayoutManager.LayoutParams) v.getLayoutParams();
-        int side = parent.getMeasuredWidth() / 3 - (int) (context.getResources().getDimensionPixelOffset(R.dimen.offset_folder_item_4dp) * 2.5);
+        int side = parent.getMeasuredWidth() / 3 - (int) (context.getResources().getDimensionPixelOffset(R.dimen.offset_folder_item_4dp) * 1.5);
         params.width = side;
         params.height = side;
         v.setLayoutParams(params);
