@@ -59,7 +59,6 @@ public class FolderListFragment extends MvpFragment implements FolderListView {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_folder_list, container, false);
         ButterKnife.bind(this, view);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2,
                 LinearLayoutManager.VERTICAL, false));
         recyclerView.addItemDecoration(new GridSpaceDecoration(2, getResources().getDimensionPixelOffset(R.dimen.offset_folder_item_4dp), true));
