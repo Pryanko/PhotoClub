@@ -15,6 +15,11 @@ public class GalleryPresenter extends BaseMvpViewStatePresenter<GalleryView, Gal
 
     private final Navigator navigator;
 
+    /**
+     * Флажок открыт ли фрагмент с выбором фотографий
+     */
+    private boolean imageListVisible;
+
     @Inject
     public GalleryPresenter(GalleryViewState viewState, Navigator navigator) {
         super(viewState);
@@ -23,14 +28,22 @@ public class GalleryPresenter extends BaseMvpViewStatePresenter<GalleryView, Gal
 
     @Override
     protected void onInitialize() {
-
+        logger.trace("onInitialize");
+        view.setImageListVisible(imageListVisible);
     }
 
     void onBackBtnClicked() {
-        navigator.navigateBack();
+        if (imageListVisible) {
+            imageListVisible = false;
+            view.setImageListVisible(imageListVisible);
+        } else {
+            navigator.navigateBack();
+        }
     }
 
     void onFolderClicked(String nameFolder) {
         logger.trace(nameFolder);
+        imageListVisible = true;
+        view.setImageListVisible(imageListVisible);
     }
 }

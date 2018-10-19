@@ -1,5 +1,6 @@
 package com.photoprint.photoclub.ui.activity.gallery;
 
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import com.photoprint.photoclub.ui.activity.base.MvpActivity;
 import com.photoprint.photoclub.ui.activity.delegate.ToolbarDelegate;
 import com.photoprint.photoclub.ui.activity.gallery.fragment.folder.FolderListFragment;
 import com.photoprint.photoclub.ui.activity.gallery.fragment.folder.adapter.FolderListAdapterImpl;
+import com.photoprint.photoclub.ui.activity.gallery.fragment.image.ImageListFragment;
 
 import javax.inject.Inject;
 
@@ -47,6 +49,7 @@ public class GalleryActivity extends MvpActivity implements GalleryView {
     //endregion
     //region FRAGMENTS
     private FolderListFragment folderListFragment;
+    private ImageListFragment imageListFragment;
     //endregion
 
     private GalleryPresenter presenter;
@@ -72,6 +75,7 @@ public class GalleryActivity extends MvpActivity implements GalleryView {
 
         presenter.initialize();
         setupFolderListFragment();
+        setupImageListFragment();
     }
 
     @Override
@@ -115,9 +119,32 @@ public class GalleryActivity extends MvpActivity implements GalleryView {
             folderListFragment = FolderListFragment.newIstance();
             getFragmentManager().beginTransaction()
                     .add(R.id.fragmentContainer, folderListFragment, F_TAG_FOLDER_LIST)
-//                    .hide(folderListFragment)
+                    .hide(folderListFragment)
                     .commit();
         }
     }
 
+    private void setupImageListFragment() {
+        imageListFragment = (ImageListFragment) getFragmentManager().findFragmentByTag(F_TAG_IMAGE_LIST);
+        if (imageListFragment == null) {
+            imageListFragment = ImageListFragment.newIstance();
+            getFragmentManager().beginTransaction()
+                    .add(R.id.fragmentContainer, imageListFragment, F_TAG_IMAGE_LIST)
+                    .hide(imageListFragment)
+                    .commit();
+        }
+    }
+
+    @Override
+    public void setImageListVisible(boolean imageListVisible) {
+        if (getFragmentManager() != null) {
+            getFragmentManager().beginTransaction()
+                    .setTransition(imageListVisible
+                            ? FragmentTransaction.TRANSIT_FRAGMENT_OPEN
+                            : FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
+                    .hide(imageListVisible ? folderListFragment : imageListFragment)
+                    .show(imageListVisible ? imageListFragment : folderListFragment)
+                    .commit();
+        }
+    }
 }

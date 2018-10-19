@@ -9,17 +9,25 @@ import javax.inject.Inject;
  */
 public class GalleryViewState extends BaseMvpViewState<GalleryView> implements GalleryView {
 
+    private boolean imageListVisible;
+
     @Inject
     GalleryViewState() {
     }
 
     @Override
     protected void onViewAttached(GalleryView view) {
-
+        view.setImageListVisible(imageListVisible);
     }
 
     @Override
     protected void onViewDetached(GalleryView view) {
 
+    }
+
+    @Override
+    public void setImageListVisible(boolean imageListVisible) {
+        this.imageListVisible = imageListVisible;
+        forEachView(view -> view.setImageListVisible(imageListVisible));
     }
 }
