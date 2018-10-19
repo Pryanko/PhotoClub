@@ -3,6 +3,7 @@ package com.photoprint.photoclub.ui.activity.gallery;
 import com.photoprint.photoclub.di.ActivityScope;
 import com.photoprint.photoclub.ui.activity.base.ActivityModule;
 import com.photoprint.photoclub.ui.activity.gallery.fragment.folder.FolderListComponent;
+import com.photoprint.photoclub.ui.activity.gallery.fragment.image.ImageListComponent;
 
 import dagger.Subcomponent;
 
@@ -18,6 +19,8 @@ public interface GalleryComponent {
     GalleryPresenter galleryPresenter();
 
     FolderListComponent folderComponent();
+
+    ImageListComponent imageComponent();
 
     @Subcomponent.Builder
     interface Builder {

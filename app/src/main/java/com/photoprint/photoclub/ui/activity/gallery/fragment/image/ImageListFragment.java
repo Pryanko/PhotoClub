@@ -1,4 +1,4 @@
-package com.photoprint.photoclub.ui.activity.gallery.fragment.folder;
+package com.photoprint.photoclub.ui.activity.gallery.fragment.image;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,58 +13,53 @@ import com.photoprint.logger.Logger;
 import com.photoprint.logger.LoggerFactory;
 import com.photoprint.photoclub.R;
 import com.photoprint.photoclub.ui.activity.gallery.GalleryActivity;
-import com.photoprint.photoclub.ui.activity.gallery.fragment.folder.adapter.FolderListAdapterImpl;
 import com.photoprint.photoclub.ui.activity.gallery.fragment.folder.adapter.GridSpaceDecoration;
 import com.photoprint.photoclub.ui.fragment.base.MvpFragment;
-
-import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- * Список папок с фотографиями
+ * Список фотографий - галерея
  *
  * @author Grigoriy Pryamov.
  */
-public class FolderListFragment extends MvpFragment implements FolderListView {
+public class ImageListFragment extends MvpFragment implements ImageListView {
 
-    private static final Logger logger = LoggerFactory.getLogger(FolderListFragment.class);
+    private static final Logger logger = LoggerFactory.getLogger(ImageListFragment.class);
 
-    public static FolderListFragment newIstance() {
-        return new FolderListFragment();
+    public static ImageListFragment newIstance() {
+        return new ImageListFragment();
     }
 
     //region DI
-    FolderListComponent component;
-    @Inject
-    FolderListAdapterImpl folderListAdapter;
+    ImageListComponent component;
     //endregion
     //region views
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
     //endregion
 
-    private FolderListPresenter presenter;
+    private ImageListPresenter presenter;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
-        component = ((GalleryActivity) getActivity()).getComponent().folderComponent();
+        component = ((GalleryActivity) getActivity()).getComponent().imageComponent();
         component.inject(this);
         super.onCreate(savedInstanceState);
-        presenter = getMvpDelegate().getPresenter(component::folderListPresenter, FolderListPresenter.class);
+        presenter = getMvpDelegate().getPresenter(component::imageListPresenter, ImageListPresenter.class);
         presenter.initialize();
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_folder_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_image_list, container, false);
         ButterKnife.bind(this, view);
-        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2,
+        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 3,
                 LinearLayoutManager.VERTICAL, false));
-        recyclerView.addItemDecoration(new GridSpaceDecoration(2, getResources().getDimensionPixelOffset(R.dimen.offset_folder_item_4dp), true));
-        recyclerView.setAdapter(folderListAdapter);
+        recyclerView.addItemDecoration(new GridSpaceDecoration(3, getResources().getDimensionPixelOffset(R.dimen.offset_folder_item_4dp), true));
+//        recyclerView.setAdapter();
         return view;
     }
 
