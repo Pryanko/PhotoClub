@@ -22,29 +22,44 @@ import com.photoprint.photoclub.R;
 import com.photoprint.utils.CompatUtils;
 
 /**
+ * Чек бокс для галереи
+ *
  * @author Grigoriy Pryamov.
  */
 public class ImageCheckBox extends View implements Checkable {
 
     private static final String KEY_INSTANCE_STATE = "INSTANCE_STATE";
-
+    /**
+     * Цвет галочки
+     */
     @ColorInt
     private final int COLOR_TICK = getContext().getResources().getColor(R.color.appYellow);
+    /**
+     * Background в не чекнутом состоянии
+     */
     @ColorInt
-    private final int COLOR_UNCHECKED =  getContext().getResources().getColor(R.color.appYellow);
+    private final int BACKGROUND_COLOR_UNCHECKED = getContext().getResources().getColor(R.color.appTransparent);
+    /**
+     * Background в чекнутом состоянии
+     */
     @ColorInt
-    private final int COLOR_CHECKED = Color.WHITE;
+    private final int BACKGROUND_COLOR_CHECKED = Color.WHITE;
+    /**
+     * Цвет ободка в не чекнутом состоянии
+     */
     @ColorInt
-    private final int COLOR_FLOOR_UNCHECKED = Color.WHITE;
+    private final int COLOR_FLOOR_UNCHECKED = getContext().getResources().getColor(R.color.appTransparent);;
 
     private static final int DEF_DRAW_SIZE = 25;
-    private static final int DEF_ANIM_DURATION = 250;
+    /**
+     * Скорость анимации
+     */
+    private static final int DEF_ANIM_DURATION = 180;
 
     private Paint mPaint, mTickPaint, mFloorPaint;
     private Point[] mTickPoints;
     private Point mCenterPoint;
     private Path mTickPath;
-
 
     private float mLeftLineDistance, mRightLineDistance, mDrewDistance;
     private float mScaleVal = 1.0f, mFloorScale = 1.0f;
@@ -80,8 +95,8 @@ public class ImageCheckBox extends View implements Checkable {
         int tickColor = ta.getColor(R.styleable.ImageCheckBox_color_tick, COLOR_TICK);
         mAnimDuration = ta.getInt(R.styleable.ImageCheckBox_duration, DEF_ANIM_DURATION);
         mFloorColor = ta.getColor(R.styleable.ImageCheckBox_color_unchecked_stroke, COLOR_FLOOR_UNCHECKED);
-        mCheckedColor = ta.getColor(R.styleable.ImageCheckBox_color_checked, COLOR_CHECKED);
-        mUnCheckedColor = ta.getColor(R.styleable.ImageCheckBox_color_unchecked, COLOR_UNCHECKED);
+        mCheckedColor = ta.getColor(R.styleable.ImageCheckBox_color_checked, BACKGROUND_COLOR_CHECKED);
+        mUnCheckedColor = ta.getColor(R.styleable.ImageCheckBox_color_unchecked, BACKGROUND_COLOR_UNCHECKED);
         mStrokeWidth = ta.getDimensionPixelSize(R.styleable.ImageCheckBox_stroke_width, CompatUtils.dp2px(getContext(), 0));
         ta.recycle();
 
@@ -160,6 +175,7 @@ public class ImageCheckBox extends View implements Checkable {
 
     /**
      * checked with animation
+     *
      * @param checked checked
      * @param animate change with animation
      */

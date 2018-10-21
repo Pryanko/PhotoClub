@@ -16,6 +16,7 @@
     <color name="appDarkGray">#7e7e7e</color>
     <color name="appLightGray">#dcdcdc</color>
     <color name="appPink">#ff4066</color>
+    <color name="appTransparent">#00ffffff</color>
 
     <!--Theme colors-->
     <color name="windowBackground">@android:color/white</color>

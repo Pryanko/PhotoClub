@@ -15,6 +15,7 @@ import com.photoprint.photoclub.R;
 import com.photoprint.photoclub.di.ScreenScope;
 import com.photoprint.photoclub.model.LocalImage;
 import com.photoprint.photoclub.ui.adapter.base.BaseItemsRecyclerAdapter;
+import com.photoprint.photoclub.ui.widget.ImageCheckBox;
 import com.photoprint.utils.ListUtils;
 
 import java.util.Collections;
@@ -41,7 +42,7 @@ public class ImageListAdapterImpl
      */
     private final static float ORIG_SIZE = 1.0f;
     /**
-     * Скорость навигации ресайза итема
+     * Скорость анимации ресайза итема
      */
     private final static int RESIZE_DURATION = 180;
 
@@ -123,6 +124,8 @@ public class ImageListAdapterImpl
 
         @BindView(R.id.image)
         ImageView image;
+        @BindView(R.id.imageCheckBox)
+        ImageCheckBox imageCheckBox;
         private String imagePath;
 
         LocalImageHolder(View itemView) {
@@ -154,16 +157,20 @@ public class ImageListAdapterImpl
             if (animation) {
                 if (selected) {
                     image.animate().scaleX(IMAGE_RESIZE).scaleY(IMAGE_RESIZE).setDuration(RESIZE_DURATION);
+                    imageCheckBox.setChecked(true, true);
                 } else {
                     image.animate().scaleX(ORIG_SIZE).scaleY(ORIG_SIZE).setDuration(RESIZE_DURATION);
+                    imageCheckBox.setChecked(false, true);
                 }
             } else {
                 if (selected) {
                     image.setScaleX(IMAGE_RESIZE);
                     image.setScaleY(IMAGE_RESIZE);
+                    imageCheckBox.setChecked(true, false);
                 } else {
                     image.setScaleX(ORIG_SIZE);
                     image.setScaleY(ORIG_SIZE);
+                    imageCheckBox.setChecked(false, false);
                 }
             }
         }
