@@ -30,13 +30,12 @@ public class GalleryPresenter extends BaseMvpViewStatePresenter<GalleryView, Gal
     @Override
     protected void onInitialize() {
         logger.trace("onInitialize");
-        view.setImageListVisible(imageListVisible);
     }
 
     void onBackBtnClicked() {
         if (imageListVisible) {
             imageListVisible = false;
-            view.setImageListVisible(false);
+            view.hideImageList();
         } else {
             navigator.navigateBack();
         }

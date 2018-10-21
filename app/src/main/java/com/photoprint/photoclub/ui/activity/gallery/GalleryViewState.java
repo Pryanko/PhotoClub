@@ -9,7 +9,6 @@ import javax.inject.Inject;
  */
 public class GalleryViewState extends BaseMvpViewState<GalleryView> implements GalleryView {
 
-    private boolean imageListVisible;
     private String folder;
 
     @Inject
@@ -18,7 +17,11 @@ public class GalleryViewState extends BaseMvpViewState<GalleryView> implements G
 
     @Override
     protected void onViewAttached(GalleryView view) {
-        view.setImageListVisible(imageListVisible);
+        if (folder == null) {
+            view.hideImageList();
+        } else {
+            view.showImageList(folder);
+        }
     }
 
     @Override
@@ -27,14 +30,14 @@ public class GalleryViewState extends BaseMvpViewState<GalleryView> implements G
     }
 
     @Override
-    public void setImageListVisible(boolean imageListVisible) {
-        this.imageListVisible = imageListVisible;
-        forEachView(view -> view.setImageListVisible(imageListVisible));
-    }
-
-    @Override
     public void showImageList(String nameFolder) {
         this.folder = nameFolder;
         forEachView(view -> view.showImageList(this.folder));
+    }
+
+    @Override
+    public void hideImageList() {
+        this.folder = null;
+        forEachView(GalleryView::hideImageList);
     }
 }

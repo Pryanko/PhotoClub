@@ -78,7 +78,7 @@ public class ImageListFragment extends MvpFragment implements ImageListView {
         recyclerView.setAdapter(null);
     }
 
-    public void onBackPressed() {
-        presenter.onBackPressed();
+    public void hideImageList() {
+        presenter.hideImageList();
     }
 }

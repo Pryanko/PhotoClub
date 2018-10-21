@@ -49,7 +49,7 @@ public class ImageListPresenter extends BaseMvpViewStatePresenter<ImageListView,
                 });
     }
 
-    void onBackPressed() {
+    void hideImageList() {
         imageListAdapter.clearAdapter();
     }
 

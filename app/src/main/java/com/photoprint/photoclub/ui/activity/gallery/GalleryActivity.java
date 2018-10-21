@@ -81,9 +81,6 @@ public class GalleryActivity extends MvpActivity implements GalleryView {
     @Override
     public void onBackPressed() {
         presenter.onBackBtnClicked();
-        if (imageListFragment != null) {
-            imageListFragment.onBackPressed();
-        }
     }
 
     @Override
@@ -122,7 +119,6 @@ public class GalleryActivity extends MvpActivity implements GalleryView {
             folderListFragment = FolderListFragment.newIstance();
             getFragmentManager().beginTransaction()
                     .add(R.id.fragmentContainer, folderListFragment, F_TAG_FOLDER_LIST)
-                    .hide(folderListFragment)
                     .commit();
         }
     }
@@ -139,27 +135,28 @@ public class GalleryActivity extends MvpActivity implements GalleryView {
     }
 
     @Override
-    public void setImageListVisible(boolean imageListVisible) {
-        if (getFragmentManager() != null) {
-            getFragmentManager().beginTransaction()
-                    .setTransition(imageListVisible
-                            ? FragmentTransaction.TRANSIT_FRAGMENT_OPEN
-                            : FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
-                    .hide(imageListVisible ? folderListFragment : imageListFragment)
-                    .show(imageListVisible ? imageListFragment : folderListFragment)
-                    .commit();
-        }
-    }
-
-    @Override
     public void showImageList(String nameFolder) {
         if (getFragmentManager() != null) {
             getFragmentManager().beginTransaction()
                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                     .hide(folderListFragment)
                     .show(imageListFragment)
-                    .commit();
+                    .commitAllowingStateLoss();
             imageListFragment.setFolder(nameFolder);
         }
     }
+
+    @Override
+    public void hideImageList() {
+        if (getFragmentManager() != null) {
+            getFragmentManager().beginTransaction()
+                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
+                    .hide(imageListFragment)
+                    .show(folderListFragment)
+                    .commitAllowingStateLoss();
+            imageListFragment.hideImageList();
+        }
+    }
+
+
 }
