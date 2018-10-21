@@ -14,4 +14,6 @@ public interface ImageListAdapter {
     void clearAdapter();
 
     void setImageList(@NonNull List<LocalImage> localImages);
+
+    void setImageSelected(int position);
 }

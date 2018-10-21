@@ -32,8 +32,30 @@ import butterknife.ButterKnife;
 public class ImageListAdapterImpl
         extends BaseItemsRecyclerAdapter<LocalImage, ImageListAdapterImpl.LocalImageHolder>
         implements ImageListAdapter {
+    /**
+     * Процентная часть для ресайза изображения при тапе по итему
+     */
+    private final static float IMAGE_RESIZE = 0.9f;
+    /**
+     * Оригинальная процентная часть для ресайза при тапе по итему
+     */
+    private final static float ORIG_SIZE = 1.0f;
+    /**
+     * Скорость навигации ресайза итема
+     */
+    private final static int RESIZE_DURATION = 180;
 
     private InteractionListener interactionListener;
+    /**
+     * Полезная нагрузка для метода notify по умолчанию.
+     * Иначе отработает стандартная анимация и все элементы "моргнут".
+     */
+    static final Object DEFAULT_PAYLOAD = new Object();
+    /**
+     * Полезная нагрузка для метода notify.
+     * Обрабатывает изменение состояния элемента "Выбрано/Не выбрано"
+     */
+    static final Object SELECTED_CHANGE_PAYLOAD = new Object();
 
     @Inject
     ImageListAdapterImpl() {
@@ -53,7 +75,22 @@ public class ImageListAdapterImpl
 
     @Override
     public void onBindViewHolder(@NonNull LocalImageHolder holder, int position) {
-        holder.bind(items.get(position));
+        holder.bindAll(items.get(position));
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull LocalImageHolder holder, int position,
+                                 @NonNull List<Object> payloads) {
+        if (ListUtils.notEmpty(payloads)) {
+            LocalImage localImage = items.get(position);
+            if (payloads.get(0) == DEFAULT_PAYLOAD) {
+                holder.bindAll(localImage);
+            } else if (payloads.get(0) == SELECTED_CHANGE_PAYLOAD) {
+                holder.bindSelected(true, localImage.isSelectedForPrint());
+            }
+        } else {
+            onBindViewHolder(holder, position);
+        }
     }
 
 
@@ -71,6 +108,11 @@ public class ImageListAdapterImpl
         DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(diffUtilCallback, false);
         this.items = localImages;
         diffResult.dispatchUpdatesTo(this);
+    }
+
+    @Override
+    public void setImageSelected(int position) {
+        notifyItemChanged(position, SELECTED_CHANGE_PAYLOAD);
     }
 
     public void setInteractionListener(InteractionListener interactionListener) {
@@ -93,9 +135,10 @@ public class ImageListAdapterImpl
             });
         }
 
-        public void bind(LocalImage localImage) {
+        void bindAll(LocalImage localImage) {
             imagePath = localImage.getFullPath();
             bindImage();
+            bindSelected(false, localImage.isSelectedForPrint());
         }
 
         void bindImage() {
@@ -104,6 +147,24 @@ public class ImageListAdapterImpl
                 image.getViewTreeObserver().addOnGlobalLayoutListener(onGlobalLayoutListener);
             } else {
                 onImageViewSizeDetermined();
+            }
+        }
+
+        void bindSelected(boolean clickItem, boolean selected) {
+            if (clickItem) {
+                if (selected) {
+                    image.animate().scaleX(IMAGE_RESIZE).scaleY(IMAGE_RESIZE).setDuration(RESIZE_DURATION);
+                } else {
+                    image.animate().scaleX(ORIG_SIZE).scaleY(ORIG_SIZE).setDuration(RESIZE_DURATION);
+                }
+            } else {
+                if (selected) {
+                    image.setScaleX(IMAGE_RESIZE);
+                    image.setScaleY(IMAGE_RESIZE);
+                } else {
+                    image.setScaleX(ORIG_SIZE);
+                    image.setScaleY(ORIG_SIZE);
+                }
             }
         }
 

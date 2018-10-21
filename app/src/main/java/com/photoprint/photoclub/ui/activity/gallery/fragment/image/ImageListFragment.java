@@ -64,6 +64,7 @@ public class ImageListFragment extends MvpFragment implements ImageListView {
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 3,
                 LinearLayoutManager.VERTICAL, false));
         recyclerView.addItemDecoration(new GridSpaceDecoration(3, getResources().getDimensionPixelOffset(R.dimen.offset_folder_item_4dp), true));
+        imageListAdapter.setInteractionListener(position -> presenter.onImageClicked(position));
         recyclerView.setAdapter(imageListAdapter);
         return view;
     }

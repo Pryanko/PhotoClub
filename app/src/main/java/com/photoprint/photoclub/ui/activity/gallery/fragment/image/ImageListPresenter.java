@@ -3,9 +3,13 @@ package com.photoprint.photoclub.ui.activity.gallery.fragment.image;
 import com.photoprint.logger.Logger;
 import com.photoprint.logger.LoggerFactory;
 import com.photoprint.photoclub.helper.runtimepermission.AppSchedulers;
+import com.photoprint.photoclub.model.LocalImage;
 import com.photoprint.photoclub.ui.activity.gallery.fragment.image.adapter.ImageListAdapter;
 import com.photoprint.photoclub.ui.activity.gallery.fragment.image.interceptor.LocalImageLoader;
 import com.photoprint.photoclub.ui.mvp.presenter.BaseMvpViewStatePresenter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -22,6 +26,8 @@ public class ImageListPresenter extends BaseMvpViewStatePresenter<ImageListView,
     private final ImageListAdapter imageListAdapter;
     private final LocalImageLoader localImageLoader;
     private Disposable loadDisposable = Disposables.disposed();
+
+    private List<LocalImage> localImages = new ArrayList<>();
 
     @Inject
     ImageListPresenter(ImageListViewState viewState,
@@ -43,7 +49,8 @@ public class ImageListPresenter extends BaseMvpViewStatePresenter<ImageListView,
                 .subscribeOn(AppSchedulers.db())
                 .subscribe(result -> {
                     if (result.isSuccessful()) {
-                        imageListAdapter.setImageList(result.getLocalImages());
+                        localImages = result.getLocalImages();
+                        imageListAdapter.setImageList(localImages);
                     }
                     //todo - доработать на случай отсутсвия данных
                 });
@@ -51,6 +58,12 @@ public class ImageListPresenter extends BaseMvpViewStatePresenter<ImageListView,
 
     void hideImageList() {
         imageListAdapter.clearAdapter();
+    }
+
+    void onImageClicked(int position) {
+        LocalImage localImage = localImages.get(position);
+        localImage.setSelectedForPrint(!localImage.isSelectedForPrint());
+        imageListAdapter.setImageSelected(position);
     }
 
     @Override
