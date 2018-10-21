@@ -150,8 +150,8 @@ public class ImageListAdapterImpl
             }
         }
 
-        void bindSelected(boolean clickItem, boolean selected) {
-            if (clickItem) {
+        void bindSelected(boolean animation, boolean selected) {
+            if (animation) {
                 if (selected) {
                     image.animate().scaleX(IMAGE_RESIZE).scaleY(IMAGE_RESIZE).setDuration(RESIZE_DURATION);
                 } else {
