@@ -28,6 +28,9 @@
     <!--GalleryActivity-->
     <string name="gallery_title">Галлерея</string>
 
+    <!--ImageSettingCard-->
+    <string name="setting_card_btn_next">Далее</string>
+
     <!--AppMenu-->
     <string name="menu_drawer_new_order">Новый заказ</string>
     <string name="menu_drawer_my_order">Мои заказы</string>
