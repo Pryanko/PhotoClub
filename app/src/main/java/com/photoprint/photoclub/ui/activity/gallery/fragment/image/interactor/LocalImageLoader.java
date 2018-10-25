@@ -1,4 +1,4 @@
-package com.photoprint.photoclub.ui.activity.gallery.fragment.image.interceptor;
+package com.photoprint.photoclub.ui.activity.gallery.fragment.image.interactor;
 
 import android.support.annotation.NonNull;
 

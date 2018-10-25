@@ -5,7 +5,7 @@ import com.photoprint.logger.LoggerFactory;
 import com.photoprint.photoclub.helper.runtimepermission.AppSchedulers;
 import com.photoprint.photoclub.model.LocalImage;
 import com.photoprint.photoclub.ui.activity.gallery.fragment.image.adapter.ImageListAdapter;
-import com.photoprint.photoclub.ui.activity.gallery.fragment.image.interceptor.LocalImageLoader;
+import com.photoprint.photoclub.ui.activity.gallery.fragment.image.interactor.LocalImageLoader;
 import com.photoprint.photoclub.ui.mvp.presenter.BaseMvpViewStatePresenter;
 
 import java.util.ArrayList;
