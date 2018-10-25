@@ -62,8 +62,15 @@ public class ImageListPresenter extends BaseMvpViewStatePresenter<ImageListView,
 
     void onImageClicked(int position) {
         LocalImage localImage = localImages.get(position);
-        localImage.setSelectedForPrint(!localImage.isSelectedForPrint());
-        imageListAdapter.setImageSelected(position);
+        if (localImage.isSelectedForPrint()) {
+            localImage.setSelectedForPrint(!localImage.isSelectedForPrint());
+            imageListAdapter.setImageSelected(position);
+            view.setImageSettingCardVisible(false, position);
+        } else {
+            localImage.setSelectedForPrint(!localImage.isSelectedForPrint());
+            imageListAdapter.setImageSelected(position);
+            view.setImageSettingCardVisible(true, position);
+        }
     }
 
     @Override

@@ -15,6 +15,7 @@ import com.photoprint.photoclub.R;
 import com.photoprint.photoclub.ui.activity.gallery.GalleryActivity;
 import com.photoprint.photoclub.ui.activity.gallery.adapter.GridSpaceDecoration;
 import com.photoprint.photoclub.ui.activity.gallery.fragment.image.adapter.ImageListAdapterImpl;
+import com.photoprint.photoclub.ui.activity.gallery.fragment.image.imagesettingcard.ImageSettingCard;
 import com.photoprint.photoclub.ui.fragment.base.MvpFragment;
 
 import javax.inject.Inject;
@@ -31,9 +32,11 @@ public class ImageListFragment extends MvpFragment implements ImageListView {
 
     private static final Logger logger = LoggerFactory.getLogger(ImageListFragment.class);
 
-    public static ImageListFragment newIstance() {
+    public static ImageListFragment newInstance() {
         return new ImageListFragment();
     }
+
+    private static final String MVP_IMAGE_SETTING_CARD_ID = "MVP_IMAGE_SETTING_CARD_ID";
 
     //region DI
     ImageListComponent component;
@@ -41,6 +44,8 @@ public class ImageListFragment extends MvpFragment implements ImageListView {
     ImageListAdapterImpl imageListAdapter;
     //endregion
     //region views
+    @BindView(R.id.imageSettingCard)
+    ImageSettingCard imageSettingCard;
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
     //endregion
@@ -66,6 +71,7 @@ public class ImageListFragment extends MvpFragment implements ImageListView {
         recyclerView.addItemDecoration(new GridSpaceDecoration(3, getResources().getDimensionPixelOffset(R.dimen.offset_folder_item_4dp), true));
         imageListAdapter.setInteractionListener(position -> presenter.onImageClicked(position));
         recyclerView.setAdapter(imageListAdapter);
+        imageSettingCard.init(component, getMvpDelegate(), MVP_IMAGE_SETTING_CARD_ID);
         return view;
     }
 
@@ -81,5 +87,9 @@ public class ImageListFragment extends MvpFragment implements ImageListView {
 
     public void hideImageList() {
         presenter.hideImageList();
+    }
+
+    @Override
+    public void setImageSettingCardVisible(boolean visible, int lastItemClicked) {
     }
 }

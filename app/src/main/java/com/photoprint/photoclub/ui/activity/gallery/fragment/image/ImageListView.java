@@ -6,4 +6,5 @@ import com.photoprint.photoclub.ui.mvp.view.MvpView;
  * @author Grigoriy Pryamov.
  */
 interface ImageListView extends MvpView {
+    void setImageSettingCardVisible(boolean visible, int lastItemClicked);
 }

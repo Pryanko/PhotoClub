@@ -126,7 +126,7 @@ public class GalleryActivity extends MvpActivity implements GalleryView {
     private void setupImageListFragment() {
         imageListFragment = (ImageListFragment) getFragmentManager().findFragmentByTag(F_TAG_IMAGE_LIST);
         if (imageListFragment == null) {
-            imageListFragment = ImageListFragment.newIstance();
+            imageListFragment = ImageListFragment.newInstance();
             getFragmentManager().beginTransaction()
                     .add(R.id.fragmentContainer, imageListFragment, F_TAG_IMAGE_LIST)
                     .hide(imageListFragment)
@@ -157,6 +157,4 @@ public class GalleryActivity extends MvpActivity implements GalleryView {
             imageListFragment.hideImageList();
         }
     }
-
-
 }

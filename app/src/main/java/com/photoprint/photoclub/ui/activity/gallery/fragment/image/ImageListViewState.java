@@ -22,4 +22,9 @@ class ImageListViewState extends BaseMvpViewState<ImageListView> implements Imag
     protected void onViewDetached(ImageListView view) {
 
     }
+
+    @Override
+    public void setImageSettingCardVisible(boolean visible, int lastItemClicked) {
+        forEachView(view -> view.setImageSettingCardVisible(visible, lastItemClicked));
+    }
 }

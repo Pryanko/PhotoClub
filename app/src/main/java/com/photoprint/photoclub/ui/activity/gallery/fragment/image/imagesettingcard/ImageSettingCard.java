@@ -33,9 +33,14 @@ public class ImageSettingCard extends FrameLayout implements ImageSettingCardVie
     private MvpDelegate mvpDelegate;
     private ImageSettingCardPresenter presenter;
     //endregion
-
+    //region VIEWS
     @BindView(R.id.nextButton)
     Button button;
+    //endregion
+    /**
+     * Флажок открыта/закрыта карточка настроек
+     */
+    private boolean isActive;
 
     public ImageSettingCard(@NonNull Context context) {
         this(context, null);
@@ -62,5 +67,9 @@ public class ImageSettingCard extends FrameLayout implements ImageSettingCardVie
         mvpDelegate.init(parent, id);
         presenter = mvpDelegate.getPresenter(component::imageSettingCardPresenter, ImageSettingCardPresenter.class);
         presenter.initialize();
+    }
+
+    public void setParams(long imageId) {
+        logger.trace(String.valueOf(imageId));
     }
 }
