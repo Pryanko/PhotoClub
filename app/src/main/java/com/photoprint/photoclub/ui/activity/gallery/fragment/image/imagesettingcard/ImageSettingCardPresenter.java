@@ -34,4 +34,8 @@ public class ImageSettingCardPresenter extends BaseMvpViewStatePresenter<ImageSe
     void onCutCountBtnClicked() {
 
     }
+
+    void applyImage(long imageId) {
+
+    }
 }

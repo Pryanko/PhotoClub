@@ -93,6 +93,10 @@ public class ImageSettingCard extends FrameLayout implements ImageSettingCardVie
         logger.trace(String.valueOf(imageId));
     }
 
+    private void applyImage(long imageId) {
+        presenter.applyImage(imageId);
+    }
+
     private interface OnCropBtnClickListener {
         void onCropBtnClicked();
     }
