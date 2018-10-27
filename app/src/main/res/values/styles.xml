@@ -70,8 +70,10 @@
     </style>
 
     <style name="Widget.App.Button.Yellow" parent="Theme.AppCompat.Light">
-        <item name="android:buttonStyle">@style/Widget.AppCompat.Button.Colored</item>
-        <item name="colorAccent">@color/appYellow</item>
+        <item name="android:buttonStyle">@style/Widget.AppCompat.Button.Borderless</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textSize">16dp</item>
+        <item name="android:textColor">@color/bg_count_setting</item>
     </style>
 
     <!--Пункт бокового меню-->
