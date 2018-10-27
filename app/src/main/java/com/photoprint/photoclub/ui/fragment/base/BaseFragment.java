@@ -1,6 +1,7 @@
 package com.photoprint.photoclub.ui.fragment.base;
 
-import android.app.Fragment;
+
+import android.support.v4.app.Fragment;
 
 import com.photoprint.photoclub.AppComponent;
 import com.photoprint.photoclub.di.Dagger;

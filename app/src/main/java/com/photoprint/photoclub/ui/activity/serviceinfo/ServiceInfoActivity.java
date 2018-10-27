@@ -124,10 +124,10 @@ public class ServiceInfoActivity extends MvpActivity implements ServiceInfoView 
     }
 
     private void setupServiceInfoFragment() {
-        serviceInfoFragment = (ServiceInfoFragment) getFragmentManager().findFragmentByTag(F_TAG_SERVICE_INFO);
+        serviceInfoFragment = (ServiceInfoFragment) getSupportFragmentManager().findFragmentByTag(F_TAG_SERVICE_INFO);
         if (serviceInfoFragment == null) {
             serviceInfoFragment = ServiceInfoFragment.newInstance();
-            getFragmentManager().beginTransaction()
+            getSupportFragmentManager().beginTransaction()
                     .add(R.id.fragmentContainer, serviceInfoFragment, F_TAG_SERVICE_INFO)
                     .hide(serviceInfoFragment)
                     .commit();
@@ -137,10 +137,10 @@ public class ServiceInfoActivity extends MvpActivity implements ServiceInfoView 
     }
 
     private void setupMaquetteListFragment() {
-        maquetteListFragment = (MaquetteListFragment) getFragmentManager().findFragmentByTag(F_TAG_MAQUETTE_LIST);
+        maquetteListFragment = (MaquetteListFragment) getSupportFragmentManager().findFragmentByTag(F_TAG_MAQUETTE_LIST);
         if (maquetteListFragment == null) {
             maquetteListFragment = MaquetteListFragment.newInstance();
-            getFragmentManager().beginTransaction()
+            getSupportFragmentManager().beginTransaction()
                     .add(R.id.fragmentContainer, maquetteListFragment, F_TAG_MAQUETTE_LIST)
                     .hide(maquetteListFragment)
                     .commit();
@@ -167,8 +167,8 @@ public class ServiceInfoActivity extends MvpActivity implements ServiceInfoView 
 
     @Override
     public void setMaquetteFragmentVisible(boolean fragmentVisible) {
-        if (getFragmentManager() != null) {
-            getFragmentManager().beginTransaction()
+        if (getSupportFragmentManager() != null) {
+            getSupportFragmentManager().beginTransaction()
                     .hide(fragmentVisible ? serviceInfoFragment : maquetteListFragment)
                     .show(fragmentVisible ? maquetteListFragment : serviceInfoFragment)
                     .commit();
@@ -177,7 +177,7 @@ public class ServiceInfoActivity extends MvpActivity implements ServiceInfoView 
 
     @Override
     public void showMaquetteList() {
-        getFragmentManager().beginTransaction()
+        getSupportFragmentManager().beginTransaction()
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                 .hide(serviceInfoFragment)
                 .show(maquetteListFragment)
@@ -186,7 +186,7 @@ public class ServiceInfoActivity extends MvpActivity implements ServiceInfoView 
 
     @Override
     public void hideMaquetteList() {
-        getFragmentManager().beginTransaction()
+        getSupportFragmentManager().beginTransaction()
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
                 .hide(maquetteListFragment)
                 .show(serviceInfoFragment)

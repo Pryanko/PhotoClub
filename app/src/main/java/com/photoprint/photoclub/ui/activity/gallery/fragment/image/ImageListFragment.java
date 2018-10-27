@@ -52,6 +52,8 @@ public class ImageListFragment extends MvpFragment implements ImageListView {
 
     private ImageListPresenter presenter;
 
+    private OnCropBtnClickListener onCropBtnClickListener;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         component = ((GalleryActivity) getActivity()).getComponent().imageComponent();
@@ -72,6 +74,11 @@ public class ImageListFragment extends MvpFragment implements ImageListView {
         imageListAdapter.setInteractionListener(position -> presenter.onImageClicked(position));
         recyclerView.setAdapter(imageListAdapter);
         imageSettingCard.init(component, getMvpDelegate(), MVP_IMAGE_SETTING_CARD_ID);
+        imageSettingCard.setOnCropBtnClickListener(() -> {
+            if (onCropBtnClickListener != null) {
+                onCropBtnClickListener.onCropBtnClicked();
+            }
+        });
         return view;
     }
 
@@ -92,5 +99,13 @@ public class ImageListFragment extends MvpFragment implements ImageListView {
     @Override
     public void setCardParams(@Nullable Long id) {
         imageSettingCard.setParams(id);
+    }
+
+    public void setOnCropBtnClickListener(OnCropBtnClickListener onCropBtnClickListener) {
+        this.onCropBtnClickListener = onCropBtnClickListener;
+    }
+
+    public interface OnCropBtnClickListener {
+        void onCropBtnClicked();
     }
 }

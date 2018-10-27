@@ -31,7 +31,7 @@ public class FolderListFragment extends MvpFragment implements FolderListView {
 
     private static final Logger logger = LoggerFactory.getLogger(FolderListFragment.class);
 
-    public static FolderListFragment newIstance() {
+    public static FolderListFragment newInstance() {
         return new FolderListFragment();
     }
 

@@ -1,8 +1,9 @@
 package com.photoprint.photoclub.ui.fragment.base;
 
-import android.app.Fragment;
+
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 
 import com.photoprint.photoclub.ui.mvp.MvpDelegate;
 import com.photoprint.photoclub.ui.mvp.view.MvpView;

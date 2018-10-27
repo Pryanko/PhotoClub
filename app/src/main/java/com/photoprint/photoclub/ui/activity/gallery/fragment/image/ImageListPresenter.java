@@ -52,8 +52,8 @@ public class ImageListPresenter extends BaseMvpViewStatePresenter<ImageListView,
     void applyFolder(String folder) {
         loadDisposable.dispose();
         loadDisposable = localImageLoader.getLocalImagesByFolder(folder)
-                .observeOn(AppSchedulers.ui())
                 .subscribeOn(AppSchedulers.db())
+                .observeOn(AppSchedulers.ui())
                 .subscribe(result -> {
                     if (result.isSuccessful()) {
                         localImages = result.getLocalImages();

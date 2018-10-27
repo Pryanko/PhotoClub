@@ -114,20 +114,21 @@ public class GalleryActivity extends MvpActivity implements GalleryView {
     }
 
     private void setupFolderListFragment() {
-        folderListFragment = (FolderListFragment) getFragmentManager().findFragmentByTag(F_TAG_FOLDER_LIST);
+        folderListFragment = (FolderListFragment) getSupportFragmentManager().findFragmentByTag(F_TAG_FOLDER_LIST);
         if (folderListFragment == null) {
-            folderListFragment = FolderListFragment.newIstance();
-            getFragmentManager().beginTransaction()
+            folderListFragment = FolderListFragment.newInstance();
+            getSupportFragmentManager().beginTransaction()
                     .add(R.id.fragmentContainer, folderListFragment, F_TAG_FOLDER_LIST)
                     .commit();
         }
     }
 
     private void setupImageListFragment() {
-        imageListFragment = (ImageListFragment) getFragmentManager().findFragmentByTag(F_TAG_IMAGE_LIST);
+        imageListFragment = (ImageListFragment) getSupportFragmentManager().findFragmentByTag(F_TAG_IMAGE_LIST);
         if (imageListFragment == null) {
             imageListFragment = ImageListFragment.newInstance();
-            getFragmentManager().beginTransaction()
+            imageListFragment.setOnCropBtnClickListener(this::onCropBtnClicked);
+            getSupportFragmentManager().beginTransaction()
                     .add(R.id.fragmentContainer, imageListFragment, F_TAG_IMAGE_LIST)
                     .hide(imageListFragment)
                     .commit();
@@ -136,8 +137,8 @@ public class GalleryActivity extends MvpActivity implements GalleryView {
 
     @Override
     public void showImageList(String nameFolder) {
-        if (getFragmentManager() != null) {
-            getFragmentManager().beginTransaction()
+        if (getSupportFragmentManager() != null) {
+            getSupportFragmentManager().beginTransaction()
                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                     .hide(folderListFragment)
                     .show(imageListFragment)
@@ -148,13 +149,16 @@ public class GalleryActivity extends MvpActivity implements GalleryView {
 
     @Override
     public void hideImageList() {
-        if (getFragmentManager() != null) {
-            getFragmentManager().beginTransaction()
+        if (getSupportFragmentManager() != null) {
+            getSupportFragmentManager().beginTransaction()
                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
                     .hide(imageListFragment)
                     .show(folderListFragment)
                     .commitAllowingStateLoss();
             imageListFragment.hideImageList();
         }
+    }
+
+    private void onCropBtnClicked() {
     }
 }

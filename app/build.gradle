@@ -103,16 +103,16 @@ dependencies {
     depsDagger()
     // Glide
     depsOldGlide()
-    //Test
+    // Test
     depsTests()
-    //MapStruct
+    // MapStruct
     depsMapStruct()
     // RxJava
     depsRxJava()
-    //ButterKnife
+    // ButterKnife
     implementation "com.jakewharton:butterknife:${versions.butterknife}"
     annotationProcessor "com.jakewharton:butterknife-compiler:${versions.butterknife}"
-    //Default
+    // Default
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation "com.facebook.fresco:fresco:${versions.fresco}"
     implementation "com.android.support:recyclerview-v7:${versions.support}"

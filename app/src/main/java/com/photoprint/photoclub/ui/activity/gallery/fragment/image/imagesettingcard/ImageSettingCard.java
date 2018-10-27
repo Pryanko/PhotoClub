@@ -110,7 +110,7 @@ public class ImageSettingCard extends FrameLayout implements ImageSettingCardVie
         }
     }
 
-    private interface OnCropBtnClickListener {
+    public interface OnCropBtnClickListener {
         void onCropBtnClicked();
     }
 }
