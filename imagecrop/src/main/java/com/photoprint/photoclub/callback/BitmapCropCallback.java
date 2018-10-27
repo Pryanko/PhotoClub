@@ -1,0 +1,14 @@
+package com.photoprint.photoclub.callback;
+
+import android.net.Uri;
+import android.support.annotation.NonNull;
+
+/**
+ * @author Grigoriy Pryamov.
+ */
+public interface BitmapCropCallback {
+
+    void onBitmapCropped(@NonNull Uri resultUri, int offsetX, int offsetY, int imageWidth, int imageHeight);
+
+    void onCropFailure(@NonNull Throwable t);
+}

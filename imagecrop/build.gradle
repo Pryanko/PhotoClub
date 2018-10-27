@@ -28,11 +28,17 @@ android {
     }
 }
 
+def retrofit_version = '2.4.0'
+
 dependencies {
     // Logger
     implementation project(':logger')
+    // Utils
+    implementation project(':utils')
     // Android annotations
     depsAndroidAnnotations()
     // Tests
     depsTests()
+    api "com.squareup.retrofit2:retrofit:$retrofit_version"
+    implementation "com.android.support:appcompat-v7:${versions.support}"
 }
