@@ -7,6 +7,7 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 
 import com.photoprint.logger.Logger;
 import com.photoprint.logger.LoggerFactory;
@@ -34,6 +35,8 @@ public class ImageSettingCard extends FrameLayout implements ImageSettingCardVie
     private ImageSettingCardPresenter presenter;
     //endregion
     //region VIEWS
+    @BindView(R.id.count)
+    TextView count;
     @BindView(R.id.nextButton)
     Button button;
     //endregion
