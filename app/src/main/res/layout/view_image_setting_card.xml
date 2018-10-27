@@ -68,7 +68,7 @@
         android:paddingEnd="12dp"
         android:paddingBottom="6dp"
         android:text="1"
-        android:textColor="@color/appYellow"
+        android:textColor="@color/bg_count_setting"
         android:textSize="16dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/nextButton"

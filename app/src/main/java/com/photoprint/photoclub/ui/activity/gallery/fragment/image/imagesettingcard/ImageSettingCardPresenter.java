@@ -1,5 +1,7 @@
 package com.photoprint.photoclub.ui.activity.gallery.fragment.image.imagesettingcard;
 
+import android.support.annotation.Nullable;
+
 import com.photoprint.logger.Logger;
 import com.photoprint.logger.LoggerFactory;
 import com.photoprint.photoclub.ui.mvp.presenter.BaseMvpViewStatePresenter;
@@ -21,6 +23,7 @@ public class ImageSettingCardPresenter extends BaseMvpViewStatePresenter<ImageSe
     @Override
     protected void onInitialize() {
         logger.trace("onInitialize");
+        view.setCardEnabled(false);
     }
 
     void onNextBtnClicked() {
@@ -35,7 +38,11 @@ public class ImageSettingCardPresenter extends BaseMvpViewStatePresenter<ImageSe
 
     }
 
-    void applyImage(long imageId) {
-
+    void applyImage(@Nullable Long imageId) {
+        if (imageId == null) {
+            view.setCardEnabled(false);
+        } else {
+            view.setCardEnabled(true);
+        }
     }
 }

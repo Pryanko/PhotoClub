@@ -8,7 +8,7 @@
             </solid>
             <stroke
                 android:width="2dp"
-                android:color="@color/appYellow">
+                android:color="@color/bg_count_setting">
 
             </stroke>
 

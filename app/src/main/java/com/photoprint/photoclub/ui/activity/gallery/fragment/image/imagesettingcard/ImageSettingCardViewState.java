@@ -9,17 +9,25 @@ import javax.inject.Inject;
  */
 class ImageSettingCardViewState extends BaseMvpViewState<ImageSettingCardView> implements ImageSettingCardView {
 
+    private boolean cardEnabled;
+
     @Inject
     ImageSettingCardViewState() {
     }
 
     @Override
     protected void onViewAttached(ImageSettingCardView view) {
-
+        view.setCardEnabled(cardEnabled);
     }
 
     @Override
     protected void onViewDetached(ImageSettingCardView view) {
 
+    }
+
+    @Override
+    public void setCardEnabled(boolean enabled) {
+        this.cardEnabled = enabled;
+        forEachView(view -> view.setCardEnabled(this.cardEnabled));
     }
 }

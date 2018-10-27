@@ -9,13 +9,15 @@ import javax.inject.Inject;
  */
 class ImageListViewState extends BaseMvpViewState<ImageListView> implements ImageListView {
 
+    private Long imageId;
+
     @Inject
     ImageListViewState() {
     }
 
     @Override
     protected void onViewAttached(ImageListView view) {
-
+        view.setCardParams(imageId);
     }
 
     @Override
@@ -24,7 +26,8 @@ class ImageListViewState extends BaseMvpViewState<ImageListView> implements Imag
     }
 
     @Override
-    public void setImageSettingCardVisible(boolean visible, int lastItemClicked) {
-        forEachView(view -> view.setImageSettingCardVisible(visible, lastItemClicked));
+    public void setCardParams(Long id) {
+        this.imageId = id;
+        forEachView(view -> view.setCardParams(this.imageId));
     }
 }

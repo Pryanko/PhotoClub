@@ -90,6 +90,7 @@ public class ImageListFragment extends MvpFragment implements ImageListView {
     }
 
     @Override
-    public void setImageSettingCardVisible(boolean visible, int lastItemClicked) {
+    public void setCardParams(@Nullable Long id) {
+        imageSettingCard.setParams(id);
     }
 }

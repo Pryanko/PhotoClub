@@ -9,7 +9,9 @@ import com.photoprint.photoclub.ui.activity.gallery.fragment.image.interactor.Lo
 import com.photoprint.photoclub.ui.mvp.presenter.BaseMvpViewStatePresenter;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.inject.Inject;
 
@@ -28,6 +30,11 @@ public class ImageListPresenter extends BaseMvpViewStatePresenter<ImageListView,
     private Disposable loadDisposable = Disposables.disposed();
 
     private List<LocalImage> localImages = new ArrayList<>();
+
+    /**
+     * Список выбранных ids фотографий
+     */
+    private Set<Long> ids = new HashSet<>();
 
     @Inject
     ImageListPresenter(ImageListViewState viewState,
@@ -58,6 +65,7 @@ public class ImageListPresenter extends BaseMvpViewStatePresenter<ImageListView,
 
     void hideImageList() {
         imageListAdapter.clearAdapter();
+        ids.clear();
     }
 
     void onImageClicked(int position) {
@@ -65,11 +73,15 @@ public class ImageListPresenter extends BaseMvpViewStatePresenter<ImageListView,
         if (localImage.isSelectedForPrint()) {
             localImage.setSelectedForPrint(!localImage.isSelectedForPrint());
             imageListAdapter.setImageSelected(position);
-            view.setImageSettingCardVisible(false, position);
+            ids.remove(localImage.getId());
+            if (ids.isEmpty()) {
+                view.setCardParams(null);
+            }
         } else {
             localImage.setSelectedForPrint(!localImage.isSelectedForPrint());
             imageListAdapter.setImageSelected(position);
-            view.setImageSettingCardVisible(true, position);
+            ids.add(localImage.getId());
+            view.setCardParams(localImage.getId());
         }
     }
 

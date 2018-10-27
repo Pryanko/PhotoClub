@@ -16,7 +16,10 @@ import com.photoprint.photoclub.R;
 import com.photoprint.photoclub.ui.activity.gallery.fragment.image.ImageListComponent;
 import com.photoprint.photoclub.ui.mvp.MvpDelegate;
 
+import java.util.List;
+
 import butterknife.BindView;
+import butterknife.BindViews;
 import butterknife.ButterKnife;
 
 /**
@@ -46,6 +49,8 @@ public class ImageSettingCard extends FrameLayout implements ImageSettingCardVie
     ImageButton cutCount;
     @BindView(R.id.crop)
     ImageButton crop;
+    @BindViews({R.id.count, R.id.nextButton, R.id.addCount, R.id.cutCount, R.id.crop})
+    List<View> allViews;
     //endregion
 
     private OnCropBtnClickListener onCropBtnClickListener;
@@ -89,12 +94,20 @@ public class ImageSettingCard extends FrameLayout implements ImageSettingCardVie
         this.onCropBtnClickListener = onCropBtnClickListener;
     }
 
-    public void setParams(long imageId) {
+    public void setParams(@Nullable Long imageId) {
         logger.trace(String.valueOf(imageId));
+        applyImage(imageId);
     }
 
-    private void applyImage(long imageId) {
+    private void applyImage(@Nullable Long imageId) {
         presenter.applyImage(imageId);
+    }
+
+    @Override
+    public void setCardEnabled(boolean enabled) {
+        for (View view : allViews) {
+            view.setEnabled(enabled);
+        }
     }
 
     private interface OnCropBtnClickListener {
