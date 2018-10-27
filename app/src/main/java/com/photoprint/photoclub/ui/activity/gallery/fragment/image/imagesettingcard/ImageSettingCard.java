@@ -7,6 +7,7 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.photoprint.logger.Logger;
@@ -38,12 +39,16 @@ public class ImageSettingCard extends FrameLayout implements ImageSettingCardVie
     @BindView(R.id.count)
     TextView count;
     @BindView(R.id.nextButton)
-    Button button;
+    Button nextButton;
+    @BindView(R.id.addCount)
+    ImageButton addCount;
+    @BindView(R.id.cutCount)
+    ImageButton cutCount;
+    @BindView(R.id.crop)
+    ImageButton crop;
     //endregion
-    /**
-     * Флажок открыта/закрыта карточка настроек
-     */
-    private boolean isActive;
+
+    private OnCropBtnClickListener onCropBtnClickListener;
 
     public ImageSettingCard(@NonNull Context context) {
         this(context, null);
@@ -61,6 +66,14 @@ public class ImageSettingCard extends FrameLayout implements ImageSettingCardVie
             return;
         }
         ButterKnife.bind(this);
+        nextButton.setOnClickListener(v -> presenter.onNextBtnClicked());
+        addCount.setOnClickListener(v -> presenter.onAddCountBtnClicked());
+        cutCount.setOnClickListener(v -> presenter.onCutCountBtnClicked());
+        crop.setOnClickListener(v -> {
+            if (onCropBtnClickListener != null) {
+                onCropBtnClickListener.onCropBtnClicked();
+            }
+        });
     }
 
     public void init(ImageListComponent imageListComponent, MvpDelegate parent, String id) {
@@ -72,7 +85,15 @@ public class ImageSettingCard extends FrameLayout implements ImageSettingCardVie
         presenter.initialize();
     }
 
+    public void setOnCropBtnClickListener(OnCropBtnClickListener onCropBtnClickListener) {
+        this.onCropBtnClickListener = onCropBtnClickListener;
+    }
+
     public void setParams(long imageId) {
         logger.trace(String.valueOf(imageId));
+    }
+
+    private interface OnCropBtnClickListener {
+        void onCropBtnClicked();
     }
 }
