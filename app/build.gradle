@@ -99,6 +99,8 @@ dependencies {
     implementation project(':localdb')
     // Utils
     implementation project(':utils')
+    // ImageCrop
+    implementation project(':imagecrop')
     // Dagger
     depsDagger()
     // Glide
